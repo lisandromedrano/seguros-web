@@ -1,0 +1,13 @@
+#database.name=basededatos-alberto.mdb
+#database.url=jdbc\:odbc\:Driver\={MicroSoft Access Driver (*.mdb)};DBQ\=d:\\work\\workspace\\SegurosV2\\basededatos-alberto.mdb
+database.url=jdbc:mysql://${OPENSHIFT_MYSQL_DB_HOST}:${OPENSHIFT_MYSQL_DB_PORT}/${OPENSHIFT_APP_NAME}
+#database.prefix=jdbc\:odbc\:Driver\={MicroSoft Access Driver (*.mdb)};DBQ\=
+#database.prefix=jdbc\:access\:
+#database.dialect=org.hibernate.dialect.GenericDialect
+#database.dialect=org.hibernate.dialect.MSAccessDialect
+database.dialect=org.hibernate.dialect.MySQLDialect 
+#database.dialect=com.hxtt.support.hibernate.HxttAccessDialect
+database.username=${OPENSHIFT_MYSQL_DB_USERNAME}
+database.password=${OPENSHIFT_MYSQL_DB_PASSWORD}
+#database.driver=sun.jdbc.odbc.JdbcOdbcDriver
+database.driver=com.mysql.jdbc.Driver

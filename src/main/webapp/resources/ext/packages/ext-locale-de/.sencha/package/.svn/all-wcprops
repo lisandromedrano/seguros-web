@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/49/trunk/seguros-web/src/main/webapp/resources/ext/packages/ext-locale-de/.sencha/package
+END
+codegen.json
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/49/trunk/seguros-web/src/main/webapp/resources/ext/packages/ext-locale-de/.sencha/package/codegen.json
+END
+sencha.cfg
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/49/trunk/seguros-web/src/main/webapp/resources/ext/packages/ext-locale-de/.sencha/package/sencha.cfg
+END
+build-impl.xml
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/49/trunk/seguros-web/src/main/webapp/resources/ext/packages/ext-locale-de/.sencha/package/build-impl.xml
+END
+plugin.xml
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/49/trunk/seguros-web/src/main/webapp/resources/ext/packages/ext-locale-de/.sencha/package/plugin.xml
+END

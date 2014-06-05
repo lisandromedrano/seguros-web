@@ -1,0 +1,50 @@
+Ext.define('app.controller.Polizas', {
+    extend: 'app.controller.BaseController',
+    views: ['polizas.List'],
+	stores:  ['Polizas'],
+	refs: [{
+	    ref: 'polizasList',
+	    selector: 'polizasList'
+	},{
+	    ref: 'grid',
+    selector: 'polizasList'
+}],
+	init: function() {
+		var me = this;
+		this.entityName="Poliza";
+		this.controller="polizas";
+		this.model="app.model.Polizas";
+		this.editionFormXtype="polizasEdit";
+		this.titleField='name';
+		this.afterFillFormFn=function(panel,form,record){
+			//fill combos					
+			panel.setTitle(record.data.bienACubrir.substr(0,10));
+			form.findField('companias.id').setValue(record.data.companias.id);
+			form.findField('secciones.id').setValue(record.data.tipoPoliza.id);
+		}
+		this.control({
+				'polizasList':{
+					itemdblclick:me.gridRowDblClick
+					,edit:me.gridRowEdit
+					,validateedit:me.validateedit
+					,scope:me
+				}
+				,'polizasList > toolbar > button#add':{
+					click:me.gridButtonAdd,
+					scope:me
+		    	}
+				,'polizasList > toolbar > button#delete':{
+		    		click:me.gridRowDelete,
+		    		scope: me
+		    	}		    	
+				,'polizasEdit>toolbar>button#save':{
+					click:me.buttonSaveClick,
+					scope: me
+				}
+		
+			});
+		this.callParent(arguments);
+		
+	}
+	
+});

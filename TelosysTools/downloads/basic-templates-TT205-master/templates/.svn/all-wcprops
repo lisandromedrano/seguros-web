@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/51/trunk/seguros-web/TelosysTools/downloads/basic-templates-TT205-master/templates
+END
+python_bean.vm
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/!svn/ver/51/trunk/seguros-web/TelosysTools/downloads/basic-templates-TT205-master/templates/python_bean.vm
+END
+context_debug.vm
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/51/trunk/seguros-web/TelosysTools/downloads/basic-templates-TT205-master/templates/context_debug.vm
+END
+java_junit_bean_cache.vm
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/!svn/ver/51/trunk/seguros-web/TelosysTools/downloads/basic-templates-TT205-master/templates/java_junit_bean_cache.vm
+END
+doc_entity_html.vm
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/51/trunk/seguros-web/TelosysTools/downloads/basic-templates-TT205-master/templates/doc_entity_html.vm
+END
+java_bean_cache.vm
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/51/trunk/seguros-web/TelosysTools/downloads/basic-templates-TT205-master/templates/java_bean_cache.vm
+END
+doc_index_html.vm
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/!svn/ver/51/trunk/seguros-web/TelosysTools/downloads/basic-templates-TT205-master/templates/doc_index_html.vm
+END
+java_junit_bean.vm
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/51/trunk/seguros-web/TelosysTools/downloads/basic-templates-TT205-master/templates/java_junit_bean.vm
+END
+java_bean.vm
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/51/trunk/seguros-web/TelosysTools/downloads/basic-templates-TT205-master/templates/java_bean.vm
+END
+templates.cfg
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/51/trunk/seguros-web/TelosysTools/downloads/basic-templates-TT205-master/templates/templates.cfg
+END

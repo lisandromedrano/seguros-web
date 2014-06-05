@@ -1,0 +1,98 @@
+package ${target.javaPackageFromFolder($SRC)};
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import com.temperies.util.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+
+import ${ROOT_PKG}.${entity.name.toLowerCase()}.model.${entity.name};
+import ${ROOT_PKG}.${entity.name.toLowerCase()}.dto.${entity.name}Dto;
+import ${ROOT_PKG}.${entity.name.toLowerCase()}.service.${entity.name}Service;
+import ${ROOT_PKG}.dto.DefaultResponse;
+#if($entity.keyAttributes[0].type=='int')#set($keyType='Integer')
+#elseif($entity.keyAttributes[0].type=='long')#set($keyType='Long')
+#end
+@Controller
+@RequestMapping("/${entity.name.toLowerCase()}")
+public class ${entity.name}Controller {
+	private static Logger log = Logger.getLogger(${entity.name}Controller.class);
+
+	@Autowired
+	${entity.name}Service ${entity.name.toLowerCase()}Service;
+
+	@ExceptionHandler(Exception.class)
+	@ResponseBody
+	public DefaultResponse handleIOException(Exception ex) {
+		DefaultResponse response = new DefaultResponse();
+		response.setMessage(ex.getMessage());
+		response.setSuccess(false);
+		return response;
+	}
+
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@ResponseBody
+	public List<${entity.name}Dto> findAll(String name) {
+		List<${entity.name}Dto> ret = new ArrayList<${entity.name}Dto>();
+		List<${entity.name}> list = new ArrayList<${entity.name}>();
+		if (name != null) {
+			// search
+			list = ${entity.name.toLowerCase()}Service.findByName(name);
+		} else {
+			list = ${entity.name.toLowerCase()}Service.findAll();
+		}
+		for (${entity.name} e : list) {
+			${entity.name}Dto ent = BeanUtils.copyProperties(e, ${entity.name}Dto.class);
+			ret.add(ent);
+		}
+		return ret;
+	}
+
+	@RequestMapping(value = "/", method = RequestMethod.POST)
+	@ResponseBody
+	public DefaultResponse createOrUpdate(${entity.name}Dto dto) {
+		return ${entity.name.toLowerCase()}Service.createOrUpdate(dto);
+	}
+
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public ${entity.name}Dto findById($keyType id) {
+		${entity.name} e = ${entity.name.toLowerCase()}Service.getById(id);
+		${entity.name}Dto ent = BeanUtils.copyProperties(e, ${entity.name}Dto.class);
+		return ent;
+	}
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public DefaultResponse delete($keyType id) {
+		log.info("Delete");
+		DefaultResponse r = new DefaultResponse();
+		try {
+			${entity.name.toLowerCase()}Service.deleteById(id);
+		} catch (Exception e) {
+			r.setSuccess(false);
+			r.setMessage(e.getMessage());
+		}
+		return r;
+	}
+	@RequestMapping(value = "/query", method = RequestMethod.GET)
+	@ResponseBody
+	public List<${entity.name}Dto> query(@RequestParam String name) {
+		List<${entity.name}Dto> ret = new ArrayList<${entity.name}Dto>();
+		//TODO: implement findByName
+		for (${entity.name} e : ${entity.name.toLowerCase()}Service.findByName(name)) {
+			${entity.name}Dto ent = BeanUtils.copyProperties(e, ${entity.name}Dto.class);
+			ret.add(ent);
+		}
+		return ret;
+	}
+
+}

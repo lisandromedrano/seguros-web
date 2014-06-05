@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/64/trunk/seguros-web/src/test/java/com/lix/test/polizas
+END
+PolizasMock.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/61/trunk/seguros-web/src/test/java/com/lix/test/polizas/PolizasMock.java
+END
+PolizasServiceTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/63/trunk/seguros-web/src/test/java/com/lix/test/polizas/PolizasServiceTest.java
+END
+PolizasDaoTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/64/trunk/seguros-web/src/test/java/com/lix/test/polizas/PolizasDaoTest.java
+END
+PolizasTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/53/trunk/seguros-web/src/test/java/com/lix/test/polizas/PolizasTest.java
+END

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/49/trunk/seguros-web/src/main/webapp/resources/ext/src/chart/axis
+END
+Abstract.js
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/49/trunk/seguros-web/src/main/webapp/resources/ext/src/chart/axis/Abstract.js
+END
+Axis.js
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/49/trunk/seguros-web/src/main/webapp/resources/ext/src/chart/axis/Axis.js
+END
+Radial.js
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/49/trunk/seguros-web/src/main/webapp/resources/ext/src/chart/axis/Radial.js
+END
+Category.js
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/49/trunk/seguros-web/src/main/webapp/resources/ext/src/chart/axis/Category.js
+END
+Time.js
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/49/trunk/seguros-web/src/main/webapp/resources/ext/src/chart/axis/Time.js
+END
+Numeric.js
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/49/trunk/seguros-web/src/main/webapp/resources/ext/src/chart/axis/Numeric.js
+END
+Gauge.js
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/49/trunk/seguros-web/src/main/webapp/resources/ext/src/chart/axis/Gauge.js
+END

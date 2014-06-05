@@ -1,0 +1,82 @@
+.icon-save{
+	background-image:url('icons/disk.png');
+} 
+.icon_exit {
+	background-image:url('icons/door_out.png');
+}
+.icon_clientes {
+	background-image:url('icons/user.png');
+}
+.icon_polizas {
+	background-image:url('icons/vcard_edit.png');
+}
+.icon_companias{
+ 	background-image:url('icons/table.png');
+}
+.icon_secciones{
+	background-image:url('icons/textfield.png');
+} 
+.icon_opciones{
+	background-image:url('icons/cog_edit.png');
+} 
+.icon-add{
+	background-image:url('icons/add.png');
+} 
+.icon-delete{
+	background-image:url('icons/delete.png');
+} 
+.icon-edit{
+ 	background-image:url('icons/application_edit.png');
+}
+.icon_app{
+	background-image:url('icons/book.png');
+} 
+.icon_plan_pago{
+	background-image:url('icons/date.png');
+} 
+.icon_excel{
+	background-image:url('icons/page_excel.png');
+} 
+.icon-ok{
+	background-image:url('icons/accept.png');
+} 
+.icon-cancel{
+	background-image:url('icons/cancel.png');
+} 
+.icon_date{
+	background-image:url('icons/date.png');
+} 
+
+
+
+
+
+/* Messages */
+#msg-div {
+    position: fixed;
+    left: 0;
+    top: 10px;
+    width: 100%;
+    z-index: 20000;
+}
+#msg-div .msg {
+    width: 300px;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    background: #FFEEBF;
+    border: 2px solid #EFB34A;
+    margin: 3px auto;
+    padding: 10px 15px;
+    color: #555;
+    -moz-box-shadow: 0 5px 8px #ccc;
+    -webkit-box-shadow: 0 5px 8px #ccc;
+    box-shadow: 0 5px 8px #ccc;
+}
+#msg-div .msg h3 {
+    margin: 0 0 8px;
+    font-weight: bold;
+    font-size: 15px;
+}
+#msg-div .msg p {
+    margin: 0;
+}

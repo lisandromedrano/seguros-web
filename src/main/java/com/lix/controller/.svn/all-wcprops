@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/63/trunk/seguros-web/src/main/java/com/lix/controller
+END
+SeccionesController.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/56/trunk/seguros-web/src/main/java/com/lix/controller/SeccionesController.java
+END
+ReportesController.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/61/trunk/seguros-web/src/main/java/com/lix/controller/ReportesController.java
+END
+PolizasController.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/53/trunk/seguros-web/src/main/java/com/lix/controller/PolizasController.java
+END
+CompaniasController.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/61/trunk/seguros-web/src/main/java/com/lix/controller/CompaniasController.java
+END
+ClienteController.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/52/trunk/seguros-web/src/main/java/com/lix/controller/ClienteController.java
+END
+PagosController.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/51/trunk/seguros-web/src/main/java/com/lix/controller/PagosController.java
+END
+ClientesController.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/56/trunk/seguros-web/src/main/java/com/lix/controller/ClientesController.java
+END
+PagosPolizasController.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/52/trunk/seguros-web/src/main/java/com/lix/controller/PagosPolizasController.java
+END
+PagosCompaniasController.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/63/trunk/seguros-web/src/main/java/com/lix/controller/PagosCompaniasController.java
+END

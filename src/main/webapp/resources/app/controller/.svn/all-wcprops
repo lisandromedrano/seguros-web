@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/59/trunk/seguros-web/src/main/webapp/resources/app/controller
+END
+PagosPolizas.js
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/52/trunk/seguros-web/src/main/webapp/resources/app/controller/PagosPolizas.js
+END
+PagosCompanias.js
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/62/trunk/seguros-web/src/main/webapp/resources/app/controller/PagosCompanias.js
+END
+Secciones.js
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/56/trunk/seguros-web/src/main/webapp/resources/app/controller/Secciones.js
+END
+Polizas.js
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/56/trunk/seguros-web/src/main/webapp/resources/app/controller/Polizas.js
+END
+Readme.md
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/49/trunk/seguros-web/src/main/webapp/resources/app/controller/Readme.md
+END
+Companias.js
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/52/trunk/seguros-web/src/main/webapp/resources/app/controller/Companias.js
+END
+BaseController.js
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/!svn/ver/59/trunk/seguros-web/src/main/webapp/resources/app/controller/BaseController.js
+END
+Cliente.js
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/52/trunk/seguros-web/src/main/webapp/resources/app/controller/Cliente.js
+END
+Pagos.js
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/52/trunk/seguros-web/src/main/webapp/resources/app/controller/Pagos.js
+END
+Main.js
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/62/trunk/seguros-web/src/main/webapp/resources/app/controller/Main.js
+END
+Clientes.js
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/62/trunk/seguros-web/src/main/webapp/resources/app/controller/Clientes.js
+END

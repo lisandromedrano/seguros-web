@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/49/trunk/seguros-web/src/main/webapp/resources/.sencha/app/microloader
+END
+testing.js
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/49/trunk/seguros-web/src/main/webapp/resources/.sencha/app/microloader/testing.js
+END
+development.js
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/49/trunk/seguros-web/src/main/webapp/resources/.sencha/app/microloader/development.js
+END
+production.js
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/49/trunk/seguros-web/src/main/webapp/resources/.sencha/app/microloader/production.js
+END

@@ -1,0 +1,21 @@
+#set( $dataFields = $entity.getAttributes() )
+## #set( $dataFields = $entity.nonKeyAttributes )
+##set( $dataFields = $entity.getAttributesByCriteria( $const.NOT_KEY, $const.NOT_IN_SELECTED_LINKS ) )
+##--------------------------------------------------------------------------------------------------------
+## Link fields = fields not in Primary Key and used as FK in selected Links    
+#set( $linkFields = $entity.getAttributesByCriteria( $const.NOT_KEY, $const.IN_SELECTED_LINKS ) )
+Ext.define('app.model.${entity.name}', {
+    extend: 'Ext.data.Model',
+    fields: [
+#foreach( $field in $dataFields )
+		{name:'$field.formatedName(12).trim()'#if($field.type=='Date'),type:'date', dateFormat: 'd-m-Y'#end}#if( $foreach.hasNext ), 
+#end
+#foreach( $field in $linkFields )
+		{name:'$field.name'}#if( $foreach.hasNext ), 
+#end
+#end
+
+    ],
+	idProperty: 'id'
+});
+

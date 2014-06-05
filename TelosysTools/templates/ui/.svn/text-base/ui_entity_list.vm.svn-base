@@ -1,0 +1,50 @@
+##set( $dataFields = $entity.getAttributes() )
+#set( $dataFields = $entity.getAttributesByCriteria( $const.NOT_KEY, $const.NOT_IN_SELECTED_LINKS ) )
+Ext.define('app.view.${entity.name.toLowerCase()}.List', {
+	extend: 'app.view.BaseGrid',
+	alias: 'widget.${entity.name.toLowerCase()}List',
+#if($entity.selectedLinks.size()>0)
+	requires:[
+#foreach( $link in $entity.selectedLinks )
+			 'app.view.${link.formatedName(0).toLowerCase()}.ComboBox'#if( $foreach.hasNext ), 
+#end   
+#end
+
+    ],
+#end
+	title: '${entity.name}',
+	store: '${entity.name}',	
+	initComponent: function() {
+		var _this=this;		
+		this.columns = [
+#foreach( $field in $dataFields )
+#set( $dataType = 'textfield' )
+#if($field.type=='Date')#set( $dataType = 'datefield' )#end
+	        {
+				header: '$field.name'
+				,dataIndex: '$field.name'
+				,flex: 1
+				,field: { xtype: '$dataType' }
+				#if($field.name=='id'),hidden:true#end
+
+			}#if( $foreach.hasNext || $entity.selectedLinks.size()>0  ),
+#end
+#end	
+#foreach( $link in $entity.selectedLinks )
+			// combo candidate for $link.formatedName(0)
+			{
+				header: '$link.formatedName(0)'
+				,id: '${link.formatedName(0)}.id'
+				,flex: 1
+				,editor: { xtype: '${link.formatedName(0).toLowerCase()}Combo' }				
+				,renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {				       
+				       return store.data.items[rowIndex].data.${link.formatedName(0)}.name;
+				}
+			}#if( $foreach.hasNext ),				 
+	#end   
+#end   
+		];
+    	this.callParent(arguments);
+	}
+});
+

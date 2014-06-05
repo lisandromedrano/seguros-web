@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/63/trunk/seguros-web/src/main/java/com/lix/dto
+END
+PaginationParams.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/!svn/ver/63/trunk/seguros-web/src/main/java/com/lix/dto/PaginationParams.java
+END
+Sort.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/59/trunk/seguros-web/src/main/java/com/lix/dto/Sort.java
+END
+PolizaDto.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/49/trunk/seguros-web/src/main/java/com/lix/dto/PolizaDto.java
+END
+ClienteDto.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/49/trunk/seguros-web/src/main/java/com/lix/dto/ClienteDto.java
+END
+DefaultResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/51/trunk/seguros-web/src/main/java/com/lix/dto/DefaultResponse.java
+END

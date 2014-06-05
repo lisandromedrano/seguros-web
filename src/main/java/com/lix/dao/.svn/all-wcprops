@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/63/trunk/seguros-web/src/main/java/com/lix/dao
+END
+HibernateDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/!svn/ver/53/trunk/seguros-web/src/main/java/com/lix/dao/HibernateDao.java
+END
+AbstractHibernateDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/63/trunk/seguros-web/src/main/java/com/lix/dao/AbstractHibernateDao.java
+END
