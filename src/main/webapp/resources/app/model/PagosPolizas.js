@@ -3,8 +3,6 @@ Ext.define('app.model.PagosPolizas', {
 	fields : [ {
 		name : 'id'
 	}, {
-		name : 'polizas'
-	}, {
 		name : 'fecha',
 		type : 'date',
 		dateFormat : 'd-m-Y'
@@ -17,7 +15,9 @@ Ext.define('app.model.PagosPolizas', {
 	}, {
 		name : 'nroRecibo'
 	}, {
-		name : 'fechaVencimiento'
+		name : 'fechaVencimiento',
+			type : 'date',
+			dateFormat : 'd-m-Y'
 	} ],
 	idProperty : 'id'
 });

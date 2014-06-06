@@ -2,6 +2,7 @@ Ext.define("app.view.clientes.Edit", {
 //	extend: 'Ext.form.Panel',
 	extend: 'app.view.BaseForm',
     alias:'widget.clientesEdit',
+    controllername:'app.controller.Clientes',
 	url:CONTEXT_ROOT+'/clientes/',
 	layout: 'fit',
 	requires:[
@@ -9,7 +10,9 @@ Ext.define("app.view.clientes.Edit", {
 			 ,'app.view.BaseForm'
     ],
 	autoShow: true,
+	autoHeight:true,
 	autoScroll: false,
+	style:'padding:5px',
 	fieldDefaults: {
 	    msgTarget: 'side',
 	    //labelWidth: 150,
@@ -17,17 +20,26 @@ Ext.define("app.view.clientes.Edit", {
 	    //anchor: '50%',
 	    style:'padding:10px;margin:10px'
 	}, 
-	layout: {
-		type: 'border'			
-	}, 
+//	layout: {
+//		type: 'border'			
+//	}, 
 	initComponent: function(params) {
+		this.layout = {
+				type : 'vbox'
+				// The total column count must be specified here
+				// ,columns : 4
+				,
+				align : 'stretch'
+			}
 		this.polizasGrid=Ext.create('app.view.polizas.List',{
-			viewConfig: {
-		        stripeRows: true
-		    }
-			,autoScroll:true
+//			viewConfig: {
+//		        stripeRows: true
+//		    }
+			autoScroll:true
+			,title:false
+			,autoHeight : true
 			,editionMode:app.utils.EditionMode.TAB
-		     ,store:Ext.create('Ext.data.Store', {
+		    ,store:Ext.create('Ext.data.Store', {
 			    model : 'app.model.Polizas',
 				proxy: {
 				    type: 'ajax',
@@ -86,11 +98,13 @@ Ext.define("app.view.clientes.Edit", {
 		 });
 		this.items=[
 		{
-			region: 'center'			
-			,layout: {
-				type: 'column'
+			xtype:'fieldset',
+			title:'Datos del cliente',
+			style:'margin-right:5px',
+			layout: {
+				type: 'table'
 					// The total column count must be specified here
-			    ,columns: 2
+			    ,columns: 3
 			}
 		    ,items:[
 				 {
@@ -141,15 +155,49 @@ Ext.define("app.view.clientes.Edit", {
 					fieldLabel: 'DNI/CUIT',
 					name:'dnicuit'
 				 }
-		    ]			 
+		    ]
 		},{
-			region:'south'
-			,xtype:'form'
-			,style:'padding:10px;'
-			,height:'50%'
-			 ,items:[this.polizasGrid]
-			}
+			 xtype:'fieldset',
+				title: 'Polizas',
+			//	width:'70%',
+				items:[
+				       	this.polizasGrid
+				 ]
+		}
 		];
+		
+//		//Function to call after save
+//		this.callbackSuccessFn=function(record) {
+//			var controller=Ext.create('app.controller.Clientes');
+//			// Set environment id for licences grid			
+//			controller.getPolizasGrid().clienteId = record.id;
+//			// Enable add button
+////			controller.getAddLicenseButton().setDisabled(false);
+////			controller.saveAppOptions();
+//			
+//			this.setTitle(record.data.nombre+' '+record.data.apellido);
+//			controller.getPolizasGrid().store.proxy.extraParams={id:record.data.id};
+//			controller.getPolizasGrid().store.load();
+//		};
+//		this.customButtons = [
+//   		    '->',{
+//   		        text: 'Guardar',
+//   		        itemId:'save',
+//   		        iconCls:'icon-save',
+//   		        handler:function(button,event){
+//   		        	this.buttonSaveClick(button,event)
+//   		        }
+//   		    
+//   		    },
+//   		    {
+//   		        text: 'Cancelar',
+//   		        scope:this,
+//   		        iconCls:'icon-cancel',
+//   		        handler:this.close
+//   		    }
+//   		];
+		
+		
 		this.callParent(arguments);
         this.enableBubble('change');
 	}

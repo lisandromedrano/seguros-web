@@ -7,7 +7,7 @@ Ext.define('app.view.pagospolizas.List', {
 	initComponent : function() {
 		this.store = Ext.create('app.store.PagosPolizas');
 		this.columns = [ {
-			header : 'fecha',
+			header : 'Fecha Pago',
 			dataIndex : 'fecha',
 			flex : 1,
 			renderer : Ext.util.Format.dateRenderer('d-m-Y'),
@@ -18,7 +18,7 @@ Ext.define('app.view.pagospolizas.List', {
 			}
 
 		}, {
-			header : 'importe',
+			header : 'Importe',
 			dataIndex : 'importe',
 			flex : 1,
 			field : {
@@ -36,7 +36,7 @@ Ext.define('app.view.pagospolizas.List', {
 		//				
 		// },
 		{
-			header : 'concepto',
+			header : 'Concepto',
 			dataIndex : 'concepto',
 			flex : 1,
 			field : {
@@ -44,7 +44,7 @@ Ext.define('app.view.pagospolizas.List', {
 			}
 
 		}, {
-			header : 'nroRecibo',
+			header : 'Nro. Recibo',
 			dataIndex : 'nroRecibo',
 			flex : 1,
 			field : {
@@ -53,7 +53,7 @@ Ext.define('app.view.pagospolizas.List', {
 			align : 'right'
 
 		}, {
-			header : 'fechaVencimiento',
+			header : 'Fecha Vencimiento',
 			dataIndex : 'fechaVencimiento',
 			flex : 1,
 			field : {

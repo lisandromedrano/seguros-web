@@ -1,7 +1,7 @@
 package com.lix.dto;
 
 public class DefaultResponse {
-	private boolean success;
+	private boolean success = true;
 	private String message;
 	private int id;
 

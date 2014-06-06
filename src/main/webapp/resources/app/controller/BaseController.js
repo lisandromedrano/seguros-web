@@ -48,12 +48,33 @@ Ext.define('app.controller.BaseController', {
 			}			}		
 	}	
 	,gridRowEdit:function(editor, e){
+		var sendData = Ext.ModelManager.create(
+				e.record.data,
+		        this.model
+		    );	
+		sendData.fields.each(function(field){
+//			console.log(field)
+			if(field.type.type=='date'){
+				sendData.data[field.name]=Ext.Date.format(sendData.data[field.name],field.dateFormat)
+			}
+		});
 		 Ext.Ajax.request({
 			    url: CONTEXT_ROOT+'/'+this.controller+'/',
 			    method: 'POST',
-			    params: e.record.data,
+			    params: sendData.data,
 			    success: function(response){
-					e.grid.store.reload();
+			    	var r=JSON.parse(response.responseText);
+			    	if(r.success){
+			    		e.grid.store.reload();			    		
+			    	}else{
+			    		Ext.Msg.alert({
+			    			title:'Failed', 
+			    			msg: r.message ? r.message : 'No response',
+			    					buttons: Ext.Msg.OK,
+			    					icon:Ext.Msg.ERROR
+			    		});
+			    		
+			    	}
 					
 			    }, failure: function(form, action) {
                   Ext.Msg.alert({

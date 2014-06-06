@@ -7,7 +7,6 @@ package com.lix.clientes.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -68,8 +67,8 @@ public class ClientesServiceImpl implements ClientesService {
 	public DefaultResponse createOrUpdate(ClientesDto dto) {
 		DefaultResponse response = new DefaultResponse();
 		try {
-			Clientes ent = new Clientes();
-			BeanUtils.copyProperties(dto, ent);
+			Clientes ent = com.lix.util.BeanUtils.copyProperties(dto,
+					Clientes.class);
 			this.update(ent);
 			response.setId(ent.getId());
 		} catch (Exception e) {

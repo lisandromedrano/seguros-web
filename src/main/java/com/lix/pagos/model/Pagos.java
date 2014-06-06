@@ -12,6 +12,8 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -27,7 +29,7 @@ import javax.persistence.TemporalType;
  */
 
 @Entity
-@Table(name = "pagos" )
+@Table(name = "pagos")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "TIPO_PAGO")
 public class Pagos implements Serializable {
@@ -38,6 +40,7 @@ public class Pagos implements Serializable {
 	// ----------------------------------------------------------------------
 	@Id
 	@Column(name = "ID", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
 	// ----------------------------------------------------------------------

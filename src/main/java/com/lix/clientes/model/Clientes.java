@@ -27,7 +27,7 @@ import com.lix.polizas.model.Polizas;
  */
 
 @Entity
-@Table(name = "clientes" )
+@Table(name = "clientes")
 public class Clientes implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -82,11 +82,11 @@ public class Clientes implements Serializable {
 	// ----------------------------------------------------------------------
 	// GETTER & SETTER FOR THE KEY FIELD
 	// ----------------------------------------------------------------------
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 

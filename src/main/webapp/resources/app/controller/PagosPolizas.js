@@ -51,7 +51,8 @@ Ext.define('app.controller.PagosPolizas', {
 	    	}	
 			,'pagospolizasList > toolbar > button#planPagos':{
 				click: function(){
-					alert('wweeeeeee')
+					var idPoliza=me.getGrid().idPoliza
+					window.location=CONTEXT_ROOT+'/reportes/plandepagos/?idPoliza='+idPoliza;
 				},
 				scope:me
 			}

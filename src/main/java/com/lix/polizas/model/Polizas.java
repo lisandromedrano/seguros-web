@@ -34,7 +34,7 @@ import com.lix.secciones.model.Secciones;
  */
 
 @Entity
-@Table(name = "polizas" )
+@Table(name = "polizas")
 public class Polizas implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -112,9 +112,12 @@ public class Polizas implements Serializable {
 	@Column(name = "PATENTE", length = 7)
 	private String patente;
 
-	// "idCliente" (column "id_cliente") is not defined by itself because used as FK in a link
-	// "idCompania" (column "id_compania") is not defined by itself because used as FK in a link
-	// "seccionId" (column "SECCION_ID") is not defined by itself because used as FK in a link
+	// "idCliente" (column "id_cliente") is not defined by itself because used
+	// as FK in a link
+	// "idCompania" (column "id_compania") is not defined by itself because used
+	// as FK in a link
+	// "seccionId" (column "SECCION_ID") is not defined by itself because used
+	// as FK in a link
 	// ----------------------------------------------------------------------
 	// ENTITY LINKS ( RELATIONSHIP )
 	// ----------------------------------------------------------------------
@@ -346,7 +349,9 @@ public class Polizas implements Serializable {
 	// toString METHOD
 	// ----------------------------------------------------------------------
 	public String toString() {
-		return "";
+		String toString = this.getNroPoliza() + "-"
+				+ this.getTipoPoliza().getNombre();
+		return toString;
 		// return ReflectionToStringBuilder.toString(this);
 	}
 

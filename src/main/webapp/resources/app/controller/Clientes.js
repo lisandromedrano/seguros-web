@@ -13,17 +13,20 @@ Ext.define('app.controller.Clientes', {
 	    ref: 'clientesEdit',
 	    selector: 'clientesEdit'
 	},{
+		ref: 'form',
+		selector: 'clientesEdit'
+	},{
 	    ref: 'polizasGrid',
 	    selector: 'clientesEdit > polizasList'
-	}],
-	init: function() {
+	}]
+	,entityName:"Cliente"
+	,controller:"clientes"
+	,model:"app.model.Clientes"
+	,editionFormXtype:"clientesEdit"
+	,titleField:'nombre'
+	,init: function() {
 		
 		var me = this;
-		me.entityName="Cliente";
-		me.controller="clientes";
-		me.model="app.model.Clientes";
-		me.editionFormXtype="clientesEdit";
-		me.titleField='nombre';
 		me.afterFillFormFn=function(panel,form,record){			
 			panel.setTitle(record.data.nombre+' '+record.data.apellido);
 			panel.polizasGrid.store.proxy.extraParams={id:record.data.id};
@@ -42,10 +45,10 @@ Ext.define('app.controller.Clientes', {
 				,'clientesList > toolbar > button#delete':{
 		    		click:me.gridRowDelete,
 		    		scope: me
-		    	}		    	
-				,'clientesEdit>toolbar>button#save':{
-					click:me.buttonSaveClick,
-					scope: me
+//		    	}		    	
+//				,'clientesEdit>toolbar>button#save':{
+//					click:me.buttonSaveClick,
+//					scope: me
 				},'clientesList > toolbar > textfield#buscarCliente':{
 		    		  specialkey: function(f,e){
 		    				

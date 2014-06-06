@@ -8,6 +8,7 @@ Ext.define("app.view.${entity.name.toLowerCase()}.Edit", {
 	extend: 'app.view.BaseForm',
     alias:'widget.${entity.name.toLowerCase()}Edit',
 	url:CONTEXT_ROOT+'/${entity.name.toLowerCase()}/',
+	controllername:'app.controller.${entity.name}',
 	layout: 'fit',
 #if($entity.selectedLinks.size()>0)
 	requires:[

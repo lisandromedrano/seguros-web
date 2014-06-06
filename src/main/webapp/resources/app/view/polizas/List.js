@@ -71,8 +71,9 @@ Ext.define('app.view.polizas.List', {
 	        	
 	        },{
 	        	xtype:'textfield'
-	            ,name     : 'buscarPoliza'
+//	            ,name     : 'buscarPoliza'
 	            ,itemId     : 'buscarPoliza'
+	            	,submitValue:false
 	            ,width: 140
 	            ,emptyText: 'Buscar cliente'
 	        },
