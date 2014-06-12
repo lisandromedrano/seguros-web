@@ -7,8 +7,14 @@ Ext.define('app.store.Clientes', {
 	    url: CONTEXT_ROOT+'/clientes/',
 	    reader: {
 	        type: 'json',
-	        successProperty: 'success'
+	        root: 'data',
+            successProperty: 'success',
+            totalProperty: 'totalCount'
 	    }
-	}    
+	}
+	,sorters: {
+		property: 'apellido',
+		direction: 'ASC'
+	}
 });
 

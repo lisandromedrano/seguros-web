@@ -80,3 +80,26 @@
 #msg-div .msg p {
     margin: 0;
 }
+
+.x-column-header-inner{
+	zoom:1;
+	text-align:center;
+	position:relative;
+	white-space:nowrap;
+	line-height:15px;
+	padding:3px 6px 4px
+}
+
+/* Override Form Label style */
+label {
+    /*font: normal 12px courier !important;*/
+    font-weight: bold !important;
+}
+.app-header{
+/* 	background-color: #423832; */
+	padding-left: 0px;
+}
+.seguros-main-logo{
+	max-width: 300;
+	max-height: 100;
+}

@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lix.dto.DefaultResponse;
 import com.lix.polizas.dao.PolizasDao;
@@ -18,6 +19,7 @@ import com.lix.polizas.model.Polizas;
 import com.lix.polizas.service.PolizasService;
 import com.lix.service.GenericService;
 import com.lix.util.BeanUtils;
+import com.lix.web.Page;
 
 /**
  * JPA implementation for basic persistence operations ( entity "Polizas" )
@@ -27,7 +29,8 @@ import com.lix.util.BeanUtils;
  */
 
 @Component("polizasService")
-public class PolizasServiceImpl extends GenericService<Polizas, Integer> implements PolizasService {
+public class PolizasServiceImpl extends GenericService<Polizas, Integer>
+		implements PolizasService {
 
 	@Autowired
 	PolizasDao polizasDao;
@@ -65,6 +68,13 @@ public class PolizasServiceImpl extends GenericService<Polizas, Integer> impleme
 
 	@Override
 	public List<Polizas> getPolizasPorVencer(PolizasPorVencerDto dto) {
-		return polizasDao.getPolizasPorVencer(dto.getFechaDesde(), dto.getFechaHasta());
+		return polizasDao.getPolizasPorVencer(dto.getFechaDesde(),
+				dto.getFechaHasta());
+	}
+
+	@Override
+	@Transactional
+	public Page<PolizasDto> findPage(PolizasDto dto) {
+		return polizasDao.findPage(dto);
 	}
 }

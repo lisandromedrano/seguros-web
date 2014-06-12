@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,27 +17,29 @@ import com.lix.clientes.dto.ClientesDto;
 import com.lix.clientes.model.Clientes;
 import com.lix.clientes.service.ClientesService;
 import com.lix.dto.DefaultResponse;
+import com.lix.web.Page;
 
 @Controller
 @RequestMapping("/clientes")
-public class ClientesController extends BaseController{
-	
-	private final static Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
-	
+public class ClientesController extends BaseController {
+
+	private final static Logger LOGGER = LoggerFactory
+			.getLogger(BaseController.class);
+
 	@Autowired
 	ClientesService clientesService;
 
-
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	@ResponseBody
-	public List<ClientesDto> findAll() {
-		List<ClientesDto> ret = new ArrayList<ClientesDto>();
-		for (Clientes e : clientesService.findAll()) {
-			ClientesDto ent = new ClientesDto();
-			BeanUtils.copyProperties(e, ent);
-			ret.add(ent);
-		}
-		return ret;
+	public Page<ClientesDto> findAll(ClientesDto dto) {
+		// List<ClientesDto> ret = new ArrayList<ClientesDto>();
+		// for (Clientes e : clientesService.findAll()) {
+		// ClientesDto ent = new ClientesDto();
+		// BeanUtils.copyProperties(e, ent);
+		// ret.add(ent);
+		// }
+		// return ret;
+		return clientesService.findPage(dto);
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
@@ -72,7 +73,8 @@ public class ClientesController extends BaseController{
 		List<ClientesDto> ret = new ArrayList<ClientesDto>();
 
 		for (Clientes e : clientesService.findByName(name)) {
-			ClientesDto ent = com.lix.util.BeanUtils.copyProperties(e, ClientesDto.class);
+			ClientesDto ent = com.lix.util.BeanUtils.copyProperties(e,
+					ClientesDto.class);
 			ret.add(ent);
 		}
 		return ret;
@@ -82,6 +84,5 @@ public class ClientesController extends BaseController{
 	Logger getLogger() {
 		return LOGGER;
 	}
-
 
 }

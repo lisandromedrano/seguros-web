@@ -20,10 +20,10 @@ Ext.define('app.controller.PagosPolizas', {
 		this.entityName="Pago Poliza";
 		this.controller="pagospolizas";
 		//Master-detail config
-		this.parentConfig={
-				model:"app.model.Polizas"
-				,fieldName:'polizas'				
-		}
+//		this.parentConfig={
+//				model:"app.model.Polizas"
+//				,fieldName:'polizas'				
+//		}
 		//--
 		this.model="app.model.PagosPolizas";
 		this.editionFormXtype="pagospolizasEdit";
@@ -37,7 +37,24 @@ Ext.define('app.controller.PagosPolizas', {
 		this.control({
 			'pagospolizasList':{
 				itemdblclick:me.gridRowDblClick
-				,edit:me.gridRowEdit
+//				,edit:me.gridRowEdit
+//				,edit: function(editor, object) {
+//                    object.store.save();
+//                    object.store.commitChanges();
+//                }
+				,edit:function(editor, e){
+					//truncate polizas Data
+					var polizaID=e.record.data.polizas.id
+					delete e.record.data.polizas
+//					e.record.data.polizas={
+//							id:polizaID
+//					};					
+					//e.record.data['polizas.id']=polizaID
+					me.save(e.record);
+				}
+				,render:function(){
+					me.getGrid().store.load();
+				}
 				,validateedit:me.validateedit
 				,scope:me
 			}

@@ -52,40 +52,8 @@ Ext.define('app.controller.BaseController', {
 				e.record.data,
 		        this.model
 		    );	
-		sendData.fields.each(function(field){
-//			console.log(field)
-			if(field.type.type=='date'){
-				sendData.data[field.name]=Ext.Date.format(sendData.data[field.name],field.dateFormat)
-			}
-		});
-		 Ext.Ajax.request({
-			    url: CONTEXT_ROOT+'/'+this.controller+'/',
-			    method: 'POST',
-			    params: sendData.data,
-			    success: function(response){
-			    	var r=JSON.parse(response.responseText);
-			    	if(r.success){
-			    		e.grid.store.reload();			    		
-			    	}else{
-			    		Ext.Msg.alert({
-			    			title:'Failed', 
-			    			msg: r.message ? r.message : 'No response',
-			    					buttons: Ext.Msg.OK,
-			    					icon:Ext.Msg.ERROR
-			    		});
-			    		
-			    	}
-					
-			    }, failure: function(form, action) {
-                  Ext.Msg.alert({
-                 	  title:'Failed', 
-                 	  msg: action.result ? action.result.message : 'No response',
-                 	  buttons: Ext.Msg.OK,
-                 	  icon:Ext.Msg.ERROR
-                 	 });
-                  
-              }
-			});
+		
+		this.save(sendData);
 	}	
 	,gridRowDelete:function(button){		
 		var grid=this.getGrid();	
@@ -166,6 +134,88 @@ Ext.define('app.controller.BaseController', {
 	      editor.editor.form.markInvalid(errors); //the double "editor" is correct
 	      return false; //prevent the editing plugin from closing
 	    }
+	}
+	,save:function(record){
+		var grid=this.getGrid();
+		record.fields.each(function(field){
+//			console.log(field)
+			if(field.type.type=='date'){
+				record.data[field.name]=Ext.Date.format(record.data[field.name],field.dateFormat)
+			}
+		});
+		 Ext.Ajax.request({
+			    url: CONTEXT_ROOT+'/'+this.controller+'/',
+			    method: 'POST',
+			    params: record.data,
+			    success: function(response){
+			    	var r=JSON.parse(response.responseText);
+			    	if(r.success && grid){
+			    		grid.store.reload();			    		
+			    	}else{
+			    		Ext.Msg.alert({
+			    			title:'Failed', 
+			    			msg: r.message ? r.message : 'No response',
+			    					buttons: Ext.Msg.OK,
+			    					icon:Ext.Msg.ERROR
+			    		});
+			    		
+			    	}
+					
+			    }, failure: function(form, action) {
+               Ext.Msg.alert({
+              	  title:'Failed', 
+              	  msg: action.result ? action.result.message : 'No response',
+              	  buttons: Ext.Msg.OK,
+              	  icon:Ext.Msg.ERROR
+              	 });
+               
+           }
+			});
+	}
+	/**
+	 * Fill all combo fields
+	 */
+	,fillComboFields:function(form,record,comboFields){
+		comboFields.forEach(function(field){
+			var formField=form.findField(field.fieldId);
+			var comboRecord=record.data[field.fieldName];
+			if(comboRecord){
+				if(comboRecord['id']){
+					if (formField != null) 
+						formField.setValue(comboRecord['id'])
+				}else if(comboRecord[field.fieldValue]){
+					var vpStore=formField.store;
+					vpStore.add(comboRecord)
+					formField.select(vpStore.getAt(vpStore.getCount()-1))					
+					formField.setRawValue(comboRecord[field.fieldValue])
+				}
+			}
+		})
+		
+	}
+	/**
+	 * HighLights fields in array 
+	 */
+	,highlightFields:function(form,fields){
+		fields.forEach(function(field){
+			var formField=form.findField(field);
+			formField.setFieldStyle('background-color:#edc8b4');
+		});	
+	}
+	/**
+	 * If a combo has text set but not the value, removes the id in the record, and adds the name property, in order to submit just name
+	 */
+	,replaceNullValuesCombos:function(form,record,fields){
+		fields.forEach(function(field){
+			if(isNaN(record[field.fieldId]) || record[field.fieldId]=="" || record[field.fieldId]==null){
+				if(isNaN(record[field.fieldId])){
+					record[field.fieldName+'.'+field.fieldValue]=record[field.fieldId];					
+				}else{
+					record[field.fieldName+'.'+field.fieldValue]=form.findField(field.fieldId).getDisplayValue();
+				}
+				delete record[field.fieldId];
+			}			
+		});
 	}
 
 })

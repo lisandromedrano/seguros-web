@@ -5,11 +5,11 @@
 package com.lix.clientes.dao;
 
 import java.util.List;
-import java.util.Map;
-import java.util.List;
-import com.lix.dao.HibernateDao;
-import com.lix.clientes.model.Clientes;
 
+import com.lix.clientes.dto.ClientesDto;
+import com.lix.clientes.model.Clientes;
+import com.lix.dao.HibernateDao;
+import com.lix.web.Page;
 
 /**
  * Basic persistence operations for entity "Clientes"
@@ -18,7 +18,9 @@ import com.lix.clientes.model.Clientes;
  * @author Telosys Tools Generator
  *
  */
-public interface ClientesDao extends HibernateDao<Clientes,Integer> {	
+public interface ClientesDao extends HibernateDao<Clientes, Integer> {
 
 	public List<Clientes> findByName(String name);
+
+	public Page<ClientesDto> findPage(ClientesDto dto);
 }

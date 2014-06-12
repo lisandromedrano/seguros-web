@@ -28,6 +28,7 @@ Ext.define('app.controller.PagosCompanias', {
 				'pagoscompaniasList':{
 					itemdblclick:me.gridRowDblClick
 					,edit:me.gridRowEdit
+					
 					,validateedit:me.validateedit
 					,scope:me
 					,beforeedit: function(editor, e) {

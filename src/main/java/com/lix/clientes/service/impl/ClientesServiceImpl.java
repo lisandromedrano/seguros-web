@@ -16,6 +16,7 @@ import com.lix.clientes.model.Clientes;
 import com.lix.clientes.service.ClientesService;
 import com.lix.dto.DefaultResponse;
 import com.lix.dto.PaginationParams;
+import com.lix.web.Page;
 
 /**
  * JPA implementation for basic persistence operations ( entity "Clientes" )
@@ -87,6 +88,11 @@ public class ClientesServiceImpl implements ClientesService {
 	@Override
 	public List<Clientes> getPage(PaginationParams params) {
 		return clientesDao.getPage(params);
+	}
+
+	@Override
+	public Page<ClientesDto> findPage(ClientesDto dto) {
+		return clientesDao.findPage(dto);
 	}
 
 }

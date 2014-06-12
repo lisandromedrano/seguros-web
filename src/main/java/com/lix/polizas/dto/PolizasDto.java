@@ -12,6 +12,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import com.lix.clientes.dto.ClientesDto;
 import com.lix.companias.dto.CompaniasDto;
+import com.lix.dto.PaginationParams;
 import com.lix.secciones.dto.SeccionesDto;
 import com.lix.util.JsonDateSerializer;
 
@@ -21,7 +22,7 @@ import com.lix.util.JsonDateSerializer;
  * @author Telosys Tools Generator
  * 
  */
-public class PolizasDto {
+public class PolizasDto extends PaginationParams {
 
 	private Integer id;
 

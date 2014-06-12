@@ -5,18 +5,18 @@
 package com.lix.pagos.dao.impl;
 
 import java.util.List;
-import java.util.Map;
+
 import javax.annotation.PostConstruct;
 
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.lix.pagos.model.Pagos;
-import com.lix.pagos.dao.PagosDao;
 import com.lix.dao.AbstractHibernateDao;
+import com.lix.pagos.dao.PagosDao;
+import com.lix.pagos.model.Pagos;
 
 /**
  * Basic persistence operations for entity "Pagos"
@@ -26,17 +26,21 @@ import com.lix.dao.AbstractHibernateDao;
  *
  */
 @Repository("pagosDao")
-public class PagosDaoImpl extends AbstractHibernateDao<Pagos,Integer> implements PagosDao{
+public class PagosDaoImpl extends AbstractHibernateDao<Pagos, Integer>
+		implements PagosDao {
 
 	@PostConstruct
 	public void setInstance() {
 		setClazz(Pagos.class);
 	}
+
 	@Override
 	@Transactional
 	public List<Pagos> findByName(String name) {
 		Criteria criteria = getCurrentSession().createCriteria((Pagos.class));
-		criteria.add(Restrictions.like("name", name.toUpperCase(), MatchMode.ANYWHERE));
+		criteria.add(Restrictions.like("name", name.toUpperCase(),
+				MatchMode.ANYWHERE));
+		criteria.setMaxResults(25);
 		return (List<Pagos>) criteria.list();
 	}
 }

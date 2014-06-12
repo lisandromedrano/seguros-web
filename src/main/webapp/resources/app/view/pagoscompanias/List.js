@@ -33,6 +33,13 @@ Ext.define('app.view.pagoscompanias.List',{
 					header : 'Compa&nacute;ia',
 					dataIndex:'companias.id',
 					editor: this.companiasCombo,
+//					listeners:{
+//	                    afterrender:{
+//	                        fn:function(combo){
+//	                           combo.getPicker().setWidth(400);
+//	                        }
+//	                     }
+//	                },
 					renderer: function(value,p, record){
 						var index = this.companiasCombo.store.find('id',value); 
 			            if (index != -1){

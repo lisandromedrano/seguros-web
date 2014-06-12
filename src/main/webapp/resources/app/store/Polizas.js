@@ -6,8 +6,10 @@ Ext.define('app.store.Polizas', {
 	    type: 'ajax',
 	    url: CONTEXT_ROOT+'/polizas/',
 	    reader: {
-	        type: 'json',
-	        successProperty: 'success'
+	    	 type: 'json',
+		        root: 'data',
+	            successProperty: 'success',
+	            totalProperty: 'totalCount'
 	    }
 	}    
 });

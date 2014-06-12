@@ -52,6 +52,17 @@ Ext.define('app.controller.Main', {
     			}
     	
     		}
+    		,'button#pagosPolizas':{
+    			click:function(){	    			
+    				var xtype = 'pagospolizasList';
+    				var idTab = 'pagospolizasList';
+    				var title = 'Pagos de Polizas';
+    				app.utils.openTab(xtype,title,idTab,{
+    					editionMode:app.utils.EditionMode.ROW
+    				});
+    			}
+    		
+    		}
     		,'button#pagosCompanias':{
     			click:function(){	    			
     				var xtype = 'pagoscompaniasList';

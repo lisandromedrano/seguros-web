@@ -5,12 +5,12 @@
 package com.lix.clientes.service;
 
 import java.util.List;
-import java.util.Map;
 
-import com.lix.clientes.model.Clientes;
-import com.lix.service.Service;
 import com.lix.clientes.dto.ClientesDto;
+import com.lix.clientes.model.Clientes;
 import com.lix.dto.DefaultResponse;
+import com.lix.service.Service;
+import com.lix.web.Page;
 
 /**
  * Basic persistence operations for entity "Clientes"
@@ -19,7 +19,10 @@ import com.lix.dto.DefaultResponse;
  * @author Telosys Tools Generator
  *
  */
-public interface ClientesService extends Service<Clientes,Integer>{
+public interface ClientesService extends Service<Clientes, Integer> {
 	DefaultResponse createOrUpdate(ClientesDto dto);
+
 	List<Clientes> findByName(String name);
+
+	Page<ClientesDto> findPage(ClientesDto dto);
 }

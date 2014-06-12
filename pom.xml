@@ -108,7 +108,8 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-test</artifactId>
-		    <version>${org.springframework.version}</version>
+<!-- 		    <version>${org.springframework.version}</version> -->
+		    <version>3.2.3.RELEASE</version>
 		    <type>jar</type>
 		    <scope>test</scope>
 		</dependency>
@@ -156,6 +157,19 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
             <type>jar</type>
             <scope>test</scope>
 		</dependency>
+		<dependency>
+		    <groupId>com.jayway.jsonpath</groupId>
+		    <artifactId>json-path</artifactId>
+		    <version>0.8.1</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>com.jayway.jsonpath</groupId>
+		    <artifactId>json-path-assert</artifactId>
+		    <version>0.8.1</version>
+		    <scope>test</scope>
+		</dependency>
+		
     </dependencies>
   
     <build>

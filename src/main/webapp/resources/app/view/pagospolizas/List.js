@@ -5,6 +5,7 @@ Ext.define('app.view.pagospolizas.List', {
 	title : 'PagosPolizas',
 	// store : 'PagosPolizas',
 	initComponent : function() {
+		this.polizasCombo = Ext.create('app.view.polizas.ComboBox');
 		this.store = Ext.create('app.store.PagosPolizas');
 		this.columns = [ {
 			header : 'Fecha Pago',
@@ -17,6 +18,42 @@ Ext.define('app.view.pagospolizas.List', {
 				format : 'd-m-Y'
 			}
 
+		},
+		{
+			header : 'Poliza',
+			dataIndex:'polizas.id',
+			align:'right',
+			editor: this.polizasCombo,
+			flex : 1,
+			renderer: function(value,p, record){
+//				return record.data.nroPoliza;
+				var index = this.polizasCombo.store.find('id',value); 
+	            if (index != -1){
+	                var rs = this.polizasCombo.store.getAt(index).data; 
+	                return rs.nroPoliza; 
+	            }else{
+	            	return record.data.polizas.nroPoliza
+	            }		           
+			}
+		},
+		{
+			header : 'Bien a Cubrir',
+//			align:'left',
+			flex : 1,
+			renderer: function(value,p, record){
+				if(record.data.polizas.bienACubrir)
+				return record.data.polizas.bienACubrir
+				else return ''
+				
+			}
+		},
+		{
+			header : 'Concepto',
+			dataIndex : 'concepto',
+			flex : 1,
+			field : {
+				xtype : 'textfield'
+			}
 		}, {
 			header : 'Importe',
 			dataIndex : 'importe',
@@ -26,27 +63,10 @@ Ext.define('app.view.pagospolizas.List', {
 			},
 			align : 'right',
 			renderer : Ext.util.Format.usMoney,
-
-		},
-		// {
-		// header: 'tipoPago'
-		// ,dataIndex: 'tipoPago'
-		// ,flex: 1
-		// ,field: { xtype: 'textfield' }
-		//				
-		// },
-		{
-			header : 'Concepto',
-			dataIndex : 'concepto',
-			flex : 1,
-			field : {
-				xtype : 'textfield'
-			}
-
 		}, {
 			header : 'Nro. Recibo',
 			dataIndex : 'nroRecibo',
-			flex : 1,
+//			flex : 1,
 			field : {
 				type : 'number'
 			},
@@ -63,31 +83,6 @@ Ext.define('app.view.pagospolizas.List', {
 		}
 
 		];
-		
-		this.dockedItems = [{
-            xtype: 'toolbar',
-            items: [
-            '->',{
-                text: 'Agregar',
-                itemId:'add',
-                iconCls: 'icon-add'
-
-            }, {
-                text: 'Plan de Pagos',
-                itemId:'planPagos',
-                iconCls: 'icon-copy',
-                disabled: true
-
-            }, 
-             {
-                itemId: 'delete',
-                text: 'Borrar',
-                iconCls: 'icon-delete',
-                disabled: true
-            }
-			]
-        }]
-
 		this.callParent(arguments);
 	}
 });

@@ -32,7 +32,7 @@ public class PagosPolizas extends Pagos implements Serializable {
 	private Integer nroRecibo;
 
 	@ManyToOne
-	@JoinColumn(name = "ID_POLIZA", referencedColumnName = "ID", insertable = false, updatable = false)
+	@JoinColumn(name = "ID_POLIZA")
 	private Polizas polizas;
 
 	// ----------------------------------------------------------------------

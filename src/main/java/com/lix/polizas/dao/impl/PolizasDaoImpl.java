@@ -4,6 +4,7 @@
  */
 package com.lix.polizas.dao.impl;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.hibernate.Criteria;
+import org.hibernate.ScrollableResults;
+import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -19,7 +22,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lix.dao.AbstractHibernateDao;
 import com.lix.polizas.dao.PolizasDao;
+import com.lix.polizas.dto.PolizasDto;
 import com.lix.polizas.model.Polizas;
+import com.lix.util.BeanUtils;
+import com.lix.web.Page;
 
 /**
  * Basic persistence operations for entity "Polizas"
@@ -29,7 +35,8 @@ import com.lix.polizas.model.Polizas;
  * 
  */
 @Repository("polizasDao")
-public class PolizasDaoImpl extends AbstractHibernateDao<Polizas, Integer> implements PolizasDao {
+public class PolizasDaoImpl extends AbstractHibernateDao<Polizas, Integer>
+		implements PolizasDao {
 
 	@PostConstruct
 	public void setInstance() {
@@ -40,7 +47,12 @@ public class PolizasDaoImpl extends AbstractHibernateDao<Polizas, Integer> imple
 	@Transactional
 	public List<Polizas> findByName(String name) {
 		Criteria criteria = getCurrentSession().createCriteria((Polizas.class));
-		criteria.add(Restrictions.like("name", name.toUpperCase(), MatchMode.ANYWHERE));
+		// criteria.add();
+		criteria.add(Restrictions.or(Restrictions.ilike("bienACubrir",
+				name.toUpperCase(), MatchMode.ANYWHERE), Restrictions.ilike(
+				"nroPoliza", name.toUpperCase(), MatchMode.ANYWHERE)));
+		// criteria.add();
+		criteria.setMaxResults(25);
 		return (List<Polizas>) criteria.list();
 	}
 
@@ -56,24 +68,70 @@ public class PolizasDaoImpl extends AbstractHibernateDao<Polizas, Integer> imple
 	@Override
 	@Transactional
 	public List<Polizas> getPolizasPorVencer(Date fechaDesde, Date fechaHasta) {
-		Criteria crit=getCriteria();
-		
-		Calendar desde=Calendar.getInstance();
+		Criteria crit = getCriteria();
+
+		Calendar desde = Calendar.getInstance();
 		desde.setTime(fechaHasta);
 		desde.set(Calendar.HOUR_OF_DAY, 0);
 		desde.set(Calendar.MINUTE, 0);
 		desde.set(Calendar.SECOND, 0);
-		
-		Calendar hasta=Calendar.getInstance();
+
+		Calendar hasta = Calendar.getInstance();
 		hasta.setTime(fechaDesde);
 		hasta.set(Calendar.HOUR_OF_DAY, 23);
 		hasta.set(Calendar.MINUTE, 59);
 		hasta.set(Calendar.SECOND, 59);
-		
-//		crit.add(Restrictions.between("fVigHasta", desde.getTime(), hasta.getTime()));
+
+		// crit.add(Restrictions.between("fVigHasta", desde.getTime(),
+		// hasta.getTime()));
 		crit.add(Restrictions.between("fVigHasta", fechaDesde, fechaHasta));
 		crit.addOrder(Order.asc("fVigHasta"));
 		return crit.list();
 	}
 
+	@Override
+	public Page<PolizasDto> findPage(PolizasDto dto) {
+		Page<PolizasDto> page = new Page<PolizasDto>();
+		page.setPage(dto.getPage());
+		Criteria criteria = getCriteria();
+		//
+		ScrollableResults scrollable = criteria.scroll();
+		if (scrollable.last()) {
+			page.setTotalCount(scrollable.getRowNumber() + 1);
+		}
+		criteria = getPaginationCriteria(dto, criteria);
+		//
+		// // TODO:add additional criteria
+		// Find by name
+		if (org.springframework.util.StringUtils.hasText(dto.getFindByName())) {
+
+			// criteria.add(Restrictions.or(Restrictions.ilike("nombre",
+			// dto.getFindByName(), MatchMode.ANYWHERE), Restrictions
+			// .ilike("apellido", dto.getFindByName(), MatchMode.ANYWHERE)));
+			// criteria.add(Restrictions.ilike("nombre", dto.getFindByName(),
+			// MatchMode.ANYWHERE));
+			Disjunction orCriteria = Restrictions.disjunction();
+			criteria.createAlias("clientes", "c");
+			orCriteria.add(Restrictions.ilike("nroPoliza", dto.getFindByName()
+					.toUpperCase(), MatchMode.ANYWHERE));
+			orCriteria.add(Restrictions.ilike("bienACubrir", dto
+					.getFindByName().toUpperCase(), MatchMode.ANYWHERE));
+			orCriteria.add(Restrictions.ilike("c.nombre", dto.getFindByName()
+					.toUpperCase(), MatchMode.ANYWHERE));
+			orCriteria.add(Restrictions.ilike("c.apellido", dto.getFindByName()
+					.toUpperCase(), MatchMode.ANYWHERE));
+
+			criteria.add(orCriteria);
+
+		}
+		List<PolizasDto> data = new ArrayList<PolizasDto>();
+		for (Polizas e : (List<Polizas>) criteria.list()) {
+			PolizasDto ent = BeanUtils.copyProperties(e, PolizasDto.class);
+			data.add(ent);
+		}
+		page.setData(data);
+		page.setSuccess(true);
+		// // return (List<Modules>) criteria.list();
+		return page;
+	}
 }

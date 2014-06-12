@@ -9,7 +9,14 @@ Ext.define('app.model.Clientes', {
 		{name:'email'}, 
 		{name:'observaciones'}, 
 		{name:'fNacimiento',type:'date', dateFormat: 'd-m-Y'}, 
-		{name:'dnicuit'}
+		{name:'dnicuit'},
+		{
+			name : 'nombreApellido',
+			type : 'string',
+			convert : function(v, record) {
+				return record.data.apellido+ ' '+record.data.nombre 
+			}
+		}
     ],
     proxy:{
 		type:'rest'

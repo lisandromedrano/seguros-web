@@ -26,11 +26,24 @@ Ext.define('app.view.polizas.List', {
 				header: 'Endoso'
 				,dataIndex: 'endoso'
 				,align:'right'
-				,flex: 1
+				,width:50
+//				,flex: 1
 				,field: { xtype: 'textfield' }
 				
 			},
-
+			{
+				header: 'Asegurado'
+				,dataIndex: 'clientes.nombreApellido'
+//				,align:'right'
+				,flex: 1
+				,field: { xtype: 'textfield' }
+				,renderer: function(value,p, record){
+//					return record.data.clientes.nombreApellido
+					return record.data.clientes.apellido+ ' '+record.data.clientes.nombre
+				}
+			
+			},
+			
 	        {
 				header: 'Bien'
 				,dataIndex: 'bienACubrir'
@@ -45,15 +58,15 @@ Ext.define('app.view.polizas.List', {
 				,flex: 1
 				,field: { xtype: 'textfield' }
 				
-			},
-
-	        {
-				header: 'Orden'
-				,dataIndex: 'orden'
-				,flex: 1
-				,field: { xtype: 'textfield' }
-				
 			}//,
+
+//	        {
+//				header: 'Orden'
+//				,dataIndex: 'orden'
+//				,flex: 1
+//				,field: { xtype: 'textfield' }
+//				
+//			}//,
 		
 			];
 		
@@ -75,7 +88,7 @@ Ext.define('app.view.polizas.List', {
 	            ,itemId     : 'buscarPoliza'
 	            	,submitValue:false
 	            ,width: 140
-	            ,emptyText: 'Buscar cliente'
+	            ,emptyText: 'Buscar Poliza'
 	        },
             '->',{
                 text: 'Agregar',

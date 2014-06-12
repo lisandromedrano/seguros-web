@@ -11,6 +11,7 @@ import com.lix.polizas.dto.PolizasDto;
 import com.lix.polizas.dto.PolizasPorVencerDto;
 import com.lix.polizas.model.Polizas;
 import com.lix.service.Service;
+import com.lix.web.Page;
 
 /**
  * Basic persistence operations for entity "Polizas"
@@ -19,7 +20,7 @@ import com.lix.service.Service;
  * @author Telosys Tools Generator
  * 
  */
-public interface PolizasService extends Service<Polizas,Integer>{
+public interface PolizasService extends Service<Polizas, Integer> {
 	DefaultResponse createOrUpdate(PolizasDto dto);
 
 	List<Polizas> findByName(String name);
@@ -27,4 +28,6 @@ public interface PolizasService extends Service<Polizas,Integer>{
 	List<Polizas> polizasPorCliente(Integer id);
 
 	List<Polizas> getPolizasPorVencer(PolizasPorVencerDto dto);
+
+	Page<PolizasDto> findPage(PolizasDto dto);
 }

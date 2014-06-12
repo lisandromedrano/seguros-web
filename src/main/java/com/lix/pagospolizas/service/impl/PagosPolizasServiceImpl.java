@@ -7,7 +7,6 @@ package com.lix.pagospolizas.service.impl;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -69,8 +68,9 @@ public class PagosPolizasServiceImpl implements PagosPolizasService {
 	public DefaultResponse createOrUpdate(PagosPolizasDto dto) {
 		DefaultResponse response = new DefaultResponse();
 		try {
-			PagosPolizas ent = BeanUtils.copyProperties(dto, PagosPolizas.class);
-			this.update(ent);
+			PagosPolizas ent = BeanUtils
+					.copyProperties(dto, PagosPolizas.class);
+			ent = this.update(ent);
 			response.setId(ent.getId());
 		} catch (Exception e) {
 			response.setSuccess(false);

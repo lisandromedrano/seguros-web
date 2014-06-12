@@ -9,6 +9,10 @@ Ext.define('app.model.PagosPolizas', {
 	}, {
 		name : 'importe'
 	}, {
+		name : 'polizas'
+	}, {
+		name : 'polizas.id'
+	}, {
 		name : 'tipoPago'
 	}, {
 		name : 'concepto'
@@ -19,5 +23,26 @@ Ext.define('app.model.PagosPolizas', {
 			type : 'date',
 			dateFormat : 'd-m-Y'
 	} ],
-	idProperty : 'id'
+	idProperty : 'id'//,
+//	 proxy: {
+//        type: 'ajax',
+////        type: 'rest',
+//        restful:true,
+////        format: 'json',
+////        headers: {
+////            'Content-Type': 'application/json'
+////        },
+//        url : CONTEXT_ROOT+'/pagospolizas/',
+//        reader: {
+//            type: 'json',
+//            root: 'data',
+//            successProperty: 'success'
+//        },
+//        writer: {
+//            type: 'json'
+////            writeAllFields: true,
+////            encode: true
+////            root: 'data'
+//        },
+//    }
 });

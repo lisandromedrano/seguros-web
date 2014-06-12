@@ -53,15 +53,17 @@ Ext.define('app.controller.Clientes', {
 		    		  specialkey: function(f,e){
 		    				
 		                  if (e.getKey() == e.ENTER) {
-		                	  me.getClientesList().store.filterBy(function(record){
-		                		  var inputValue=f.value.toUpperCase();
-		                		  if(inputValue.length<2)return true;
-		                		  if(record.data.nombre.toUpperCase().indexOf(inputValue)!=-1)
-		                			  return true;
-		                		  else if(record.data.apellido.toUpperCase().indexOf(inputValue)!=-1)
-		                			  return true;
-		                		  return false;
-		                	  })
+		                	  me.getClientesList().store.load({
+		                		  params:{findByName:f.value.toUpperCase()}})
+//		                	  me.getClientesList().store.filterBy(function(record){
+//		                		  var inputValue=f.value.toUpperCase();
+//		                		  if(inputValue.length<2)return true;
+//		                		  if(record.data.nombre.toUpperCase().indexOf(inputValue)!=-1)
+//		                			  return true;
+//		                		  else if(record.data.apellido.toUpperCase().indexOf(inputValue)!=-1)
+//		                			  return true;
+//		                		  return false;
+//		                	  })
 		                  }
 		               }
 		        

@@ -20,8 +20,9 @@
     <script type="text/javascript" src="app-test/lib/jasmine-1.3.0/jasmine-html.js"></script>
     
 	<!--     including the Jasmine Test Case file -->
-       <script type="text/javascript" src="app-test/spec/AppControllerSpec.js"></script>
-       <script type="text/javascript" src="app-test/spec/PagosCompaniasSpec.js"></script>
+<!--        <script type="text/javascript" src="app-test/spec/AppControllerSpec.js"></script> -->
+<!--        <script type="text/javascript" src="app-test/spec/PagosCompaniasSpec.js"></script> -->
+       <script type="text/javascript" src="app-test/spec/DummyProxySpec.js"></script>
  
     <script src="bootstrap.js"></script>
     <script src="app-test/app-test.js"></script>

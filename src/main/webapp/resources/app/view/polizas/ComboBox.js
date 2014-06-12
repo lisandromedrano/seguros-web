@@ -2,15 +2,15 @@ Ext.define("app.view.polizas.ComboBox", {
 	extend: 'Ext.form.ComboBox',
 	alias:'widget.polizasCombo',
     store: 'Polizas',
-	displayField: 'name',
+	displayField: 'nroPoliza',
 	valueField: 'id',
 	typeAhead: false,
 	name: 'polizas',
 	itemId : 'polizas',
 	queryParam: 'name',
 	hideTrigger:false,
-	emptyText:'Select Polizas',
-	//valueField:'polizas.id',
+	emptyText:'Seleccione Poliza',
+	//valueField:'polizas.id',ione
 	minChars:3,
 	forceSelection:true,
 	mode:'remote',
@@ -25,27 +25,29 @@ Ext.define("app.view.polizas.ComboBox", {
 	},			       
 	listConfig: {
 	   loadingText: 'Searching...',
-	   emptyText: 'No matching Polizas found.',	
+	   emptyText: 'No se encontraron Polizas.',	
 	   getInnerTpl: function() {
 		   return '<a>' +
-		   '<b>{name}</b><br>'+
+		   '{nroPoliza}  - {companias.nombre}<br>'+
+		   '<b>{bienACubrir}</b><br>'+
 		   '</a>';
 	   }
 	},
 	initComponent:function(){
-		//this.store=Ext.create('Ext.data.Store', {
-	    //    model : 'app.model.Polizas',
-		//	proxy: {
-		//	     type: 'ajax',
-		//	     url:  CONTEXT_ROOT+'/'+'polizas/query',
-		//		reader: {
-		//	        type: 'json',
-		//	        root: 'data',
-		//	        successProperty:'success',
-		//	        totalProperty: 'results'
-		//	    }
-		//	}
-	    //});
+		this.store=Ext.create('Ext.data.Store', {
+	        model : 'app.model.Polizas',
+			proxy: {
+			     type: 'ajax',
+			     url:  CONTEXT_ROOT+'/'+'polizas/query',
+				reader: {
+			        type: 'json',
+			        root: 'data',
+			        successProperty:'success',
+			        totalProperty: 'results'
+			    }
+			}
+	    });
+		this.store.load({params:{name:''}})
 		this.callParent(arguments);
 	}
 	

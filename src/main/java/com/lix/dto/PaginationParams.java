@@ -17,11 +17,13 @@ public class PaginationParams {
 	private String sort;
 	private String property;
 	private String direction;
+	private String findByName;
 	private List<Sort> sorting;
 
 	// private List<Map<String, String>> sort;
 
-	// private List<Sort> sort = LazyList.decorate(new ArrayList<Sort>(), FactoryUtils.instantiateFactory(Sort.class));
+	// private List<Sort> sort = LazyList.decorate(new ArrayList<Sort>(),
+	// FactoryUtils.instantiateFactory(Sort.class));
 
 	public Integer getLimit() {
 		return limit;
@@ -83,10 +85,19 @@ public class PaginationParams {
 		return sort;
 	}
 
-	public void setSort(String sort) throws JsonParseException, JsonMappingException, IOException {
+	public void setSort(String sort) throws JsonParseException,
+			JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		this.sorting = mapper.readValue(sort, new TypeReference<List<Sort>>() {
 		});
 		this.sort = sort;
+	}
+
+	public String getFindByName() {
+		return findByName;
+	}
+
+	public void setFindByName(String findByName) {
+		this.findByName = findByName;
 	}
 }

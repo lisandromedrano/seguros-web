@@ -7,6 +7,7 @@ Ext.define('app.store.Companias', {
 	    url: CONTEXT_ROOT+'/companias/',
 	    reader: {
 	        type: 'json',
+	        root:'data',
 	        successProperty: 'success'
 	    }
 	}    
