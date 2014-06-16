@@ -38,17 +38,17 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	
 
 	<!-- Hibernate session factory -->
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"  
-		depends-on="hsqlSchemaCreator">	 
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">  
+<!-- 		depends-on="hsqlSchemaCreator">	  -->
 	    <property name="dataSource">
 	      <ref bean="dataSource"/>
 	    </property>
 	 
 	    <property name="hibernateProperties">
 	       <props>
-	         <prop key="hibernate.dialect">${database.dialect}</prop>
+<!-- 	         <prop key="hibernate.dialect">${database.dialect}</prop> -->
 	         <prop key="hibernate.show_sql">false</prop>
-	         <prop key="hibernate.hbm2ddl.auto">create</prop>
+<!-- 	         <prop key="hibernate.hbm2ddl.auto">create</prop> -->
 <!-- 	         <prop key="hibernate.hbm2ddl.auto">create</prop> -->
 <!-- 	         <prop key="hibernate.generateDdl">true</prop> -->
 	       </props>
@@ -60,20 +60,20 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <property name="dataSource" ref="dataSource" />
         <property name="schema" value="seguros" />
     </bean>
-    <bean id="dataSourceInitializer" class="org.springframework.jdbc.datasource.init.DataSourceInitializer">
-	    <property name="dataSource" ref="dataSource" />
-	    <property name="databasePopulator">
-	        <bean class="org.springframework.jdbc.datasource.init.ResourceDatabasePopulator">
-	            <property name="continueOnError" value="true" />
-	            <property name="scripts">
-	                <list>
+<!--     <bean id="dataSourceInitializer" class="org.springframework.jdbc.datasource.init.DataSourceInitializer"> -->
+<!-- 	    <property name="dataSource" ref="dataSource" /> -->
+<!-- 	    <property name="databasePopulator"> -->
+<!-- 	        <bean class="org.springframework.jdbc.datasource.init.ResourceDatabasePopulator"> -->
+<!-- 	            <property name="continueOnError" value="true" /> -->
+<!-- 	            <property name="scripts"> -->
+<!-- 	                <list> -->
 <!-- 	                    <value>classpath:sql/create-schema.sql</value> -->
 <!-- 	                    <value>classpath*:sql/DataModel.sql</value> -->
-	                </list>
-	            </property>
-	        </bean>
-	    </property>
-	</bean> 
+<!-- 	                </list> -->
+<!-- 	            </property> -->
+<!-- 	        </bean> -->
+<!-- 	    </property> -->
+<!-- 	</bean>  -->
     
       <bean id="txManager"
 	    class="org.springframework.orm.hibernate3.HibernateTransactionManager">

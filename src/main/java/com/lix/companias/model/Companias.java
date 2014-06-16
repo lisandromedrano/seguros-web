@@ -16,6 +16,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import com.lix.polizas.model.Polizas;
 
 /**
@@ -26,7 +29,7 @@ import com.lix.polizas.model.Polizas;
  */
 
 @Entity
-@Table(name = "companias" )
+@Table(name = "companias")
 public class Companias implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -87,8 +90,9 @@ public class Companias implements Serializable {
 	// toString METHOD
 	// ----------------------------------------------------------------------
 	public String toString() {
-		return "";
-		// return ReflectionToStringBuilder.toString(this);
+		// return "";
+		return ReflectionToStringBuilder.toString(this,
+				ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 
 	// public List<Pagos> getPagos() {

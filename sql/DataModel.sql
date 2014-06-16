@@ -104,17 +104,17 @@ create table secciones
 );
 
 alter table PAGOS add constraint FK_PAGO_COMPANIA foreign key (ID_COMPANIA)
-      references COMPANIAS (ID) on delete restrict on update restrict;
+      references COMPANIAS (ID) on delete cascade;
 
 alter table PAGOS add constraint FK_PAGO_POLIZA foreign key (ID_POLIZA)
-      references polizas (ID) on delete restrict on update restrict;
+      references polizas (ID) on delete cascade;
 
 alter table polizas add constraint FK_POLIZA_CLIENTE foreign key (id_cliente)
-      references clientes (id) on delete restrict on update restrict;
+      references clientes (id) on delete cascade;
 
 alter table polizas add constraint FK_POLIZA_COMPANIA foreign key (id_compania)
-      references COMPANIAS (ID) on delete restrict on update restrict;
+      references COMPANIAS (ID) on delete cascade;
 
 alter table polizas add constraint FK_POLIZA_SECCION foreign key (SECCION_ID)
-      references secciones (ID) on delete restrict on update restrict;
+      references secciones (ID) on delete cascade;
 

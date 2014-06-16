@@ -13,16 +13,16 @@ Ext.define('app.view.clientes.List', {
 				hidden:true
 				,dataIndex:'id'
 			},
-		    {
-				header: 'nombre'
-				,dataIndex: 'nombre'
-				,flex: 1
-				,field: { xtype: 'textfield' }
-				
+			{
+				header: 'Apellido o Razon Social'
+					,dataIndex: 'apellido'
+						,flex: 1
+						,field: { xtype: 'textfield' }
+			
 			},
-	        {
-				header: 'apellido'
-				,dataIndex: 'apellido'
+		    {
+				header: 'Nombre'
+				,dataIndex: 'nombre'
 				,flex: 1
 				,field: { xtype: 'textfield' }
 				
@@ -34,13 +34,14 @@ Ext.define('app.view.clientes.List', {
 //				,field: { xtype: 'textfield' }
 //				
 //			},
-//	        {
-//				header: 'telefono'
-//				,dataIndex: 'telefono'
-//				,flex: 1
-//				,field: { xtype: 'textfield' }
-//				
-//			},
+	        {
+				header: 'Telefono'
+				,dataIndex: 'telefono'
+				,flex: 1
+				,align:'right'
+				,field: { xtype: 'textfield' }
+				
+			},
 	        {
 				header: 'email'
 				,dataIndex: 'email'

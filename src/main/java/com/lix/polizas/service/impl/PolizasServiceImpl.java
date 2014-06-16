@@ -77,4 +77,33 @@ public class PolizasServiceImpl extends GenericService<Polizas, Integer>
 	public Page<PolizasDto> findPage(PolizasDto dto) {
 		return polizasDao.findPage(dto);
 	}
+
+	@Override
+	public void crearPlanDePagos(Integer idPoliza) {
+		// Calendar cal=Calendar.getInstance();
+		// cal.setTime(fechaPrimerVencimiento);
+		// int start=0;
+		// if(this.getPagos()!=null){
+		// start=this.getPagos().size();
+		// List<PagoPoliza>
+		// pagosExistentes=PagoPoliza.ordenarPagosPorNroRecibo(this.getPagos());
+		// for(PagoPoliza pagoPoliza:pagosExistentes){
+		// pagoPoliza.setFechaVencimiento(cal.getTime());
+		// cal.add(Calendar.MONTH, 1);
+		// }
+		// }
+		// //Agrego más pagos
+		// for(int i=start;i<this.getCantCuotas();i++){
+		// PagoPoliza p=new PagoPoliza();
+		// p.setTipo_pago(AbstractPago.POLIZA);
+		// p.setFechaVencimiento(cal.getTime());
+		// p.setNroRecibo(i+1);
+		// p.setImporte(0.0f);
+		// p.setConcepto("");
+		// //p.setPoliza(poliza);
+		// cal.add(Calendar.MONTH, 1);
+		// this.addPago(p);
+		// }
+
+	}
 }

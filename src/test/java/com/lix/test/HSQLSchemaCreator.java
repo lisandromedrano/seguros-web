@@ -42,8 +42,9 @@ public final class HSQLSchemaCreator implements InitializingBean {
 	 */
 	public void afterPropertiesSet() throws Exception {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-		 jdbcTemplate.execute("CREATE SCHEMA " + schema + " AUTHORIZATION DBA");
-//		jdbcTemplate.execute("ALTER CATALOG RENAME TO " + schema);
+		// jdbcTemplate.execute("CREATE SCHEMA " + schema +
+		// " AUTHORIZATION DBA");
+		// jdbcTemplate.execute("ALTER CATALOG RENAME TO " + schema);
 	}
 
 }

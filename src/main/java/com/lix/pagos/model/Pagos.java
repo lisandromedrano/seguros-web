@@ -34,6 +34,8 @@ import javax.persistence.TemporalType;
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "TIPO_PAGO")
 public class Pagos implements Serializable {
 	private static final long serialVersionUID = 1L;
+	public static final String TIPO_PAGO_POLIZA = "P";
+	public static final String TIPO_PAGO_COMPANIA = "C";
 
 	// ----------------------------------------------------------------------
 	// ENTITY PRIMARY KEY ( BASED ON A SINGLE FIELD )

@@ -31,6 +31,7 @@ Ext.define('app.controller.Polizas', {
 		}
 	],
 	init: function() {
+		
 		var me = this;
 		this.entityName="Poliza";
 		this.controller="polizas";

@@ -30,4 +30,6 @@ public interface PolizasService extends Service<Polizas, Integer> {
 	List<Polizas> getPolizasPorVencer(PolizasPorVencerDto dto);
 
 	Page<PolizasDto> findPage(PolizasDto dto);
+
+	void crearPlanDePagos(Integer idPoliza);
 }

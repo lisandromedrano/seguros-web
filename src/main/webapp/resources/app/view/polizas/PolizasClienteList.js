@@ -1,18 +1,21 @@
 Ext.define('app.view.polizas.PolizasClienteList', {
-	extend: 'Ext.grid.Panel',
+	extend: 'app.view.polizas.List',
 	alias: 'widget.polizasClienteList',	
 	title: 'Polizas',
-	editionMode:app.utils.EditionMode.ROW,
+//	editionMode:app.utils.EditionMode.ROW,
+	autoScroll:true,
+	title:false,
+	
+	editionMode:app.utils.EditionMode.TAB,
+    
 	initComponent: function() {
 		var _this=this;
-		if(this.editionMode==app.utils.EditionMode.ROW){
-			this.plugins=[Ext.create('Ext.grid.plugin.RowEditing')];
-		}
+		this.autoHeight = true;
 		this.store=Ext.create('Ext.data.Store', {
 		    model : 'app.model.Polizas',
 			proxy: {
 			    type: 'ajax',
-			    url:  CONTEXT_ROOT+'/'+'polizas/findByCliente',
+			    url:  CONTEXT_ROOT+'/'+'polizas/polizasPorCliente',
 				reader: {
 			        type: 'json',
 			        successProperty:'success',
@@ -20,40 +23,54 @@ Ext.define('app.view.polizas.PolizasClienteList', {
 			    },autoLoad:false
 			}
 		});
-//		if(this.idCliente){
-//			this.store.proxy.extraParams={id:this.idCliente};
-//		}		
+		if(this.editionMode==app.utils.EditionMode.ROW){
+			this.plugins=[Ext.create('Ext.grid.plugin.RowEditing')];
+		}	
 		this.columns=[
-              {dataIndex:'id',hidden:true}
-		   ,{
-			   dataIndex: 'bienACubrir'
-				,header: 'Bien A Cubrir'
-				,flex: 1
-				,field: { xtype: 'textfield' }
-				
-			}
-		   ,{
-				header: 'Nro. Poliza'
-				,dataIndex: 'nroPoliza'
-				,flex: 1
-				,field: { xtype: 'textfield' }
-				
-			}
-		   ,{
-				header: 'F. Desde'
-				,dataIndex: 'fVigDesde'
-				,flex: 1
-				,field: { xtype: 'datefield',format: 'd-m-Y' }
-				
-			},
-	        {
-				header: 'F. Hasta'
-				,dataIndex: 'fVigHasta'
-				,flex: 1
-				,field: { xtype: 'datefield' ,format: 'd-m-Y'}
-				
-			}
+               {dataIndex:'id',hidden:true}
+			   ,{
+				   dataIndex: 'bienACubrir'
+					,header: 'Bien A Cubrir'
+					,flex: 1
+					,field: { xtype: 'textfield' }
+					
+				}
+			   ,{
+					header: 'Nro. Poliza'
+					,dataIndex: 'nroPoliza'
+					,flex: 1
+					,field: { xtype: 'textfield' }
+					
+				}
+			   ,{
+					header: 'Endoso'
+					,dataIndex: 'endoso'
+					,flex: 1
+					,field: { xtype: 'textfield' }
+					
+				}
+			   ,{
+				   text:'Vigencia'
+					,flex: 1
+				   ,columns:[
+					   {
+							header: 'Desde'
+							,dataIndex: 'fVigDesde'
+							,renderer: Ext.util.Format.dateRenderer('d-m-Y')
+							,field: { xtype: 'datefield',format: 'd-m-Y' }
+							
+						},
+				        {
+							header: 'Hasta'
+							,dataIndex: 'fVigHasta'
+							,renderer: Ext.util.Format.dateRenderer('d-m-Y')
+							,field: { xtype: 'datefield' ,format: 'd-m-Y'}
+							
+						}
+				   ]
+			   }
 		];
+				
 		this.dockedItems = [{
             xtype: 'toolbar',
             items: [{

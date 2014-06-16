@@ -7,7 +7,6 @@ package com.lix.companias.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -69,9 +68,9 @@ public class CompaniasServiceImpl implements CompaniasService {
 	public DefaultResponse createOrUpdate(CompaniasDto dto) {
 		DefaultResponse response = new DefaultResponse();
 		try {
-			Companias ent = new Companias();
-			BeanUtils.copyProperties(dto, ent);
-			this.update(ent);
+			Companias ent = com.lix.util.BeanUtils.copyProperties(dto,
+					Companias.class);
+			ent = this.update(ent);
 			response.setId(ent.getId());
 		} catch (Exception e) {
 			response.setSuccess(false);

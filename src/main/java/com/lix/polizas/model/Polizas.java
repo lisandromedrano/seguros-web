@@ -145,11 +145,8 @@ public class Polizas implements Serializable {
 	// ----------------------------------------------------------------------
 	// GETTER & SETTER FOR THE KEY FIELD
 	// ----------------------------------------------------------------------
-	public void setId(int id) {
-		this.id = id;
-	}
 
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
@@ -349,9 +346,16 @@ public class Polizas implements Serializable {
 	// toString METHOD
 	// ----------------------------------------------------------------------
 	public String toString() {
-		String toString = this.getNroPoliza() + "-"
-				+ this.getTipoPoliza().getNombre();
-		return toString;
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.getNroPoliza());
+		sb.append(" - ");
+		if (this.getTipoPoliza() != null) {
+			sb.append(this.getTipoPoliza().getNombre());
+		}
+		// String toString = this.getNroPoliza() + "-" + this.getTipoPoliza() !=
+		// null ? this
+		// .getTipoPoliza().getNombre() : "null";
+		return sb.toString();
 		// return ReflectionToStringBuilder.toString(this);
 	}
 

@@ -4,9 +4,11 @@
  */
 package com.lix.test.clientes;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,6 +28,14 @@ public class ClientesTest extends AbstractTestWithContext {
 	@Autowired
 	ClientesService service;
 
+	@Before
+	public void setup() {
+		Clientes c = ClientesMock.createInstance();
+		c.setNombre("LARA");
+		c.setFNacimiento(new Date());
+		service.save(c);
+	}
+
 	@Test
 	public void findAll() {
 		List<Clientes> list = service.findAll();
@@ -40,5 +50,14 @@ public class ClientesTest extends AbstractTestWithContext {
 			ClientesDto dto = BeanUtils.copyProperties(c, ClientesDto.class);
 			System.out.println(dto.getFNacimiento());
 		}
+	}
+
+	@Test
+	public void testSaveWithAssignedId() {
+		Clientes c = ClientesMock.createInstance();
+		c.setId(20);
+		service.save(c);
+		List<Clientes> clientes = service.findByName(c.getNombre());
+		Assert.assertTrue(clientes.size() > 0);
 	}
 }

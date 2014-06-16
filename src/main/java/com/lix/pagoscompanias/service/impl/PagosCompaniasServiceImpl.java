@@ -7,7 +7,6 @@ package com.lix.pagoscompanias.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +18,8 @@ import com.lix.pagoscompanias.model.PagosCompanias;
 import com.lix.pagoscompanias.service.PagosCompaniasService;
 
 /**
- * JPA implementation for basic persistence operations ( entity "PagosCompanias" )
+ * JPA implementation for basic persistence operations ( entity "PagosCompanias"
+ * )
  * 
  * @author Telosys Tools Generator
  * 
@@ -68,9 +68,9 @@ public class PagosCompaniasServiceImpl implements PagosCompaniasService {
 	public DefaultResponse createOrUpdate(PagosCompaniasDto dto) {
 		DefaultResponse response = new DefaultResponse();
 		try {
-			PagosCompanias ent = new PagosCompanias();
-			BeanUtils.copyProperties(dto, ent);
-			this.update(ent);
+			PagosCompanias ent = com.lix.util.BeanUtils.copyProperties(dto,
+					PagosCompanias.class);
+			ent = this.update(ent);
 			response.setId(ent.getId());
 		} catch (Exception e) {
 			response.setSuccess(false);

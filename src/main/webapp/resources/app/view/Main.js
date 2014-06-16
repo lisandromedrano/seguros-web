@@ -42,15 +42,16 @@ Ext.define('app.view.Main', {
 //		defaults:{
 //			textAlign:'left'
 //		},
-        layout : {
-			type : 'accordion',
-			fill:false,
-			hideCollapseTool:true,
-			animate : true
-			
-		},
+//        layout : {
+//			type : 'accordion',
+//			fill:false,
+//			hideCollapseTool:true,
+//			animate : true
+//			
+//		},
 		defaults : {
 			xtype : 'buttongroup',
+			collapsed:false,
 			layout : {
 				type : 'vbox',
 				align : 'stretch',

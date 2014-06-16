@@ -31,71 +31,71 @@ Ext.define("app.view.clientes.Edit", {
 				,
 				align : 'stretch'
 			}
-		this.polizasGrid=Ext.create('app.view.polizas.List',{
-//			viewConfig: {
-//		        stripeRows: true
-//		    }
-			autoScroll:true
-			,title:false
-			,autoHeight : true
-			,editionMode:app.utils.EditionMode.TAB
-		    ,store:Ext.create('Ext.data.Store', {
-			    model : 'app.model.Polizas',
-				proxy: {
-				    type: 'ajax',
-				    url:  CONTEXT_ROOT+'/'+'polizas/polizasPorCliente',
-					reader: {
-				        type: 'json',
-				        successProperty:'success',
-				        totalProperty: 'results'
-				    },autoLoad:false
-				}
-			})
-			,columns:[
-			      {dataIndex:'id',hidden:true}
-				   ,{
-					   dataIndex: 'bienACubrir'
-						,header: 'Bien A Cubrir'
-						,flex: 1
-						,field: { xtype: 'textfield' }
-						
-					}
-				   ,{
-						header: 'Nro. Poliza'
-						,dataIndex: 'nroPoliza'
-						,flex: 1
-						,field: { xtype: 'textfield' }
-						
-					}
-				   ,{
-						header: 'Endoso'
-						,dataIndex: 'endoso'
-						,flex: 1
-						,field: { xtype: 'textfield' }
-						
-					}
-				   ,{
-					   text:'Vigencia'
-						,flex: 1
-					   ,columns:[
-						   {
-								header: 'Desde'
-								,dataIndex: 'fVigDesde'
-								,renderer: Ext.util.Format.dateRenderer('d-m-Y')
-								,field: { xtype: 'datefield',format: 'd-m-Y' }
-								
-							},
-					        {
-								header: 'Hasta'
-								,dataIndex: 'fVigHasta'
-								,renderer: Ext.util.Format.dateRenderer('d-m-Y')
-								,field: { xtype: 'datefield' ,format: 'd-m-Y'}
-								
-							}
-					   ]
-				   }
-			]
-		 });
+//		this.polizasGrid=Ext.create('app.view.polizas.List',{
+////			viewConfig: {
+////		        stripeRows: true
+////		    }
+//			autoScroll:true
+//			,title:false
+//			,autoHeight : true
+//			,editionMode:app.utils.EditionMode.TAB
+//		    ,store:Ext.create('Ext.data.Store', {
+//			    model : 'app.model.Polizas',
+//				proxy: {
+//				    type: 'ajax',
+//				    url:  CONTEXT_ROOT+'/'+'polizas/polizasPorCliente',
+//					reader: {
+//				        type: 'json',
+//				        successProperty:'success',
+//				        totalProperty: 'results'
+//				    },autoLoad:false
+//				}
+//			})
+//			,columns:[
+//			      {dataIndex:'id',hidden:true}
+//				   ,{
+//					   dataIndex: 'bienACubrir'
+//						,header: 'Bien A Cubrir'
+//						,flex: 1
+//						,field: { xtype: 'textfield' }
+//						
+//					}
+//				   ,{
+//						header: 'Nro. Poliza'
+//						,dataIndex: 'nroPoliza'
+//						,flex: 1
+//						,field: { xtype: 'textfield' }
+//						
+//					}
+//				   ,{
+//						header: 'Endoso'
+//						,dataIndex: 'endoso'
+//						,flex: 1
+//						,field: { xtype: 'textfield' }
+//						
+//					}
+//				   ,{
+//					   text:'Vigencia'
+//						,flex: 1
+//					   ,columns:[
+//						   {
+//								header: 'Desde'
+//								,dataIndex: 'fVigDesde'
+//								,renderer: Ext.util.Format.dateRenderer('d-m-Y')
+//								,field: { xtype: 'datefield',format: 'd-m-Y' }
+//								
+//							},
+//					        {
+//								header: 'Hasta'
+//								,dataIndex: 'fVigHasta'
+//								,renderer: Ext.util.Format.dateRenderer('d-m-Y')
+//								,field: { xtype: 'datefield' ,format: 'd-m-Y'}
+//								
+//							}
+//					   ]
+//				   }
+//			]
+//		 });
 		this.items=[
 		{
 			xtype:'fieldset',
@@ -154,6 +154,11 @@ Ext.define("app.view.clientes.Edit", {
 					xtype:'textfield',
 					fieldLabel: 'DNI/CUIT',
 					name:'dnicuit'
+				 },
+				 {
+					 xtype:'textfield',
+					 name:'id',
+					 hidden:true
 				 }
 		    ]
 		},{
@@ -161,7 +166,8 @@ Ext.define("app.view.clientes.Edit", {
 				title: 'Polizas',
 			//	width:'70%',
 				items:[
-				       	this.polizasGrid
+//				       	this.polizasGrid
+{	xtype:'polizasClienteList'}
 				 ]
 		}
 		];

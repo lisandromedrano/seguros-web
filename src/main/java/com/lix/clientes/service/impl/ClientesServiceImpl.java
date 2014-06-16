@@ -70,7 +70,7 @@ public class ClientesServiceImpl implements ClientesService {
 		try {
 			Clientes ent = com.lix.util.BeanUtils.copyProperties(dto,
 					Clientes.class);
-			this.update(ent);
+			ent = this.update(ent);
 			response.setId(ent.getId());
 		} catch (Exception e) {
 			response.setSuccess(false);

@@ -33,6 +33,7 @@ Ext.define('app.Application', {
         ,'PagosCompanias'
         ,'PagosPolizas'
         ,'PagosPolizasByPoliza'
+        ,'PolizasByCliente'
     ],
     stores: [
        'Secciones'

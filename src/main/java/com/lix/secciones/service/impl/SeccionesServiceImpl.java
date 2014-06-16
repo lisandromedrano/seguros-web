@@ -69,7 +69,7 @@ public class SeccionesServiceImpl implements SeccionesService {
 		DefaultResponse response = new DefaultResponse();
 		try {
 			Secciones ent = BeanUtils.copyProperties(dto, Secciones.class);
-			this.update(ent);
+			ent = this.update(ent);
 			response.setId(ent.getId());
 		} catch (Exception e) {
 			response.setSuccess(false);

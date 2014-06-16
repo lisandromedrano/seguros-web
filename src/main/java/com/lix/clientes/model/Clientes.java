@@ -17,6 +17,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import com.lix.polizas.model.Polizas;
 
 /**
@@ -35,7 +38,7 @@ public class Clientes implements Serializable {
 	// ENTITY PRIMARY KEY ( BASED ON A SINGLE FIELD )
 	// ----------------------------------------------------------------------
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
 	private Integer id;
 
@@ -169,8 +172,9 @@ public class Clientes implements Serializable {
 	// toString METHOD
 	// ----------------------------------------------------------------------
 	public String toString() {
-		return "";
-		// return ReflectionToStringBuilder.toString(this);
+		// return "";
+		return ReflectionToStringBuilder.toString(this,
+				ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 
 	public List<Polizas> getPolizas() {

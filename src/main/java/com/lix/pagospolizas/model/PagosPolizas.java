@@ -24,7 +24,7 @@ import com.lix.polizas.model.Polizas;
  */
 
 @Entity
-@DiscriminatorValue(value = "P")
+@DiscriminatorValue(value = Pagos.TIPO_PAGO_POLIZA)
 public class PagosPolizas extends Pagos implements Serializable {
 	private static final long serialVersionUID = 1L;
 

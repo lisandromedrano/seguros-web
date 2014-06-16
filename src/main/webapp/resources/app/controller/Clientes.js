@@ -18,6 +18,9 @@ Ext.define('app.controller.Clientes', {
 	},{
 	    ref: 'polizasGrid',
 	    selector: 'clientesEdit > polizasList'
+	},{
+		ref: 'addPolizaButton',
+		selector: 'clientesEdit > polizasList > toolbar > button#add'
 	}]
 	,entityName:"Cliente"
 	,controller:"clientes"
@@ -29,8 +32,8 @@ Ext.define('app.controller.Clientes', {
 		var me = this;
 		me.afterFillFormFn=function(panel,form,record){			
 			panel.setTitle(record.data.nombre+' '+record.data.apellido);
-			panel.polizasGrid.store.proxy.extraParams={id:record.data.id};
-			panel.polizasGrid.store.load();
+			panel.query('polizasClienteList')[0].store.proxy.extraParams={id:record.data.id};
+			panel.query('polizasClienteList')[0].store.load();
 		}
 		me.control({
 				'clientesList':{
