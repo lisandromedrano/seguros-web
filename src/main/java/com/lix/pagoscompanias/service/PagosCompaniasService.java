@@ -10,6 +10,7 @@ import com.lix.dto.DefaultResponse;
 import com.lix.pagoscompanias.dto.PagosCompaniasDto;
 import com.lix.pagoscompanias.model.PagosCompanias;
 import com.lix.service.Service;
+import com.lix.web.Page;
 
 /**
  * Basic persistence operations for entity "PagosCompanias"
@@ -26,4 +27,6 @@ public interface PagosCompaniasService extends Service<PagosCompanias, Integer> 
 	List<PagosCompanias> findByCompania(Integer idCompania);
 
 	List<PagosCompanias> find(PagosCompaniasDto dto);
+
+	Page<PagosCompaniasDto> findPage(PagosCompaniasDto dto);
 }

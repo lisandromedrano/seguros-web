@@ -5,12 +5,11 @@
 package com.lix.pagospolizas.dao;
 
 import java.util.List;
-import java.util.Map;
-import java.util.List;
+
 import com.lix.dao.HibernateDao;
 import com.lix.pagospolizas.dto.PagosPolizasDto;
 import com.lix.pagospolizas.model.PagosPolizas;
-
+import com.lix.web.Page;
 
 /**
  * Basic persistence operations for entity "PagosPolizas"
@@ -19,9 +18,11 @@ import com.lix.pagospolizas.model.PagosPolizas;
  * @author Telosys Tools Generator
  *
  */
-public interface PagosPolizasDao extends HibernateDao<PagosPolizas,Integer> {	
+public interface PagosPolizasDao extends HibernateDao<PagosPolizas, Integer> {
 
 	public List<PagosPolizas> findByName(String name);
 
 	public List<PagosPolizas> find(PagosPolizasDto dto);
+
+	Page<PagosPolizasDto> findPage(PagosPolizasDto dto);
 }

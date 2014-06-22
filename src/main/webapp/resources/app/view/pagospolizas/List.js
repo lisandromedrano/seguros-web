@@ -3,6 +3,7 @@ Ext.define('app.view.pagospolizas.List', {
 	alias : 'widget.pagospolizasList',
 	requires : [ 'app.view.polizas.ComboBox', 'app.view.companias.ComboBox' ],
 	title : 'PagosPolizas',
+	iconCls:'icon_pagos_polizas',
 	// store : 'PagosPolizas',
 	initComponent : function() {
 		this.polizasCombo = Ext.create('app.view.polizas.ComboBox');
@@ -76,6 +77,7 @@ Ext.define('app.view.pagospolizas.List', {
 			header : 'Fecha Vencimiento',
 			dataIndex : 'fechaVencimiento',
 			flex : 1,
+			renderer : Ext.util.Format.dateRenderer('d-m-Y'),
 			field : {
 				xtype : 'datefield'
 			}
@@ -83,6 +85,44 @@ Ext.define('app.view.pagospolizas.List', {
 		}
 
 		];
+		this.dockedItems = [{
+            xtype: 'toolbar',
+            items: [{
+            	text: 'Actualizar',
+	    	    iconCls:'x-tbar-loading',
+	    	    scope: this,
+	    	    handler: function(){
+	    			this.store.load();	
+	    		}
+	        	
+	        },{
+	        	xtype:'textfield'
+//	            ,name     : 'buscarPoliza'
+	            ,itemId     : 'buscarPagoPoliza'
+	            ,submitValue:false
+	            ,width: 300
+	            ,emptyText: 'Buscar por N. Poliza, Bien o N. Recibo'
+	        },
+            '->',{
+                text: 'Agregar',
+                itemId:'add',
+                iconCls: 'icon-add'
+
+            }, 
+             {
+            	text: 'Ver Poliza',
+            	itemId:'verPoliza',
+            	iconCls: 'icon-add'
+            		
+             }, 
+             {
+                itemId: 'delete',
+                text: 'Borrar',
+                iconCls: 'icon-delete',
+                disabled: true
+            }
+			]
+        }]
 		this.callParent(arguments);
 	}
 });

@@ -28,7 +28,7 @@ Ext.define('app.controller.Secciones', {
 				}
 				,'seccionesList > toolbar > button#add':{
 					click:me.gridButtonAdd,
-					sscope:me
+					scope:me
 		    	},'seccionesList > toolbar > button#delete':{
 		    		click:me.gridRowDelete,
 		    		scope: me

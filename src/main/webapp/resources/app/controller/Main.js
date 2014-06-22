@@ -48,7 +48,8 @@ Ext.define('app.controller.Main', {
 	    			var title = 'Companias';
 	    			app.utils.openWindow(xtype,title,{
 	    				editionMode:app.utils.EditionMode.ROW
-	    			});
+	    				,width:600
+	    			}).setIconCls('icon_companias');
     			}
     	
     		}

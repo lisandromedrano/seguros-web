@@ -1,7 +1,7 @@
 Ext.define('app.store.PagosCompanias', {
     extend: 'Ext.data.Store',
     model: 'app.model.PagosCompanias',
-	autoLoad: true,
+//	autoLoad: true,
 	filterOnLoad: false,
 	remoteSort: true,
 	proxy: {
@@ -9,7 +9,9 @@ Ext.define('app.store.PagosCompanias', {
 	    url: CONTEXT_ROOT+'/pagoscompanias/',
 	    reader: {
 	        type: 'json',
-	        successProperty: 'success'
+	        root: 'data',
+            successProperty: 'success',
+            totalProperty: 'totalCount'
 	    }
 	}  
 	,sorters: {

@@ -4,7 +4,7 @@ Ext.define('app.model.PagosCompanias', {
 		{name:'id'}, 
 		{name:'companias'},
 		{name:'companias.id'},
-		{name:'fecha'}, 
+		{name:'fecha',type : 'date',dateFormat : 'd-m-Y'}, 
 		{name:'importe'},  
 		{name:'concepto'} 
 

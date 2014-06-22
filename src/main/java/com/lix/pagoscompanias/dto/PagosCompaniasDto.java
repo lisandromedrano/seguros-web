@@ -12,7 +12,6 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import com.lix.companias.dto.CompaniasDto;
 import com.lix.dto.PaginationParams;
-import com.lix.polizas.dto.PolizasDto;
 import com.lix.util.JsonDateSerializer;
 
 /**
@@ -39,9 +38,10 @@ public class PagosCompaniasDto extends PaginationParams {
 
 	private Integer nroRecibo;
 
+	@JsonSerialize(using = JsonDateSerializer.class)
 	private Date fechaVencimiento;
 
-	private PolizasDto polizas;
+	// private PolizasDto polizas;
 
 	private CompaniasDto companias;
 
@@ -117,13 +117,13 @@ public class PagosCompaniasDto extends PaginationParams {
 	// GETTERS & SETTERS FOR LINKS
 	// ----------------------------------------------------------------------
 
-	public void setPolizas(PolizasDto polizas) {
-		this.polizas = polizas;
-	}
-
-	public PolizasDto getPolizas() {
-		return this.polizas;
-	}
+	// public void setPolizas(PolizasDto polizas) {
+	// this.polizas = polizas;
+	// }
+	//
+	// public PolizasDto getPolizas() {
+	// return this.polizas;
+	// }
 
 	public void setCompanias(CompaniasDto companias) {
 		this.companias = companias;

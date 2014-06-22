@@ -22,6 +22,25 @@ Ext.define('app.model.Clientes', {
 		type:'rest'
 		,url: CONTEXT_ROOT+'/clientes'
 	},
+    
+//	
+//    proxy: {
+//	    type: 'rest',
+//	    actionMethods:{create: 'POST', read: 'GET', update: 'PUT', destroy: 'DELETE'},
+//	    url: CONTEXT_ROOT+'/clientes',
+//	    api:{
+//	    	create: CONTEXT_ROOT+'/clientes/'
+//	    },
+//	    reader: {
+//	        type: 'json',
+//	        successProperty: 'success'
+//	    }
+//	},
+    validations: [
+	      {type: 'email', field: 'email'},
+//	      {type: 'presence', field: 'nombre'},
+	      {type: 'presence', field: 'apellido'}
+	  ],
 	idProperty: 'id'
 });
 

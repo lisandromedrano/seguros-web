@@ -16,6 +16,7 @@ import com.lix.pagospolizas.dto.PagosPolizasDto;
 import com.lix.pagospolizas.model.PagosPolizas;
 import com.lix.pagospolizas.service.PagosPolizasService;
 import com.lix.util.BeanUtils;
+import com.lix.web.Page;
 
 @Controller
 @RequestMapping("/pagospolizas")
@@ -28,16 +29,20 @@ public class PagosPolizasController extends BaseController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	@ResponseBody
-	public List<PagosPolizasDto> find(PagosPolizasDto dto) {
-		List<PagosPolizasDto> ret = new ArrayList<PagosPolizasDto>();
-		for (PagosPolizas e : pagospolizasService.find(dto)) {
-			PagosPolizasDto ent = BeanUtils.copyProperties(e,
-					PagosPolizasDto.class);
-
-			ret.add(ent);
-		}
-		return ret;
+	public Page<PagosPolizasDto> find(PagosPolizasDto dto) {
+		return pagospolizasService.findPage(dto);
 	}
+
+	// public List<PagosPolizasDto> find(PagosPolizasDto dto) {
+	// List<PagosPolizasDto> ret = new ArrayList<PagosPolizasDto>();
+	// for (PagosPolizas e : pagospolizasService.find(dto)) {
+	// PagosPolizasDto ent = BeanUtils.copyProperties(e,
+	// PagosPolizasDto.class);
+	//
+	// ret.add(ent);
+	// }
+	// return ret;
+	// }
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	@ResponseBody

@@ -50,7 +50,7 @@ public class ClientesController extends BaseController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
-	public ClientesDto findById(Integer id) {
+	public ClientesDto findById(@RequestParam Integer id) {
 		Clientes e = clientesService.getById(id);
 		ClientesDto ent = new ClientesDto();
 		BeanUtils.copyProperties(e, ent);

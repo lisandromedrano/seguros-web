@@ -37,7 +37,8 @@ Ext.define('app.view.BaseGrid', {
 	        }]
 		}
 		this.bbar=[{xtype: 'pagingtoolbar',
-			pageSize: 10,
+			pageSize: 25,
+			displayInfo: true,
 	        store: this.store}];
         this.on('selectionchange', function(selModel, selections){	       
 	        this.down('#delete').setDisabled(selections.length === 0);	        

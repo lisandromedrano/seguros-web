@@ -4,20 +4,25 @@
  */
 package com.lix.pagospolizas.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 import javax.annotation.PostConstruct;
 
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import org.hibernate.Criteria;
+import org.hibernate.ScrollableResults;
+import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.lix.pagospolizas.model.PagosPolizas;
+import com.lix.dao.AbstractHibernateDao;
 import com.lix.pagospolizas.dao.PagosPolizasDao;
 import com.lix.pagospolizas.dto.PagosPolizasDto;
-import com.lix.dao.AbstractHibernateDao;
+import com.lix.pagospolizas.model.PagosPolizas;
+import com.lix.util.BeanUtils;
+import com.lix.web.Page;
 
 /**
  * Basic persistence operations for entity "PagosPolizas"
@@ -27,26 +32,75 @@ import com.lix.dao.AbstractHibernateDao;
  *
  */
 @Repository("pagospolizasDao")
-public class PagosPolizasDaoImpl extends AbstractHibernateDao<PagosPolizas,Integer> implements PagosPolizasDao{
+public class PagosPolizasDaoImpl extends
+		AbstractHibernateDao<PagosPolizas, Integer> implements PagosPolizasDao {
 
 	@PostConstruct
 	public void setInstance() {
 		setClazz(PagosPolizas.class);
 	}
+
 	@Override
 	@Transactional
 	public List<PagosPolizas> findByName(String name) {
-		Criteria criteria = getCurrentSession().createCriteria((PagosPolizas.class));
-		criteria.add(Restrictions.like("name", name.toUpperCase(), MatchMode.ANYWHERE));
+		Criteria criteria = getCurrentSession().createCriteria(
+				(PagosPolizas.class));
+		criteria.add(Restrictions.like("name", name.toUpperCase(),
+				MatchMode.ANYWHERE));
 		return (List<PagosPolizas>) criteria.list();
 	}
+
 	@Override
 	@Transactional
 	public List<PagosPolizas> find(PagosPolizasDto dto) {
 		Criteria criteria = getPaginationCriteria(dto);
-		if(dto.getPolizas()!=null && dto.getPolizas().getId()!=null){
-			criteria.add(Restrictions.eq("polizas.id", dto.getPolizas().getId()));
+		if (dto.getPolizas() != null && dto.getPolizas().getId() != null) {
+			criteria.add(Restrictions
+					.eq("polizas.id", dto.getPolizas().getId()));
 		}
 		return criteria.list();
+	}
+
+	@Override
+	public Page<PagosPolizasDto> findPage(PagosPolizasDto dto) {
+		Page<PagosPolizasDto> page = new Page<PagosPolizasDto>();
+		page.setPage(dto.getPage());
+		Criteria criteria = getCriteria();
+
+		//
+		// // TODO:add additional criteria
+		// Find by name
+		if (org.springframework.util.StringUtils.hasText(dto.getFindByName())) {
+
+			Disjunction orCriteria = Restrictions.disjunction();
+			criteria.createAlias("polizas", "p");
+			orCriteria.add(Restrictions.ilike("p.nroPoliza", dto
+					.getFindByName().toUpperCase(), MatchMode.ANYWHERE));
+			orCriteria.add(Restrictions.ilike("p.bienACubrir", dto
+					.getFindByName().toUpperCase(), MatchMode.ANYWHERE));
+			orCriteria.add(Restrictions.ilike("concepto", dto.getFindByName()
+					.toUpperCase(), MatchMode.ANYWHERE));
+			criteria.add(orCriteria);
+		}
+		// Find By Poliza
+		if (dto.getPolizas() != null && dto.getPolizas().getId() != null) {
+			criteria.add(Restrictions
+					.eq("polizas.id", dto.getPolizas().getId()));
+		}
+		//
+		ScrollableResults scrollable = criteria.scroll();
+		if (scrollable.last()) {
+			page.setTotalCount(scrollable.getRowNumber() + 1);
+		}
+		criteria = getPaginationCriteria(dto, criteria);
+		List<PagosPolizasDto> data = new ArrayList<PagosPolizasDto>();
+		for (PagosPolizas e : (List<PagosPolizas>) criteria.list()) {
+			PagosPolizasDto ent = BeanUtils.copyProperties(e,
+					PagosPolizasDto.class);
+			data.add(ent);
+		}
+		page.setData(data);
+		page.setSuccess(true);
+		return page;
 	}
 }

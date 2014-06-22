@@ -73,10 +73,22 @@ Ext.define('app.controller.PagosPolizas', {
 				},
 				scope:me
 			}
-			,'polizasEdit>toolbar>button#save':{
-				click:me.buttonSaveClick,
-				scope: me
-			}
+			,'pagospolizasList > toolbar > textfield#buscarPagoPoliza':{
+	    		  specialkey: function(f,e){
+	    				
+	                  if (e.getKey() == e.ENTER) {
+	                	  var inputValue=f.value.toUpperCase();
+	                	  me.getGrid().store.currentPage = 1;
+	                	  me.getGrid().store.proxy.extraParams={findByName:inputValue};
+	                	  me.getGrid().store.load();
+	                  }
+	               }
+	        
+	    	}
+//			,'polizasEdit>toolbar>button#save':{
+//				click:me.buttonSaveClick,
+//				scope: me
+//			}
 		
 			});
 	}

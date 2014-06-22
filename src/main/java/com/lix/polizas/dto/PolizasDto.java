@@ -74,8 +74,6 @@ public class PolizasDto extends PaginationParams {
 
 	private CompaniasDto companias;
 
-	private SeccionesDto secciones;
-
 	// private List<PagosPolizasDto> pagosPolizas;
 
 	private ClientesDto clientes;
@@ -296,11 +294,11 @@ public class PolizasDto extends PaginationParams {
 	}
 
 	public void setSecciones(SeccionesDto secciones) {
-		this.secciones = secciones;
+		this.tipoPoliza = secciones;
 	}
 
 	public SeccionesDto getSecciones() {
-		return this.secciones;
+		return this.tipoPoliza;
 	}
 
 	// public void setPagosPolizas(List<PagosPolizasDto> pagosPolizas) {

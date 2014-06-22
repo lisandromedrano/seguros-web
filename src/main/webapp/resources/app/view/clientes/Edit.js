@@ -6,20 +6,22 @@ Ext.define("app.view.clientes.Edit", {
 	url:CONTEXT_ROOT+'/clientes/',
 	layout: 'fit',
 	requires:[
-			 'app.view.polizas.List'
+			 'app.view.polizas.PolizasClienteList'
 			 ,'app.view.BaseForm'
     ],
 	autoShow: true,
 	autoHeight:true,
-	autoScroll: false,
+	iconCls:'icon_clientes_edicion',
+	autoScroll: true,
 	style:'padding:5px',
-	fieldDefaults: {
-	    msgTarget: 'side',
-	    //labelWidth: 150,
-	    width:400,
-	    //anchor: '50%',
-	    style:'padding:10px;margin:10px'
-	}, 
+//	fieldDefaults: {
+//	    msgTarget: 'under',
+//	    //labelWidth: 150,
+//	    width:400,
+//	    //anchor: '50%',
+//	    labelAlign : 'top',
+//	    style:'padding:10px;margin:10px'
+//	}, 
 //	layout: {
 //		type: 'border'			
 //	}, 
@@ -31,71 +33,6 @@ Ext.define("app.view.clientes.Edit", {
 				,
 				align : 'stretch'
 			}
-//		this.polizasGrid=Ext.create('app.view.polizas.List',{
-////			viewConfig: {
-////		        stripeRows: true
-////		    }
-//			autoScroll:true
-//			,title:false
-//			,autoHeight : true
-//			,editionMode:app.utils.EditionMode.TAB
-//		    ,store:Ext.create('Ext.data.Store', {
-//			    model : 'app.model.Polizas',
-//				proxy: {
-//				    type: 'ajax',
-//				    url:  CONTEXT_ROOT+'/'+'polizas/polizasPorCliente',
-//					reader: {
-//				        type: 'json',
-//				        successProperty:'success',
-//				        totalProperty: 'results'
-//				    },autoLoad:false
-//				}
-//			})
-//			,columns:[
-//			      {dataIndex:'id',hidden:true}
-//				   ,{
-//					   dataIndex: 'bienACubrir'
-//						,header: 'Bien A Cubrir'
-//						,flex: 1
-//						,field: { xtype: 'textfield' }
-//						
-//					}
-//				   ,{
-//						header: 'Nro. Poliza'
-//						,dataIndex: 'nroPoliza'
-//						,flex: 1
-//						,field: { xtype: 'textfield' }
-//						
-//					}
-//				   ,{
-//						header: 'Endoso'
-//						,dataIndex: 'endoso'
-//						,flex: 1
-//						,field: { xtype: 'textfield' }
-//						
-//					}
-//				   ,{
-//					   text:'Vigencia'
-//						,flex: 1
-//					   ,columns:[
-//						   {
-//								header: 'Desde'
-//								,dataIndex: 'fVigDesde'
-//								,renderer: Ext.util.Format.dateRenderer('d-m-Y')
-//								,field: { xtype: 'datefield',format: 'd-m-Y' }
-//								
-//							},
-//					        {
-//								header: 'Hasta'
-//								,dataIndex: 'fVigHasta'
-//								,renderer: Ext.util.Format.dateRenderer('d-m-Y')
-//								,field: { xtype: 'datefield' ,format: 'd-m-Y'}
-//								
-//							}
-//					   ]
-//				   }
-//			]
-//		 });
 		this.items=[
 		{
 			xtype:'fieldset',
@@ -107,17 +44,17 @@ Ext.define("app.view.clientes.Edit", {
 			    ,columns: 3
 			}
 		    ,items:[
+		            {
+		            	xtype:'textfield',
+		            	fieldLabel: 'Apellido / Razon Social',
+		            	name:'apellido'
+		            },
 				 {
 					xtype:'textfield',
 					fieldLabel: 'Nombre',
 					name:'nombre'
 				 },
 					
-				 {
-					xtype:'textfield',
-					fieldLabel: 'Apellido',
-					name:'apellido'
-				 },
 					
 				 {
 					xtype:'textfield',
@@ -134,6 +71,7 @@ Ext.define("app.view.clientes.Edit", {
 				 {
 					xtype:'textfield',
 					fieldLabel: 'Email',
+//					vtype:'email',
 					name:'email'
 				 },
 					
@@ -167,45 +105,28 @@ Ext.define("app.view.clientes.Edit", {
 			//	width:'70%',
 				items:[
 //				       	this.polizasGrid
-{	xtype:'polizasClienteList'}
+					{	xtype:'polizasClienteList'}
 				 ]
 		}
-		];
-		
-//		//Function to call after save
-//		this.callbackSuccessFn=function(record) {
-//			var controller=Ext.create('app.controller.Clientes');
-//			// Set environment id for licences grid			
-//			controller.getPolizasGrid().clienteId = record.id;
-//			// Enable add button
-////			controller.getAddLicenseButton().setDisabled(false);
-////			controller.saveAppOptions();
-//			
-//			this.setTitle(record.data.nombre+' '+record.data.apellido);
-//			controller.getPolizasGrid().store.proxy.extraParams={id:record.data.id};
-//			controller.getPolizasGrid().store.load();
-//		};
-//		this.customButtons = [
-//   		    '->',{
-//   		        text: 'Guardar',
-//   		        itemId:'save',
-//   		        iconCls:'icon-save',
-//   		        handler:function(button,event){
-//   		        	this.buttonSaveClick(button,event)
-//   		        }
-//   		    
-//   		    },
-//   		    {
-//   		        text: 'Cancelar',
-//   		        scope:this,
-//   		        iconCls:'icon-cancel',
-//   		        handler:this.close
-//   		    }
-//   		];
-		
-		
+		];		
 		this.callParent(arguments);
         this.enableBubble('change');
+	}
+	//Function to call after save
+	,callbackSuccessFn:function() {
+		var controller=Ext.create('app.controller.Clientes');
+		var record =this.getValues();
+		// Set environment id for licences grid			
+		controller.getPolizasGrid().clienteId = record.id;
+		controller.getPolizasGrid().query('button#add')[0].setDisabled(false)
+		// Enable add button			
+		var title=record.apellido;
+		if(record.nombre){
+			title = title + ', '+record.nombre
+		}
+		this.setTitle(title);
+		controller.getPolizasGrid().store.proxy.extraParams={id:record.id};
+		controller.getPolizasGrid().store.load();
 	}
 	
 });

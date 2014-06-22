@@ -7,9 +7,9 @@ Ext.define('app.store.Polizas', {
 	    url: CONTEXT_ROOT+'/polizas/',
 	    reader: {
 	    	 type: 'json',
-		        root: 'data',
-	            successProperty: 'success',
-	            totalProperty: 'totalCount'
+	        root: 'data',
+            successProperty: 'success',
+            totalProperty: 'totalCount'
 	    }
 	}    
 });

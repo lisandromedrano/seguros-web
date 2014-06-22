@@ -11,6 +11,8 @@ Ext.define("app.view.polizas.Edit", {
 	],
 	style:'padding:5px',
 	autoShow : true,
+	 controllername:'app.controller.Polizas',
+	 iconCls:'icon_polizas_edit',
 	initComponent : function(params) {
 		var _this = this;
 		this.layout = {
@@ -53,6 +55,17 @@ Ext.define("app.view.polizas.Edit", {
 					columns : 5
 				},
 				items:[
+						{
+						    xtype: 'displayfield',
+						    fieldLabel: 'Asegurado',
+						    name: 'asegurado',
+						    fieldStyle: 'color: blue; text-decoration:underline; cursor:pointer',
+//						    listeners:{
+//						    	click:function(){alert('ayangena!')}
+//						    },
+						    tpl:new Ext.XTemplate('<tpl>{apellido}, {nombre}</tpl>')
+//						    value: '10'
+						},
 				       {
 				    	   xtype : 'textfield',
 				    	   fieldLabel : 'Num. Poliza',
@@ -84,6 +97,8 @@ Ext.define("app.view.polizas.Edit", {
 						{
 							xtype : 'numberfield',
 							fieldLabel : 'Cuotas',
+							minValue:1,
+							maxValue:24,
 							name : 'cantCuotas'
 						},
 						{
@@ -108,24 +123,12 @@ Ext.define("app.view.polizas.Edit", {
 							xtype : 'textfield',
 							fieldLabel : 'Moneda',
 							width:30,
+							value:'$',
 							name : 'moneda'
-						},
-						
-						
-						
-						{
-							xtype : 'textfield',
-							fieldLabel : 'Observaciones',
-							columns : 3,
-							name : 'observaciones'
-						},
-						
-				
-						
-				
-						{
+						},		{
 							xtype : 'datefield',
 							fieldLabel : 'Fecha Registracion',
+							format: 'd-m-Y',
 							name : 'fRegistracion'
 						},
 				
@@ -145,20 +148,24 @@ Ext.define("app.view.polizas.Edit", {
 						{
 							xtype : 'seccionesCombo',
 							fieldLabel : 'Tipo Poliza',
-							name : 'secciones.id'
+							colspan:2,
+							name : 'tipoPoliza.id'
 						} ,
 						{
 							xtype : 'fieldset',
 							title : 'Vigencia',
-							
-							rowspan : 3,					
+							layout:{type:'table'},
+							colspan : 2,	
+							style:'margin-right:5px',
 							items : [ {
 								xtype : 'datefield',
 								fieldLabel : 'Desde',
+								format: 'd-m-Y',
 								name : 'fVigDesde'
 							}, {
 								xtype : 'datefield',
 								fieldLabel : 'Hasta',
+								format: 'd-m-Y',
 								name : 'fVigHasta'
 							},
 				
@@ -166,7 +173,8 @@ Ext.define("app.view.polizas.Edit", {
 						}, {
 							xtype : 'fieldset',
 							title : 'Datos del Vehiculo',
-							rowspan : 2,
+							colspan : 3,
+							layout:{type:'table'},
 							items : [ {
 								xtype : 'textfield',
 								fieldLabel : 'Nro. Chasis',
@@ -180,9 +188,19 @@ Ext.define("app.view.polizas.Edit", {
 								fieldLabel : 'Nro. Motor',
 								name : 'nroMotor'
 							} ]
+						},
+						{
+							xtype : 'textarea',
+							fieldLabel : 'Observaciones',
+							width: 400,
+							colspan : 3,
+							name : 'observaciones'
 						},{
 							xtype : 'hidden',
 							name : 'id'
+						},{
+							xtype : 'hidden',
+							name : 'clientes.id'
 						}
 						
 				]
@@ -202,6 +220,25 @@ Ext.define("app.view.polizas.Edit", {
 			
 		];
 		this.callParent(arguments);
+	}
+	//Function to call after save
+	,callbackSuccessFn:function() {
+		var controller=Ext.create('app.controller.Polizas');
+		var record =this.getValues();
+		// Set poliza id for pagos grid			
+		controller.getPagosPolizasList().store.proxy.extraParams={'polizas.id':record.id};
+		controller.getPagosPolizasList().store.load();
+		controller.getPagosPolizasList().idPoliza=record.id;
+		
+		this.setTitle(record.bienACubrir.substr(0,10));
+		
+		// Enable add pago button			
+		controller.getAddPagoPolizaButton().setDisabled(false);
+		var buttonPlanPagos=controller.getPlanPagosButton();
+		if(buttonPlanPagos){
+			buttonPlanPagos.setDisabled(false);
+		}
+		
 	}
 
 });

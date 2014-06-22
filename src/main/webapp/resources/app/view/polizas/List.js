@@ -9,6 +9,7 @@ Ext.define('app.view.polizas.List', {
     ],
 	title: 'Polizas',
 	store: 'Polizas',	
+	iconCls:'icon_polizas',
 	initComponent: function() {
 		
 		if(this.columns==undefined){
@@ -52,6 +53,13 @@ Ext.define('app.view.polizas.List', {
 				
 			},
 
+			{
+				header: 'Patente'
+					,dataIndex: 'patente'
+						,width:250
+						,field: { xtype: 'textfield' }
+			
+			},
 	        {
 				header: 'Riesgo'
 				,dataIndex: 'riesgoACubrir'
@@ -87,15 +95,16 @@ Ext.define('app.view.polizas.List', {
 //	            ,name     : 'buscarPoliza'
 	            ,itemId     : 'buscarPoliza'
 	            	,submitValue:false
-	            ,width: 140
-	            ,emptyText: 'Buscar Poliza'
+	            ,width: 300
+	            ,emptyText: 'Buscar por Numero, Asegurado, Bien, o Patente'
 	        },
-            '->',{
-                text: 'Agregar',
-                itemId:'add',
-                iconCls: 'icon-add'
-
-            }, 
+            '->',
+//            {
+//                text: 'Agregar',
+//                itemId:'add',
+//                iconCls: 'icon-add'
+//
+//            }, 
              {
                 itemId: 'delete',
                 text: 'Borrar',

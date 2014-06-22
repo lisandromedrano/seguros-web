@@ -32,7 +32,7 @@ public class PagosCompanias extends Pagos implements Serializable {
 	private Integer nroRecibo;
 
 	@ManyToOne
-	@JoinColumn(name = "ID_COMPANIA", referencedColumnName = "ID", insertable = false, updatable = false)
+	@JoinColumn(name = "ID_COMPANIA", referencedColumnName = "ID")
 	private Companias companias;
 
 	// ----------------------------------------------------------------------

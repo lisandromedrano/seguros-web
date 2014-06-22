@@ -5,12 +5,12 @@
 package com.lix.pagospolizas.service;
 
 import java.util.List;
-import java.util.Map;
 
+import com.lix.dto.DefaultResponse;
+import com.lix.pagospolizas.dto.PagosPolizasDto;
 import com.lix.pagospolizas.model.PagosPolizas;
 import com.lix.service.Service;
-import com.lix.pagospolizas.dto.PagosPolizasDto;
-import com.lix.dto.DefaultResponse;
+import com.lix.web.Page;
 
 /**
  * Basic persistence operations for entity "PagosPolizas"
@@ -25,4 +25,6 @@ public interface PagosPolizasService extends Service<PagosPolizas, Integer> {
 	List<PagosPolizas> findByName(String name);
 
 	List<PagosPolizas> find(PagosPolizasDto dto);
+
+	Page<PagosPolizasDto> findPage(PagosPolizasDto dto);
 }

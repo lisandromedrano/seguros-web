@@ -17,6 +17,7 @@ import com.lix.pagospolizas.dto.PagosPolizasDto;
 import com.lix.pagospolizas.model.PagosPolizas;
 import com.lix.pagospolizas.service.PagosPolizasService;
 import com.lix.util.BeanUtils;
+import com.lix.web.Page;
 
 /**
  * JPA implementation for basic persistence operations ( entity "PagosPolizas" )
@@ -93,6 +94,12 @@ public class PagosPolizasServiceImpl implements PagosPolizasService {
 	@Override
 	public List<PagosPolizas> find(PagosPolizasDto dto) {
 		return pagospolizasDao.find(dto);
+	}
+
+	@Override
+	public Page<PagosPolizasDto> findPage(PagosPolizasDto dto) {
+
+		return pagospolizasDao.findPage(dto);
 	}
 
 }

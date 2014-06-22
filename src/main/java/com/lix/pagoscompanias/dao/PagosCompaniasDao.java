@@ -9,6 +9,7 @@ import java.util.List;
 import com.lix.dao.HibernateDao;
 import com.lix.pagoscompanias.dto.PagosCompaniasDto;
 import com.lix.pagoscompanias.model.PagosCompanias;
+import com.lix.web.Page;
 
 /**
  * Basic persistence operations for entity "PagosCompanias"
@@ -17,11 +18,14 @@ import com.lix.pagoscompanias.model.PagosCompanias;
  * @author Telosys Tools Generator
  * 
  */
-public interface PagosCompaniasDao extends HibernateDao<PagosCompanias, Integer> {
+public interface PagosCompaniasDao extends
+		HibernateDao<PagosCompanias, Integer> {
 
 	public List<PagosCompanias> findByName(String name);
 
 	public List<PagosCompanias> findByCompania(Integer idCompania);
 
 	public List<PagosCompanias> find(PagosCompaniasDto dto);
+
+	public Page<PagosCompaniasDto> findPage(PagosCompaniasDto dto);
 }

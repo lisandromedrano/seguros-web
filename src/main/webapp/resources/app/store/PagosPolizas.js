@@ -3,15 +3,15 @@ Ext.define('app.store.PagosPolizas', {
     model: 'app.model.PagosPolizas',
 	autoLoad: false,
 	proxy: {
-//	    type: 'ajax',
-	    type: 'rest',
-	    actionMethods:{create: 'POST', read: 'GET', update: 'POST', destroy: 'DELETE'},
+	    type: 'ajax',
+//	    type: 'rest',
+//	    actionMethods:{create: 'POST', read: 'GET', update: 'POST', destroy: 'DELETE'},
 	    url: CONTEXT_ROOT+'/pagospolizas/',
 	    reader: {
 	        type: 'json',
-	        totalProperty:'total',
-	        root:'data',
-	        successProperty: 'success'
+	        root: 'data',
+            successProperty: 'success',
+            totalProperty: 'totalCount'
 	    }
 	},   
 	idProperty:'id',

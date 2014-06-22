@@ -7,51 +7,44 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lix.dto.DefaultResponse;
-import com.lix.dto.PaginationParams;
 import com.lix.pagoscompanias.dto.PagosCompaniasDto;
 import com.lix.pagoscompanias.model.PagosCompanias;
 import com.lix.pagoscompanias.service.PagosCompaniasService;
 import com.lix.util.BeanUtils;
+import com.lix.web.Page;
 
 @Controller
 @RequestMapping("/pagoscompanias")
-public class PagosCompaniasController {
+public class PagosCompaniasController extends BaseController {
 	Logger log = LoggerFactory.getLogger(PagosCompaniasController.class);
 
 	@Autowired
 	PagosCompaniasService pagoscompaniasService;
 
-	@ExceptionHandler(Exception.class)
-	@ResponseBody
-	public DefaultResponse handleIOException(Exception ex) {
-		DefaultResponse response = new DefaultResponse();
-		response.setMessage(ex.getMessage());
-		response.setSuccess(false);
-		return response;
-	}
-
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	@ResponseBody
-	public List<PagosCompaniasDto> find(PagosCompaniasDto dto) {
-		log.info("find -> parameters:{}", dto);
-		List<PagosCompaniasDto> ret = new ArrayList<PagosCompaniasDto>();
-		List<PagosCompanias> pagosCompanias = new ArrayList<PagosCompanias>();
-		pagosCompanias = pagoscompaniasService.find(dto);
-		for (PagosCompanias e : pagosCompanias) {
-			// PagosCompaniasDto ent = new PagosCompaniasDto();
-			// BeanUtils.copyProperties(e, ent);
-			PagosCompaniasDto ent = BeanUtils.copyProperties(e, PagosCompaniasDto.class);
-			ret.add(ent);
-		}
-		log.info("returning {} elements", ret.size());
-		return ret;
+	public Page<PagosCompaniasDto> find(PagosCompaniasDto dto) {
+		// log.info("find -> parameters:{}", dto);
+		// List<PagosCompaniasDto> ret = new ArrayList<PagosCompaniasDto>();
+		// List<PagosCompanias> pagosCompanias = new
+		// ArrayList<PagosCompanias>();
+		// pagosCompanias = pagoscompaniasService.find(dto);
+		// for (PagosCompanias e : pagosCompanias) {
+		// // PagosCompaniasDto ent = new PagosCompaniasDto();
+		// // BeanUtils.copyProperties(e, ent);
+		// PagosCompaniasDto ent = BeanUtils.copyProperties(e,
+		// PagosCompaniasDto.class);
+		// ret.add(ent);
+		// }
+		// log.info("returning {} elements", ret.size());
+		// return ret;
+		return pagoscompaniasService.findPage(dto);
 	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
@@ -64,7 +57,8 @@ public class PagosCompaniasController {
 	@ResponseBody
 	public PagosCompaniasDto findById(Integer id) {
 		PagosCompanias e = pagoscompaniasService.getById(id);
-		PagosCompaniasDto ent = BeanUtils.copyProperties(e, PagosCompaniasDto.class);
+		PagosCompaniasDto ent = BeanUtils.copyProperties(e,
+				PagosCompaniasDto.class);
 		return ent;
 	}
 
@@ -93,6 +87,12 @@ public class PagosCompaniasController {
 		// ret.add(ent);
 		// }
 		return ret;
+	}
+
+	@Override
+	Logger getLogger() {
+		// TODO Auto-generated method stub
+		return log;
 	}
 
 }

@@ -9,7 +9,7 @@ Ext.define("app.view.secciones.ComboBox", {
 	itemId : 'secciones',
 	queryParam: 'name',
 	hideTrigger:false,
-	emptyText:'Select Seccion',
+	emptyText:'Seleccione Tipo de Poliza',
 	//valueField:'secciones.id',
 	minChars:3,
 	forceSelection:true,

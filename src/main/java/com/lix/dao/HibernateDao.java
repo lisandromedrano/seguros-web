@@ -27,6 +27,8 @@ public interface HibernateDao<T extends Serializable, K> {
 
 	public abstract List<T> getPage(PaginationParams params);
 
+	// public <D> Page<D> findPage(PaginationParams dto, Class<D> dtoClass);
+
 	public T getOrCreate(T entity, String... fieldsToCompare);
 
 }

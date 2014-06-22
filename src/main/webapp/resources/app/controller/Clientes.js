@@ -17,24 +17,25 @@ Ext.define('app.controller.Clientes', {
 		selector: 'clientesEdit'
 	},{
 	    ref: 'polizasGrid',
-	    selector: 'clientesEdit > polizasList'
+	    selector: 'polizasClienteList'
 	},{
 		ref: 'addPolizaButton',
-		selector: 'clientesEdit > polizasList > toolbar > button#add'
+		selector: 'polizasClienteList > toolbar > button#add'
 	}]
 	,entityName:"Cliente"
 	,controller:"clientes"
 	,model:"app.model.Clientes"
 	,editionFormXtype:"clientesEdit"
 	,titleField:'nombre'
+	,afterFillFormFn:function(panel,form,record){			
+		panel.setTitle(record.data.nombre+' '+record.data.apellido);
+		panel.query('polizasClienteList')[0].store.proxy.extraParams={id:record.data.id};
+		panel.query('polizasClienteList')[0].store.load();
+		panel.query('polizasClienteList > toolbar > button#add')[0].setDisabled(false);
+	}
 	,init: function() {
 		
 		var me = this;
-		me.afterFillFormFn=function(panel,form,record){			
-			panel.setTitle(record.data.nombre+' '+record.data.apellido);
-			panel.query('polizasClienteList')[0].store.proxy.extraParams={id:record.data.id};
-			panel.query('polizasClienteList')[0].store.load();
-		}
 		me.control({
 				'clientesList':{
 					itemdblclick:me.gridRowDblClick
@@ -52,21 +53,21 @@ Ext.define('app.controller.Clientes', {
 //				,'clientesEdit>toolbar>button#save':{
 //					click:me.buttonSaveClick,
 //					scope: me
+//	    		,'clientesEdit':{
+//					render:function(){
+//						//disable add button from Polizas Grid
+//						this.getAddPolizaButton().setDisabled(true);
+//					}
+//				}
 				},'clientesList > toolbar > textfield#buscarCliente':{
 		    		  specialkey: function(f,e){
 		    				
 		                  if (e.getKey() == e.ENTER) {
+		                	  me.getClientesList().store.currentPage = 1;
 		                	  me.getClientesList().store.load({
-		                		  params:{findByName:f.value.toUpperCase()}})
-//		                	  me.getClientesList().store.filterBy(function(record){
-//		                		  var inputValue=f.value.toUpperCase();
-//		                		  if(inputValue.length<2)return true;
-//		                		  if(record.data.nombre.toUpperCase().indexOf(inputValue)!=-1)
-//		                			  return true;
-//		                		  else if(record.data.apellido.toUpperCase().indexOf(inputValue)!=-1)
-//		                			  return true;
-//		                		  return false;
-//		                	  })
+		                		  params:{findByName:f.value.toUpperCase(),page:0}
+		                	  	})
+
 		                  }
 		               }
 		        

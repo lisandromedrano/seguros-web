@@ -14,7 +14,7 @@ Ext.define('app.view.pagospolizas.ListByPoliza', {
 			    reader: {
 			        type: 'json',
 			        root:'data',
-			        totalProperty:'total',
+			        totalProperty:'totalCount',
 			        successProperty: 'success'
 			    }
 			},   
@@ -24,18 +24,17 @@ Ext.define('app.view.pagospolizas.ListByPoliza', {
 				direction: 'DESC'
 			}
 		});
-		this.columns = [ {
-			header : 'Fecha Pago',
-			dataIndex : 'fecha',
+//		Nº  de cuota-importe y fecha de pago n ese mismo orden
+		this.columns = [{
+			header : 'Nro. Recibo',
+			dataIndex : 'nroRecibo',
 			flex : 1,
-			renderer : Ext.util.Format.dateRenderer('d-m-Y'),
-			align : 'right',
 			field : {
-				xtype : 'datefield',
-				format : 'd-m-Y'
-			}
+				type : 'number'
+			},
+			align : 'right'
 
-		}, {
+		},{
 			header : 'Importe',
 			dataIndex : 'importe',
 			flex : 1,
@@ -61,21 +60,25 @@ Ext.define('app.view.pagospolizas.ListByPoliza', {
 				xtype : 'textfield'
 			}
 
-		}, {
-			header : 'Nro. Recibo',
-			dataIndex : 'nroRecibo',
+		},   {
+			header : 'Fecha Pago',
+			dataIndex : 'fecha',
 			flex : 1,
+			renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+			align : 'right',
 			field : {
-				type : 'number'
-			},
-			align : 'right'
+				xtype : 'datefield',
+				format : 'd-m-Y'
+			}
 
 		}, {
 			header : 'Fecha Vencimiento',
 			dataIndex : 'fechaVencimiento',
 			flex : 1,
+			renderer : Ext.util.Format.dateRenderer('d-m-Y'),
 			field : {
-				xtype : 'datefield'
+				xtype : 'datefield',
+				format : 'd-m-Y'
 			}
 
 		}
@@ -88,7 +91,8 @@ Ext.define('app.view.pagospolizas.ListByPoliza', {
             '->',{
                 text: 'Agregar',
                 itemId:'add',
-                iconCls: 'icon-add'
+                iconCls: 'icon-add',
+                disabled: true
 
             }, {
                 text: 'Plan de Pagos',

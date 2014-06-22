@@ -94,12 +94,7 @@ public class PolizasDaoImpl extends AbstractHibernateDao<Polizas, Integer>
 		Page<PolizasDto> page = new Page<PolizasDto>();
 		page.setPage(dto.getPage());
 		Criteria criteria = getCriteria();
-		//
-		ScrollableResults scrollable = criteria.scroll();
-		if (scrollable.last()) {
-			page.setTotalCount(scrollable.getRowNumber() + 1);
-		}
-		criteria = getPaginationCriteria(dto, criteria);
+
 		//
 		// // TODO:add additional criteria
 		// Find by name
@@ -120,10 +115,18 @@ public class PolizasDaoImpl extends AbstractHibernateDao<Polizas, Integer>
 					.toUpperCase(), MatchMode.ANYWHERE));
 			orCriteria.add(Restrictions.ilike("c.apellido", dto.getFindByName()
 					.toUpperCase(), MatchMode.ANYWHERE));
+			orCriteria.add(Restrictions.ilike("patente", dto.getFindByName()
+					.toUpperCase(), MatchMode.ANYWHERE));
 
 			criteria.add(orCriteria);
 
 		}
+		//
+		ScrollableResults scrollable = criteria.scroll();
+		if (scrollable.last()) {
+			page.setTotalCount(scrollable.getRowNumber() + 1);
+		}
+		criteria = getPaginationCriteria(dto, criteria);
 		List<PolizasDto> data = new ArrayList<PolizasDto>();
 		for (Polizas e : (List<Polizas>) criteria.list()) {
 			PolizasDto ent = BeanUtils.copyProperties(e, PolizasDto.class);

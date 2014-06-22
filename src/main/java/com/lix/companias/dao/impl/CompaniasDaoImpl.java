@@ -55,6 +55,7 @@ public class CompaniasDaoImpl extends AbstractHibernateDao<Companias, Integer>
 		Page<CompaniasDto> page = new Page<CompaniasDto>();
 		page.setPage(dto.getPage());
 		Criteria criteria = getCriteria();
+		// // TODO:add additional criteria
 		//
 		ScrollableResults scrollable = criteria.scroll();
 		if (scrollable.last()) {
@@ -62,7 +63,6 @@ public class CompaniasDaoImpl extends AbstractHibernateDao<Companias, Integer>
 		}
 		criteria = getPaginationCriteria(dto, criteria);
 		//
-		// // TODO:add additional criteria
 		List<CompaniasDto> data = new ArrayList<CompaniasDto>();
 		for (Companias e : (List<Companias>) criteria.list()) {
 			CompaniasDto ent = BeanUtils.copyProperties(e, CompaniasDto.class);

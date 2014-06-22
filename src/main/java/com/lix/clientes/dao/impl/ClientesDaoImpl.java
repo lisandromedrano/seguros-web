@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 
 import org.hibernate.Criteria;
 import org.hibernate.ScrollableResults;
+import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -55,12 +56,7 @@ public class ClientesDaoImpl extends AbstractHibernateDao<Clientes, Integer>
 		Page<ClientesDto> page = new Page<ClientesDto>();
 		page.setPage(dto.getPage());
 		Criteria criteria = getCriteria();
-		//
-		ScrollableResults scrollable = criteria.scroll();
-		if (scrollable.last()) {
-			page.setTotalCount(scrollable.getRowNumber() + 1);
-		}
-		criteria = getPaginationCriteria(dto, criteria);
+
 		//
 		// // TODO:add additional criteria
 		// Find by name
@@ -71,10 +67,22 @@ public class ClientesDaoImpl extends AbstractHibernateDao<Clientes, Integer>
 			// .ilike("apellido", dto.getFindByName(), MatchMode.ANYWHERE)));
 			// criteria.add(Restrictions.ilike("nombre", dto.getFindByName(),
 			// MatchMode.ANYWHERE));
-			criteria.add(Restrictions.or(Restrictions.ilike("nombre", dto
-					.getFindByName().toUpperCase(), MatchMode.ANYWHERE),
-					Restrictions.ilike("apellido", dto.getFindByName()
-							.toUpperCase(), MatchMode.ANYWHERE)));
+			Disjunction orCriteria = Restrictions.disjunction();
+
+			orCriteria.add(Restrictions.ilike("nombre", dto.getFindByName()
+					.toUpperCase(), MatchMode.ANYWHERE));
+			orCriteria.add(Restrictions.ilike("apellido", dto.getFindByName()
+					.toUpperCase(), MatchMode.ANYWHERE));
+			orCriteria.add(Restrictions.ilike("dnicuit", dto.getFindByName()
+					.toUpperCase(), MatchMode.ANYWHERE));
+
+			criteria.add(orCriteria);
+		}
+		//
+		ScrollableResults scrollable = criteria.scroll();
+		criteria = getPaginationCriteria(dto, criteria);
+		if (scrollable.last()) {
+			page.setTotalCount(scrollable.getRowNumber() + 1);
 		}
 		List<ClientesDto> data = new ArrayList<ClientesDto>();
 		for (Clientes e : (List<Clientes>) criteria.list()) {

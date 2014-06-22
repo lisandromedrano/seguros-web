@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<databases defaultId="0" maxId="4">
-<db driver="com.mysql.jdbc.Driver" id="0" isolationLevel="" name="MYSQL database" poolSize="1" url="jdbc:mysql://localhost:3306/seguros">
-<property name="user" value="seguros"/>
-<property name="password" value="seguros"/>
-<metadata catalog="" schema="TO_BE_DEFINED" table-name-pattern="%" table-types="TABLE"/>
-</db>
-</databases>

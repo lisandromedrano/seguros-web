@@ -122,17 +122,17 @@ public class Polizas implements Serializable {
 	// ENTITY LINKS ( RELATIONSHIP )
 	// ----------------------------------------------------------------------
 	@ManyToOne
-	@JoinColumn(name = "id_compania", referencedColumnName = "ID", insertable = false, updatable = false)
+	@JoinColumn(name = "id_compania", referencedColumnName = "ID")
 	private Companias companias;
 
 	@OneToMany(mappedBy = "polizas", targetEntity = PagosPolizas.class)
 	private List<PagosPolizas> pagosPolizas;
 
 	@ManyToOne
-	@JoinColumn(name = "id_cliente", referencedColumnName = "id", insertable = false, updatable = false)
+	@JoinColumn(name = "id_cliente", referencedColumnName = "id")
 	private Clientes clientes;
 	@ManyToOne
-	@JoinColumn(name = "seccion_id", referencedColumnName = "id", insertable = false, updatable = false)
+	@JoinColumn(name = "seccion_id", referencedColumnName = "id")
 	private Secciones tipoPoliza;
 
 	// ----------------------------------------------------------------------

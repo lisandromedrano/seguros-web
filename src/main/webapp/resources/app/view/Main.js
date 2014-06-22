@@ -20,13 +20,14 @@ Ext.define('app.view.Main', {
 //    	items:[],
 //    	margins: '0 0 5 10',
     	bbar: {
-    		cls:'app-header',
+//    		cls:'app-header',
     		items:[{
-    		height:60,
+    		height:80,
     		border: false,
     		xtype:'image',
-    		autoEl: 'div',
-    		cls: 'seguros-main-logo',
+//    		autoEl: 'div',
+//    		style:'max-width:200px',
+//    		cls: 'seguros-main-logo',
     		src:'css/images/meloyasoc.jpg'//,
     		
     	}]}
@@ -94,7 +95,7 @@ Ext.define('app.view.Main', {
 							xtype:'button',
 							itemId:'pagosPolizas',
 							text:'Pagos de Polizas',
-							iconCls:'icon_companias'
+							iconCls:'icon_pagos_polizas'
 						} ,{
 			   				xtype:'button',
 			   				text:'Secciones',
@@ -119,7 +120,7 @@ Ext.define('app.view.Main', {
 		   				xtype:'button',
 		   				itemId:'pagosCompanias',
 		   				text:'Pagos',
-		   				iconCls:'icon_companias'
+		   				iconCls:'icon_pagos_companias'
 		   			} 
 		    	   ]
 		       }

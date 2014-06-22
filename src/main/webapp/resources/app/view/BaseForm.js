@@ -3,12 +3,13 @@ Ext.define("app.view.BaseForm", {
 	alias:'widget.baseForm',
 	autoScroll: true,
 	fieldDefaults : {
-		msgTarget : 'side',
+		msgTarget : 'under',
 		// labelWidth: 150,
 		// width:400,
 		// anchor: '50%',
 		width : '80%',
 		labelAlign : 'top',
+//		fieldStyle:'text-transform:uppercase',
 		style : 'padding:10px;margin:10px'
 	},
 	initComponent: function(params) {
@@ -85,8 +86,9 @@ Ext.define("app.view.BaseForm", {
 	            		if(form.editionMode==app.utils.EditionMode.WINDOW || button.itemId=='saveAndClose'){
 	            			form.close();
 	            		}
-	            		if(typeof this.callbackSuccessFn == 'function') { 
-	            			callbackSuccessFn(form.getValues());						
+	            		if(typeof form.callbackSuccessFn == 'function') { 
+//	            			form.callbackSuccessFn(form.getValues());						
+	            			form.callbackSuccessFn();						
 	            		}
 	            	}else{
 	            		Ext.Msg.alert({
@@ -108,7 +110,7 @@ Ext.define("app.view.BaseForm", {
 	            }
 	        });
 		}else{
-			form.markInvalid(errors);	
+			form.getForm().markInvalid(errors);	
 		}
 	}
 

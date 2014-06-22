@@ -1,5 +1,0 @@
-database.url=jdbc:hsqldb:mem:seguros
-database.dialect=org.hibernate.dialect.HSQLDialect
-database.username=sa
-database.password=
-database.driver=org.hsqldb.jdbcDriver

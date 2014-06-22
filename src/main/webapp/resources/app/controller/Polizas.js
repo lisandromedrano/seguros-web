@@ -9,6 +9,9 @@ Ext.define('app.controller.Polizas', {
 	    ref: 'pagosPolizasList',
 	    selector: 'pagospolizasListByPoliza'
 	},{
+		ref: 'form',
+		selector: 'polizasEdit'
+	},{
 	    ref: 'addPagoPolizaButton',
 	    selector: 'pagospolizasListByPoliza>toolbar>button#add'
 	},{
@@ -18,6 +21,11 @@ Ext.define('app.controller.Polizas', {
 	    ref: 'grid',
 	    selector: 'polizasList'
 	}],
+	entityName:"Poliza",
+	controller:"polizas",
+	model:'app.model.Polizas',
+	editionFormXtype:"polizasEdit",
+	titleField:'name',
 	comboFields:[
 		{
 			fieldName : 'companias',
@@ -32,27 +40,29 @@ Ext.define('app.controller.Polizas', {
 	],
 	init: function() {
 		
-		var me = this;
-		this.entityName="Poliza";
-		this.controller="polizas";
-		this.model="app.model.Polizas";
-		this.editionFormXtype="polizasEdit";
+		var me = this;		
 		this.titleField='name';
 		this.afterFillFormFn=function(panel,form,record){
 			panel.setTitle(record.data.bienACubrir.substr(0,10));
 			//fill combos					
 			form.findField('companias.id').setValue(record.data.companias.id);
-			form.findField('secciones.id').setValue(record.data.tipoPoliza.id);
+			form.findField('tipoPoliza.id').setValue(record.data.tipoPoliza.id);
 //			this.fillComboFields(form, record, this.comboFields)
+			var pagosPolizasList=panel.query('pagospolizasListByPoliza')[0]
+			pagosPolizasList.store.proxy.extraParams={'polizas.id':record.data.id};
+			pagosPolizasList.store.load();
+			pagosPolizasList.idPoliza=record.data.id;
+			pagosPolizasList.query('button#add')[0].setDisabled(false);
+			pagosPolizasList.query('button#planPagos')[0].setDisabled(false);
+//			var buttonPlanPagos=me.getPlanPagosButton();
+//			if(buttonPlanPagos){
+//				buttonPlanPagos.setDisabled(false);
+//			}
 			
-			me.getPagosPolizasList().store.proxy.extraParams={'polizas.id':record.data.id};
-			me.getPagosPolizasList().store.load();
-			me.getPagosPolizasList().idPoliza=record.data.id;
-			me.getAddPagoPolizaButton().setDisabled(false);
-			var buttonPlanPagos=me.getPlanPagosButton();
-			if(buttonPlanPagos){
-				buttonPlanPagos.setDisabled(false);
-			}
+			//fill asegurado
+			var asegurado=form.findField('asegurado');
+			var value='<a onclick="app.utils.openClienteTab('+record.data.clientes.id+')">'+record.data.clientes.apellido+' '+record.data.clientes.nombre+'</a>'
+			asegurado.setValue(value);
 		}
 		this.control({
 				'polizasList':{
@@ -69,28 +79,31 @@ Ext.define('app.controller.Polizas', {
 		    		click:me.gridRowDelete,
 		    		scope: me
 		    	}		    	
-				,'polizasEdit>toolbar>button#save':{
-					render:function(){
-						//disable add button from Contract Lines Grid
-						me.getAddPolizaButton().setDisabled(true);
-					}
-				}
-				,'polizasEdit>toolbar>button#save':{
-					click:function(button,event){
-						me.buttonSaveClick(button, event,function(){
-							me.getAddPagoPolizaButton().setDisabled(false);							
-						});
-						
-					},
-					scope: me
-				}
+//				,'polizasEdit>toolbar>button#save':{
+//					render:function(){
+//						//disable add button from Contract Lines Grid
+//						me.getAddPolizaButton().setDisabled(true);
+//					}
+//				}
+//				,'polizasEdit>toolbar>button#save':{
+//					click:function(button,event){
+//						me.buttonSaveClick(button, event,function(){
+//							me.getAddPagoPolizaButton().setDisabled(false);							
+//						});
+//						
+//					},
+//					scope: me
+//				}
 				,'polizasList > toolbar > textfield#buscarPoliza':{
 		    		  specialkey: function(f,e){
 		    				
 		                  if (e.getKey() == e.ENTER) {
 		                	  var inputValue=f.value.toUpperCase();
-		                	  me.getPolizasList().store.load({
-		                		  params:{findByName:f.value.toUpperCase()}})
+		                	  me.getPolizasList().store.currentPage = 1;
+		                	  me.getPolizasList().store.proxy.extraParams={findByName:inputValue};
+		                	  me.getPolizasList().store.load();
+//		                	  me.getPolizasList().store.load({
+//		                		  params:{findByName:f.value.toUpperCase()}})
 		                  }
 		               }
 		        

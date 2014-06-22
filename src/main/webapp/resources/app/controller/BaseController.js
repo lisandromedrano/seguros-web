@@ -7,8 +7,14 @@ Ext.define('app.controller.BaseController', {
 		var initialRecord=Ext.create(this.model);
 		if(this.parentConfig!=undefined){
 			//Master-Detail Model
+			var parentFieldName=this.parentConfig.fieldName
 			var parentRecord=Ext.create(this.parentConfig.model,this.getParentForm().getValues());
-			initialRecord.data[this.parentConfig.fieldName]=parentRecord.data;			
+			if(parentRecord.data.id)
+				initialRecord.data[parentFieldName+'.id']=parentRecord.data.id;		
+//			Ext.Object.each(app.utils.flattenObject(parentRecord.data), function(key, value,
+//					myself) {
+//				initialRecord.data[parentFieldName+'.' + key] = value;
+//			})
 		}
 		if(this.getGrid().editionMode!=app.utils.EditionMode.ROW){
 			var xtype = this.editionFormXtype;
@@ -40,7 +46,7 @@ Ext.define('app.controller.BaseController', {
 			}else if(this.getGrid().editionMode==app.utils.EditionMode.TAB){							
 				win=app.utils.openTab(xtype,title,idTab);
 				form = win.getForm();
-			}				
+			}		
 			form.loadRecord(record)
 			//fill combos
 			if(typeof this.afterFillFormFn == 'function') { 
@@ -58,29 +64,52 @@ Ext.define('app.controller.BaseController', {
 	,gridRowDelete:function(button){		
 		var grid=this.getGrid();	
 		var selection =	 grid.getSelectionModel().getSelection()[0];
-        if (selection) {
-			Ext.Ajax.request({
-			    url: CONTEXT_ROOT+'/'+this.controller+'/delete',
-			    method: 'POST',
-			    params: {id:selection.data.id},
-			    success: function(response){
-					grid.store.reload();
-					
+		var url = CONTEXT_ROOT+'/'+this.controller+'/delete';
+		var deleteEntity=function(buttonId){
+			var cancel = buttonId=='no';
+			if(cancel)
+				return;
+			if (selection) {
+				Ext.Ajax.request({
+					url: url,
+					method: 'POST',
+					params: {id:selection.data.id},
+					success: function(response){
+						var responseObject= Ext.JSON.decode(response.responseText);
+				    	if(responseObject.success){
+				    		grid.store.reload();			    		
+				    	}else{
+				    		Ext.Msg.alert({
+			                 	  title:'Failed', 
+			                 	  msg: responseObject.message?responseObject.message : 'No response',
+			                 	  buttons: Ext.Msg.OK,
+			                 	  icon:Ext.Msg.ERROR
+			                 	 });
+				    	}
+						
 //			    	app.utils.requestMessageProcessor(grid.store.proxy,response);
-					
-			    },
-			    error: function(response){
-			    	//app.utils.requestMessageProcessor(grid.store.proxy,response);
-			    	 Ext.Msg.alert({
-			        	  title:'Failed', 
-			        	  msg: action.result ? action.result.message : 'No response',
-			        	  buttons: Ext.Msg.OK,
-			        	  icon:Ext.Msg.ERROR
-			        	 });
-					
-			    }
-			});
-        }
+						
+					},
+					error: function(response){
+						//app.utils.requestMessageProcessor(grid.store.proxy,response);
+						Ext.Msg.alert({
+							title:'Failed', 
+							msg: action.result ? action.result.message : 'No response',
+									buttons: Ext.Msg.OK,
+									icon:Ext.Msg.ERROR
+						});
+						
+					}
+				});
+			}
+		}
+		Ext.Msg.show({
+            title: 'Borrar',
+            msg: 'Esta seguro de borrar el registro?',
+            buttons: Ext.Msg.YESNO,
+            icon: Ext.Msg.QUESTION,
+            fn: deleteEntity
+       }); 
 	}	
 	,buttonSaveClick:function(button){
 		console.log('button save click');

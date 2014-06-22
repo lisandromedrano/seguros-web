@@ -6,6 +6,7 @@ Ext.define('app.view.clientes.List', {
     ],
 	title: 'Clientes',
 	store: 'Clientes',
+	iconCls:'icon_clientes',
 	initComponent: function() {
 		var _this=this;		
 		this.columns = [
@@ -48,7 +49,7 @@ Ext.define('app.view.clientes.List', {
 				,flex: 1
 				,field: { xtype: 'textfield' }
 				
-			}//,
+			},
 //	        {
 //				header: 'observaciones'
 //				,dataIndex: 'observaciones'
@@ -56,30 +57,22 @@ Ext.define('app.view.clientes.List', {
 //				,field: { xtype: 'textfield' }
 //				
 //			},
-//	        {
-//				header: 'fNacimiento'
-//				,dataIndex: 'fNacimiento'
-//				,flex: 1
-//				,field: { xtype: 'datefield' }
-//				
-//			},
-//	        {
-//				header: 'dnicuit'
-//				,dataIndex: 'dnicuit'
-//				,flex: 1
-//				,field: { xtype: 'textfield' }
-//				
-//			},
-//			// combo candidate for polizas
-//			{
-//				header: 'polizas'
-//				,id: 'polizas.id'
-//				,flex: 1
-//				,editor: { xtype: 'polizasCombo' }				
-//				,renderer: function(value, metaData, record, rowIndex, colIndex, store, view) {				       
-//				       return store.data.items[rowIndex].data.polizas.name;
-//				}
-//			},				 
+	        {
+				header: 'F. Nacimiento'
+				,dataIndex: 'fNacimiento'
+				,renderer : Ext.util.Format.dateRenderer('d-m-Y')
+				,flex: 1
+				,field: { xtype: 'datefield' }
+				
+			},
+	        {
+				header: 'CUIT/DNI'
+				,dataIndex: 'dnicuit'
+				,flex: 1
+				,field: { xtype: 'textfield' }
+				
+			}
+			 
 			];
 		this.dockedItems = [{
             xtype: 'toolbar',
@@ -95,8 +88,8 @@ Ext.define('app.view.clientes.List', {
 	        	xtype:'textfield'
 	            ,name     : 'buscarCliente'
 	            ,itemId     : 'buscarCliente'
-	            ,width: 140
-	            ,emptyText: 'Buscar cliente'
+	            ,width: 300
+	            ,emptyText: 'Buscar por nombre, razon social o CUIT/DNI'
 	        },
             '->',{
                 text: 'Agregar',

@@ -1,190 +1,0 @@
-10
-
-dir
-60
-https://svn-lisandro.googlecode.com/svn/trunk/seguros-web/src/main/webapp/resources/ext/packages
-https://svn-lisandro.googlecode.com/svn
-
-
-
-2013-11-01T15:31:04.222784Z
-49
-lisandro.medrano@gmail.com
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-0297f848-9eb8-6dee-cd39-4a23d7bf25d6
-
-ext-locale-af
-dir
-
-ext-locale-bg
-dir
-
-ext-locale-ca
-dir
-
-ext-locale-cs
-dir
-
-ext-locale-da
-dir
-
-ext-locale-de
-dir
-
-ext-locale-el_GR
-dir
-
-ext-locale-en
-dir
-
-ext-locale-en_AU
-dir
-
-ext-locale-en_GB
-dir
-
-ext-locale-es
-dir
-
-ext-locale-et
-dir
-
-ext-locale-fa
-dir
-
-ext-locale-fi
-dir
-
-ext-locale-fr
-dir
-
-ext-locale-fr_CA
-dir
-
-ext-locale-gr
-dir
-
-ext-locale-he
-dir
-
-ext-locale-hr
-dir
-
-ext-locale-hu
-dir
-
-ext-locale-id
-dir
-
-ext-locale-it
-dir
-
-ext-locale-ja
-dir
-
-ext-locale-ko
-dir
-
-ext-locale-lt
-dir
-
-ext-locale-lv
-dir
-
-ext-locale-mk
-dir
-
-ext-locale-nl
-dir
-
-ext-locale-no_NB
-dir
-
-ext-locale-no_NN
-dir
-
-ext-locale-pl
-dir
-
-ext-locale-pt
-dir
-
-ext-locale-pt_BR
-dir
-
-ext-locale-pt_PT
-dir
-
-ext-locale-ro
-dir
-
-ext-locale-ru
-dir
-
-ext-locale-sk
-dir
-
-ext-locale-sl
-dir
-
-ext-locale-sr
-dir
-
-ext-locale-sr_RS
-dir
-
-ext-locale-sv_SE
-dir
-
-ext-locale-th
-dir
-
-ext-locale-tr
-dir
-
-ext-locale-ukr
-dir
-
-ext-locale-vn
-dir
-
-ext-locale-zh_CN
-dir
-
-ext-locale-zh_TW
-dir
-
-ext-theme-access
-dir
-
-ext-theme-base
-dir
-
-ext-theme-classic
-dir
-
-ext-theme-classic-sandbox
-dir
-
-ext-theme-gray
-dir
-
-ext-theme-neptune
-dir
-
-ext-theme-neutral
-dir
-

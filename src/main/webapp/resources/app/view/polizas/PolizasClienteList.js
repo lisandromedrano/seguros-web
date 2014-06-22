@@ -1,5 +1,5 @@
 Ext.define('app.view.polizas.PolizasClienteList', {
-	extend: 'app.view.polizas.List',
+	extend: 'app.view.BaseGrid',
 	alias: 'widget.polizasClienteList',	
 	title: 'Polizas',
 //	editionMode:app.utils.EditionMode.ROW,
@@ -83,9 +83,10 @@ Ext.define('app.view.polizas.PolizasClienteList', {
 	        	
 	        },
             '->',{
-                text: 'Add',
+                text: 'Agregar',
                 itemId:'add',
-                iconCls: 'icon-add'//,
+                iconCls: 'icon-add',
+                disabled: true
 				//handler: function(){
 	            //    // empty record
 				//	if(_this.editionMode==app.utils.EditionMode.ROW){					
@@ -97,7 +98,7 @@ Ext.define('app.view.polizas.PolizasClienteList', {
             }, 
              {
                 itemId: 'delete',
-                text: 'Delete',
+                text: 'Borrar',
                 iconCls: 'icon-delete',
                 disabled: true
             }			

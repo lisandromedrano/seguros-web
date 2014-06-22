@@ -21,7 +21,7 @@
     		
         <script src="app.js"></script>
 	    <script type="text/javascript"   src="js/util.js"></script>
-<!--     <script type="text/javascript"   src="js/overrides.js"></script> -->
+    <script type="text/javascript"   src="js/overrides.js"></script>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

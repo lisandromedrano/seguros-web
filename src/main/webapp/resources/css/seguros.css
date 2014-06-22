@@ -7,11 +7,26 @@
 .icon_clientes {
 	background-image:url('icons/user.png');
 }
+.icon_clientes_edicion {
+	background-image:url('icons/user_edit.png');
+}
 .icon_polizas {
+	background-image:url('icons/vcard.png');
+}
+.icon_polizas_edit {
 	background-image:url('icons/vcard_edit.png');
 }
+.icon_pagos_polizas {
+	background-image:url('icons/table_edit.png');
+}
 .icon_companias{
- 	background-image:url('icons/table.png');
+ 	background-image:url('icons/book.png');
+}
+.icon_pagos_companias{
+ 	background-image:url('icons/book_go.png');
+}
+.icon_companias{
+ 	background-image:url('icons/book.png');
 }
 .icon_secciones{
 	background-image:url('icons/textfield.png');
@@ -95,11 +110,12 @@ label {
     /*font: normal 12px courier !important;*/
     font-weight: bold !important;
 }
+
 .app-header{
 /* 	background-color: #423832; */
 	padding-left: 0px;
 }
 .seguros-main-logo{
-	max-width: 300;
-	max-height: 100;
+	max-width: 300 !important;
+	max-height: 100 !important;
 }

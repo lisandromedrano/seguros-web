@@ -265,4 +265,41 @@ public abstract class AbstractHibernateDao<T extends Serializable, K extends Ser
 		q.setInteger("id", id);
 		return q.list();
 	}
+
+	//
+	// private Page<K> getPage(PaginationParams dto) {
+	// Page<K> page = new Page<K>();
+	// page.setPage(dto.getPage());
+	// Criteria criteria = getCriteria();
+	// return page;
+	// }
+	// @Override
+	// public <D> Page<D> findPage(PaginationParams dto, Class<D> dtoClass) {
+	// Page<D> page = new Page<D>();
+	// page.setPage(dto.getPage());
+	// Criteria criteria = getCriteria();
+	//
+	// //
+	// // // TODO:add additional criteria
+	//
+	// //
+	// ScrollableResults scrollable = criteria.scroll();
+	// criteria = getPaginationCriteria(dto, criteria);
+	// if (scrollable.last()) {
+	// page.setTotalCount(scrollable.getRowNumber() + 1);
+	// }
+	// List<D> data = new ArrayList<D>();
+	// for (T e : (List<T>) criteria.list()) {
+	// D ent = com.lix.util.BeanUtils.copyProperties(e, dtoClass);
+	// data.add(ent);
+	// }
+	// page.setData(data);
+	// page.setSuccess(true);
+	// // // return (List<Modules>) criteria.list();
+	// return page;
+	// }
+
+	// protected abstract <D extends PaginationParams> Criteria
+	// addAdditionalCriteria(
+	// Criteria criteria, D dto);
 }
