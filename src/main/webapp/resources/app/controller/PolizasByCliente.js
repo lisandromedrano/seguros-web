@@ -61,6 +61,10 @@ Ext.define('app.controller.PolizasByCliente', {
 			pagosPolizasList.idPoliza=record.data.id;
 			pagosPolizasList.query('button#add')[0].setDisabled(false);
 			pagosPolizasList.query('button#planPagos')[0].setDisabled(false);
+			
+			var asegurado=form.findField('asegurado');
+			var value='<a onclick="app.utils.openClienteTab('+record.data.clientes.id+')">'+record.data.clientes.apellido+' '+record.data.clientes.nombre+'</a>'
+			asegurado.setValue(value);
 		}
 		this.control({
 				'polizasClienteList':{
