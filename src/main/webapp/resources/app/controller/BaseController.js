@@ -34,16 +34,20 @@ Ext.define('app.controller.BaseController', {
 		}
 	}
 	,gridRowDblClick:function(thisO, record, item, index, e, eOpts){
-		if(this.getGrid().editionMode!=app.utils.EditionMode.ROW){			
+		var editionMode=this.editionMode;
+		if(editionMode == undefined){
+			editionMode=this.getGrid().editionMode;
+		}
+		if(editionMode!=app.utils.EditionMode.ROW){			
 			var xtype = this.editionFormXtype;
 			var idTab = this.controller+'-'+record.data.id;
 			var title = record.data[this.titleField];
 			var form;
 			var win;
-			if(this.getGrid().editionMode==app.utils.EditionMode.WINDOW){
+			if(editionMode==app.utils.EditionMode.WINDOW){
 				win=app.utils.openWindow(xtype,title);
 				form = win.query(this.editionFormXtype)[0].getForm();
-			}else if(this.getGrid().editionMode==app.utils.EditionMode.TAB){							
+			}else if(editionMode==app.utils.EditionMode.TAB){							
 				win=app.utils.openTab(xtype,title,idTab);
 				form = win.getForm();
 			}		

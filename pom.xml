@@ -17,7 +17,11 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
     </repository>    
   </repositories>  
     <properties>
-        <org.springframework.version>3.1.0.RELEASE</org.springframework.version>
+        <org.springframework.version>3.2.8.RELEASE</org.springframework.version>
+<!--         <org.springframework.version>3.1.0.RELEASE</org.springframework.version> -->
+        <spring.security.version>3.2.3.RELEASE</spring.security.version>
+<!--         <hibernate.version>4.3.5.Final</hibernate.version> -->
+        <hibernate.version>4.1.7.Final</hibernate.version>
     </properties>
   
   
@@ -38,13 +42,23 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
       <dependency>
           <groupId>org.hibernate</groupId>
           <artifactId>hibernate-core</artifactId>
-          <version>3.6.0.Final</version>
+          <version>${hibernate.version}</version>
       </dependency>
       <dependency>
           <groupId>org.hibernate</groupId>
           <artifactId>hibernate-entitymanager</artifactId>
-          <version>4.1.9.Final</version>
+          <version>${hibernate.version}</version>
       </dependency>
+      <dependency>
+		   <groupId>org.javassist</groupId>
+		   <artifactId>javassist</artifactId>
+		   <version>3.18.1-GA</version>
+		</dependency>
+      <dependency>
+	    <groupId>org.apache.tomcat</groupId>
+	    <artifactId>tomcat-dbcp</artifactId>
+	    <version>7.0.52</version>
+	</dependency>
       
 		<!--       SPRING 		-->
 		<dependency>
@@ -72,6 +86,25 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xs
           <artifactId>spring-webmvc</artifactId>
           <version>${org.springframework.version}</version>
       </dependency>
+      <!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+ 
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+ 
+		<!-- Spring Security JSP Taglib -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>

@@ -29,7 +29,7 @@ Ext.define('app.controller.Clientes', {
 	,titleField:'nombre'
 	,afterFillFormFn:function(panel,form,record){			
 		panel.setTitle(record.data.nombre+' '+record.data.apellido);
-		panel.query('polizasClienteList')[0].store.proxy.extraParams={id:record.data.id};
+		panel.query('polizasClienteList')[0].store.proxy.extraParams={'clientes.id':record.data.id};
 		panel.query('polizasClienteList')[0].store.load();
 		panel.query('polizasClienteList > toolbar > button#add')[0].setDisabled(false);
 	}

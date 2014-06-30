@@ -73,6 +73,7 @@
    		class="com.lix.reportes.PlanPagosExcelBuilder">
    </bean>
 	
+	<import resource="classpath:spring-security.xml"/>
 
 
 </beans>

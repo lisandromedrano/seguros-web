@@ -22,8 +22,10 @@ select
 	,STR_TO_DATE(f_nacimiento, '%d/%m/%Y') 
 	,DNICUIT
 from clientes_temp;
+-- 512 filas insertadas. (La consulta tardó 0.0306 seg)
 
 update `clientes` set F_NACIMIENTO=null WHERE `F_NACIMIENTO` = '0000-00-00'
+-- 408 filas afectadas. (La consulta tardó 0.0368 seg)
 
 insert into SECCIONES (ID,CODIGO,NOMBRE)
 select id,codigo,NOMBRE from secciones_temp;
@@ -110,5 +112,7 @@ select
 	,NRO_RECIBO
 	,STR_TO_DATE(fechaVencimiento, '%d/%m/%Y') 
 from pagos_temp;
+--7599 filas afectadas.
 
-ynin
+update pagos set FECHA_VENCIMIENTO=null WHERE FECHA_VENCIMIENTO = '0000-00-00';
+update pagos set FECHA=null WHERE FECHA = '0000-00-00';

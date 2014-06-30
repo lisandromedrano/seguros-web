@@ -121,6 +121,10 @@ public class PolizasDaoImpl extends AbstractHibernateDao<Polizas, Integer>
 			criteria.add(orCriteria);
 
 		}
+		if (dto.getClientes() != null && dto.getClientes().getId() != null) {
+			criteria.add(Restrictions.eq("clientes.id", dto.getClientes()
+					.getId()));
+		}
 		//
 		ScrollableResults scrollable = criteria.scroll();
 		if (scrollable.last()) {

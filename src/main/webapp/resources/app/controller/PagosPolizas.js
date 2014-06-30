@@ -66,6 +66,15 @@ Ext.define('app.controller.PagosPolizas', {
 	    		click:me.gridRowDelete,
 	    		scope: me
 	    	}	
+			,'pagospolizasList > toolbar > button#verPoliza':{
+				click:function(){
+					var grid=this.getGrid();	
+					var selection =	 grid.getSelectionModel().getSelection()[0];
+					var idPoliza=selection.data['polizas.id'];
+					app.utils.openPolizaTab(idPoliza);
+				},
+				scope: me
+			}	
 			,'pagospolizasList > toolbar > button#planPagos':{
 				click: function(){
 					var idPoliza=me.getGrid().idPoliza

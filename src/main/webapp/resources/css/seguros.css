@@ -64,7 +64,17 @@
 
 
 
-
+/* .login-bg{ */
+/*     background-image: url(css/images/fondo_login.jpg);	 */
+/*     height: 100%; */
+/*   	width:100%;	 */
+/* } */
+/* .seguros-login-logo{ */
+/*     max-height: 52px !important; */
+/*     padding-bottom: 10px !important; */
+/*     max-width: 200px; */
+/*     margin-left: 90; */
+/* }  */
 
 /* Messages */
 #msg-div {

@@ -26,6 +26,7 @@ Ext.define('app.controller.Polizas', {
 	model:'app.model.Polizas',
 	editionFormXtype:"polizasEdit",
 	titleField:'name',
+	editionMode:app.utils.EditionMode.TAB,
 	comboFields:[
 		{
 			fieldName : 'companias',
@@ -37,33 +38,34 @@ Ext.define('app.controller.Polizas', {
 			fieldId : 'secciones.id',
 			fieldValue : 'nombre'
 		}
-	],
+	]
+	,afterFillFormFn:function(panel,form,record){
+		panel.setTitle(record.data.bienACubrir.substr(0,10));
+		//fill combos					
+		form.findField('companias.id').setValue(record.data.companias.id);
+		form.findField('tipoPoliza.id').setValue(record.data.tipoPoliza.id);
+//		this.fillComboFields(form, record, this.comboFields)
+		var pagosPolizasList=panel.query('pagospolizasListByPoliza')[0]
+		pagosPolizasList.store.proxy.extraParams={'polizas.id':record.data.id};
+		pagosPolizasList.store.load();
+		pagosPolizasList.idPoliza=record.data.id;
+		pagosPolizasList.query('button#add')[0].setDisabled(false);
+		pagosPolizasList.query('button#planPagos')[0].setDisabled(false);
+//		var buttonPlanPagos=me.getPlanPagosButton();
+//		if(buttonPlanPagos){
+//			buttonPlanPagos.setDisabled(false);
+//		}
+		
+		//fill asegurado
+		var asegurado=form.findField('asegurado');
+		var value='<a onclick="app.utils.openClienteTab('+record.data.clientes.id+')">'+record.data.clientes.apellido+' '+record.data.clientes.nombre+'</a>'
+		asegurado.setValue(value);
+	},
 	init: function() {
 		
 		var me = this;		
 		this.titleField='name';
-		this.afterFillFormFn=function(panel,form,record){
-			panel.setTitle(record.data.bienACubrir.substr(0,10));
-			//fill combos					
-			form.findField('companias.id').setValue(record.data.companias.id);
-			form.findField('tipoPoliza.id').setValue(record.data.tipoPoliza.id);
-//			this.fillComboFields(form, record, this.comboFields)
-			var pagosPolizasList=panel.query('pagospolizasListByPoliza')[0]
-			pagosPolizasList.store.proxy.extraParams={'polizas.id':record.data.id};
-			pagosPolizasList.store.load();
-			pagosPolizasList.idPoliza=record.data.id;
-			pagosPolizasList.query('button#add')[0].setDisabled(false);
-			pagosPolizasList.query('button#planPagos')[0].setDisabled(false);
-//			var buttonPlanPagos=me.getPlanPagosButton();
-//			if(buttonPlanPagos){
-//				buttonPlanPagos.setDisabled(false);
-//			}
-			
-			//fill asegurado
-			var asegurado=form.findField('asegurado');
-			var value='<a onclick="app.utils.openClienteTab('+record.data.clientes.id+')">'+record.data.clientes.apellido+' '+record.data.clientes.nombre+'</a>'
-			asegurado.setValue(value);
-		}
+		
 		this.control({
 				'polizasList':{
 					itemdblclick:me.gridRowDblClick

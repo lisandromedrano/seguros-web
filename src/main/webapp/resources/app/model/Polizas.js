@@ -30,6 +30,10 @@ Ext.define('app.model.Polizas', {
 		{name:'orden'}, 
 		{name:'patente'}
     ],
+    proxy:{
+		type:'rest'
+		,url: CONTEXT_ROOT+'/polizas'
+	},
 	idProperty: 'id',
 	validations: [
 {

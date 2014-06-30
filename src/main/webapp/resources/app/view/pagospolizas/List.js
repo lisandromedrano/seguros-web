@@ -112,7 +112,7 @@ Ext.define('app.view.pagospolizas.List', {
              {
             	text: 'Ver Poliza',
             	itemId:'verPoliza',
-            	iconCls: 'icon-add'
+            	iconCls: 'icon_polizas_edit'
             		
              }, 
              {

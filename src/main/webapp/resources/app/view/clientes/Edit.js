@@ -105,7 +105,8 @@ Ext.define("app.view.clientes.Edit", {
 			//	width:'70%',
 				items:[
 //				       	this.polizasGrid
-					{	xtype:'polizasClienteList'}
+					{	xtype:'polizasClienteList'
+						,height:300}
 				 ]
 		}
 		];		
@@ -125,7 +126,7 @@ Ext.define("app.view.clientes.Edit", {
 			title = title + ', '+record.nombre
 		}
 		this.setTitle(title);
-		controller.getPolizasGrid().store.proxy.extraParams={id:record.id};
+		controller.getPolizasGrid().store.proxy.extraParams={'clientes.id':record.data.id};
 		controller.getPolizasGrid().store.load();
 	}
 	

@@ -15,11 +15,12 @@ Ext.define('app.view.polizas.PolizasClienteList', {
 		    model : 'app.model.Polizas',
 			proxy: {
 			    type: 'ajax',
-			    url:  CONTEXT_ROOT+'/'+'polizas/polizasPorCliente',
+			    url:  CONTEXT_ROOT+'/'+'polizas/',
 				reader: {
-			        type: 'json',
-			        successProperty:'success',
-			        totalProperty: 'results'
+					 type: 'json',
+			        root: 'data',
+		            successProperty: 'success',
+		            totalProperty: 'totalCount'
 			    },autoLoad:false
 			}
 		});

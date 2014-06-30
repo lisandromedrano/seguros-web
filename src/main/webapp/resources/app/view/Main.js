@@ -30,6 +30,18 @@ Ext.define('app.view.Main', {
 //    		cls: 'seguros-main-logo',
     		src:'css/images/meloyasoc.jpg'//,
     		
+    	},'->'
+    	,'<b>Usuario:</b> '+usuario
+    	,{
+    		text:'Salir',
+    		scale: 'large',
+//    		cls:'button-logout',
+    		handler:function(button){
+    			button.setDisabled(true);
+    			var redirect = 'j_spring_security_logout'; 
+                window.location = redirect;
+                
+    		}
     	}]}
     },{
         region: 'west',

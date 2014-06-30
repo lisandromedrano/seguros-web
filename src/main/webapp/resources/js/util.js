@@ -11,11 +11,6 @@ Ext.define('app.utils', {
 		    m.slideIn('t').pause(3000).ghost('t', {remove:true});
 		}
     	,openClienteTab:function(clienteId){
-//			var idTab = 'cliente-'+record.data.id;
-//			var xtype = 'clienteEdit';
-//			var title = record.data.apellido;
-//    		var tab=this.openTab(xtype,idTab,title);
-//    		tab.getForm().loadRecord(record);
     		var Cliente = Ext.ModelManager.getModel('app.model.Clientes')
     		Cliente.load(clienteId,{
     			success: function(cliente) {
@@ -27,6 +22,18 @@ Ext.define('app.utils', {
     		//
     		
 		}
+    	,openPolizaTab:function(polizaId){
+    		var Poliza = Ext.ModelManager.getModel('app.model.Polizas')
+    		Poliza.load(polizaId,{
+    			success: function(poliza) {
+    				var polizasController=Ext.create('app.controller.Polizas')
+    				polizasController.gridRowDblClick(null,poliza);	
+    			}
+    		})
+    		
+    		//
+    		
+    	}
     	,openTab:function(xtype,title,idTab,config){
     		var panel=Ext.apply({
 	        	xtype:xtype
