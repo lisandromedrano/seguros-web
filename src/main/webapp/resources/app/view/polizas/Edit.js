@@ -104,17 +104,20 @@ Ext.define("app.view.polizas.Edit", {
 						{
 							xtype : 'numberfield',
 							fieldLabel : 'Prima',
+//							decimalSeparator:'.',
 							name : 'prima'
 						},
 				
 						{
 							xtype : 'numberfield',
+//							decimalSeparator:'.',
 							fieldLabel : 'Suma',
 							name : 'suma'
 						},
 				
 						{
 							xtype : 'numberfield',
+//							decimalSeparator:'.',
 							fieldLabel : 'Premio',
 							name : 'premio'
 						},

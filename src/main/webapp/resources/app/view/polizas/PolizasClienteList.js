@@ -23,6 +23,12 @@ Ext.define('app.view.polizas.PolizasClienteList', {
 		            totalProperty: 'totalCount'
 			    },autoLoad:false
 			}
+			,remoteSort: true
+			,sorters: {
+				property: 'fVigHasta',
+				direction: 'DESC'
+			}
+			
 		});
 		if(this.editionMode==app.utils.EditionMode.ROW){
 			this.plugins=[Ext.create('Ext.grid.plugin.RowEditing')];

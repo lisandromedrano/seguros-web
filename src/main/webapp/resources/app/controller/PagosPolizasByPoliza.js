@@ -44,7 +44,7 @@ Ext.define('app.controller.PagosPolizasByPoliza', {
 //                }
 				,edit:function(editor, e){
 					//truncate polizas Data
-					var polizaID=e.record.data.polizas.id
+//					var polizaID=e.record.data.polizas.id
 					delete e.record.data.polizas
 //					e.record.data.polizas={
 //							id:polizaID

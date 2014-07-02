@@ -1,11 +1,13 @@
 package com.lix.controller;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.beans.propertyeditors.CustomNumberEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -39,6 +41,16 @@ public abstract class BaseController {
 		CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
 		// Register it as custom editor for the Date type
 		binder.registerCustomEditor(Date.class, editor);
+
+		DecimalFormat df = new DecimalFormat();
+		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+		symbols.setDecimalSeparator(',');
+		symbols.setGroupingSeparator('.');
+		df.setDecimalFormatSymbols(symbols);
+		CustomNumberEditor cne = new CustomNumberEditor(Double.class, df, true);
+		// Register it as custom editor for the Date type
+		binder.registerCustomEditor(Double.class, cne);
+
 	}
 
 }

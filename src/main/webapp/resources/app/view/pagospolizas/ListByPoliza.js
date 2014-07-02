@@ -20,8 +20,8 @@ Ext.define('app.view.pagospolizas.ListByPoliza', {
 			},   
 			remoteSort: true,
 			sorters: {
-				property: 'fecha',
-				direction: 'DESC'
+				property: 'nroRecibo',
+				direction: 'ASC'
 			}
 		});
 //		Nº  de cuota-importe y fecha de pago n ese mismo orden

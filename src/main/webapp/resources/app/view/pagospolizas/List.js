@@ -33,6 +33,7 @@ Ext.define('app.view.pagospolizas.List', {
 	                var rs = this.polizasCombo.store.getAt(index).data; 
 	                return rs.nroPoliza; 
 	            }else{
+	            	this.polizasCombo.store.add(record.data.polizas)
 	            	return record.data.polizas.nroPoliza
 	            }		           
 			}
