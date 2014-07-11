@@ -61,7 +61,8 @@ Ext.define('app.view.pagospolizas.List', {
 			dataIndex : 'importe',
 			flex : 1,
 			field : {
-				type : 'number'
+				type : 'number',
+				decimalSeparator:'.'
 			},
 			align : 'right',
 			renderer : Ext.util.Format.usMoney,

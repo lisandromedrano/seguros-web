@@ -16,6 +16,9 @@
 .icon_polizas_edit {
 	background-image:url('icons/vcard_edit.png');
 }
+.icon_polizas_copy {
+	background-image:url('icons/page_copy.png');
+}
 .icon_pagos_polizas {
 	background-image:url('icons/table_edit.png');
 }
@@ -48,6 +51,9 @@
 } 
 .icon_plan_pago{
 	background-image:url('icons/page_excel.png');
+} 
+.icon_generar_plan_pago{
+	background-image:url('icons/date.png');
 } 
 .icon_excel{
 	background-image:url('icons/page_excel.png');

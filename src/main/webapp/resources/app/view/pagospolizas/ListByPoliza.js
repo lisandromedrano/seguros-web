@@ -39,7 +39,8 @@ Ext.define('app.view.pagospolizas.ListByPoliza', {
 			dataIndex : 'importe',
 			flex : 1,
 			field : {
-				type : 'number'
+				type : 'number',
+				decimalSeparator:'.'
 			},
 			align : 'right',
 			renderer : Ext.util.Format.usMoney,
@@ -99,6 +100,11 @@ Ext.define('app.view.pagospolizas.ListByPoliza', {
                 itemId:'planPagos',
                 iconCls: 'icon_plan_pago',
                 disabled: true
+            }, {
+            	text: 'Generar Plan de Pagos',
+            	itemId:'generarPlanPagos',
+            	iconCls: 'icon_generar_plan_pago',
+            	disabled: true
 
             }, 
              {

@@ -9,5 +9,9 @@ Ext.application({
 
     extend: 'app.Application',
     
-    autoCreateViewport: true
+    autoCreateViewport: true,
+    launch:function(){
+    	Ext.util.Format.decimalSeparator= '.';
+    	Ext.util.Format.thousandSeparator=',';
+    }
 });

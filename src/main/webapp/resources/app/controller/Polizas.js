@@ -18,6 +18,9 @@ Ext.define('app.controller.Polizas', {
 		ref: 'planPagosButton',
 		selector: 'pagospolizasListByPoliza>toolbar>button#planPagos'
 	},{
+		ref: 'planPagosGenerarButton',
+		selector: 'pagospolizasListByPoliza>toolbar>button#generarPlanPagos'
+	},{
 	    ref: 'grid',
 	    selector: 'polizasList'
 	}],
@@ -51,6 +54,7 @@ Ext.define('app.controller.Polizas', {
 		pagosPolizasList.idPoliza=record.data.id;
 		pagosPolizasList.query('button#add')[0].setDisabled(false);
 		pagosPolizasList.query('button#planPagos')[0].setDisabled(false);
+		pagosPolizasList.query('button#generarPlanPagos')[0].setDisabled(false);
 //		var buttonPlanPagos=me.getPlanPagosButton();
 //		if(buttonPlanPagos){
 //			buttonPlanPagos.setDisabled(false);

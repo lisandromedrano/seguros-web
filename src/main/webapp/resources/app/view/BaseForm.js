@@ -40,6 +40,12 @@ Ext.define("app.view.BaseForm", {
 		}
 		this.callParent(arguments);
 	}
+	,clearFields:function(fields){
+		var _this=this;
+		Ext.Array.each(fields,function(f){
+			_this.getForm().findField(f).setValue("")
+		});
+	}
 	,buttonSaveClick:function(button,event){
 		var controller=Ext.create(button.up('form').controllername)
 		var grid=controller.getGrid();		

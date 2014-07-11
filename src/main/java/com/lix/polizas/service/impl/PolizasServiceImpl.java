@@ -5,13 +5,22 @@
 
 package com.lix.polizas.service.impl;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lix.dto.DefaultResponse;
+import com.lix.pagospolizas.dao.PagosPolizasDao;
+import com.lix.pagospolizas.model.PagosPolizas;
 import com.lix.polizas.dao.PolizasDao;
 import com.lix.polizas.dto.PolizasDto;
 import com.lix.polizas.dto.PolizasPorVencerDto;
@@ -32,8 +41,13 @@ import com.lix.web.Page;
 public class PolizasServiceImpl extends GenericService<Polizas, Integer>
 		implements PolizasService {
 
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(PolizasServiceImpl.class);
+
 	@Autowired
 	PolizasDao polizasDao;
+	@Autowired
+	PagosPolizasDao pagosPolizasDao;
 
 	@Override
 	public DefaultResponse createOrUpdate(PolizasDto dto) {
@@ -79,31 +93,56 @@ public class PolizasServiceImpl extends GenericService<Polizas, Integer>
 	}
 
 	@Override
-	public void crearPlanDePagos(Integer idPoliza) {
-		// Calendar cal=Calendar.getInstance();
-		// cal.setTime(fechaPrimerVencimiento);
-		// int start=0;
-		// if(this.getPagos()!=null){
-		// start=this.getPagos().size();
-		// List<PagoPoliza>
-		// pagosExistentes=PagoPoliza.ordenarPagosPorNroRecibo(this.getPagos());
-		// for(PagoPoliza pagoPoliza:pagosExistentes){
-		// pagoPoliza.setFechaVencimiento(cal.getTime());
-		// cal.add(Calendar.MONTH, 1);
-		// }
-		// }
-		// //Agrego más pagos
-		// for(int i=start;i<this.getCantCuotas();i++){
-		// PagoPoliza p=new PagoPoliza();
-		// p.setTipo_pago(AbstractPago.POLIZA);
-		// p.setFechaVencimiento(cal.getTime());
-		// p.setNroRecibo(i+1);
-		// p.setImporte(0.0f);
-		// p.setConcepto("");
-		// //p.setPoliza(poliza);
-		// cal.add(Calendar.MONTH, 1);
-		// this.addPago(p);
-		// }
+	@Transactional
+	public void crearPlanDePagos(Integer idPoliza, Date fechaPrimerVencimiento)
+			throws Exception {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(fechaPrimerVencimiento);
+		Polizas poliza = this.getById(idPoliza);
+		if (poliza.getCantCuotas() == null) {
+			LOGGER.error("intentando generar plan de pagos con poliza sin cantidad de cuotas, se lanza excepcion");
+			throw new Exception(
+					"La ingrese la cantidad de cuotas de la poliza, guardela y vuelva a intentar");
+		}
+		int start = 0;
+		// Pagos Existentes
+		if (poliza.getPagosPolizas() != null
+				&& !poliza.getPagosPolizas().isEmpty()) {
+			start = poliza.getPagosPolizas().size();
+			List<PagosPolizas> pagosExistentes = ordenarPagosPorNroRecibo(poliza
+					.getPagosPolizas());
+			for (PagosPolizas pagoPoliza : pagosExistentes) {
+				pagoPoliza.setFechaVencimiento(cal.getTime());
+				cal.add(Calendar.MONTH, 1);
+				pagosPolizasDao.save(pagoPoliza);
+			}
+		} else {
+			poliza.setPagosPolizas(new ArrayList<PagosPolizas>());
+		}
+		// Agrego más pagos
+		for (int i = start; i < poliza.getCantCuotas(); i++) {
+			PagosPolizas p = new PagosPolizas();
+			p.setFechaVencimiento(cal.getTime());
+			p.setNroRecibo(i + 1);
+			p.setImporte(0.0d);
+			p.setConcepto("");
+			p.setPolizas(poliza);
+			cal.add(Calendar.MONTH, 1);
+			poliza.getPagosPolizas().add(p);
+			pagosPolizasDao.save(p);
+		}
 
+	}
+
+	private List<PagosPolizas> ordenarPagosPorNroRecibo(List<PagosPolizas> pagos) {
+		List<PagosPolizas> pagosOrdenados = new ArrayList<PagosPolizas>(pagos);
+
+		Collections.sort(pagosOrdenados, new Comparator() {
+			public int compare(final Object o1, final Object o2) {
+				return ((PagosPolizas) o1).getNroRecibo()
+						- ((PagosPolizas) o2).getNroRecibo();
+			}
+		});
+		return pagosOrdenados;
 	}
 }

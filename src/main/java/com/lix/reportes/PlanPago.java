@@ -68,7 +68,7 @@ public class PlanPago extends Libro {
 		cell = row1.createCell(col);
 		cell.setCellStyle(ESTILO_STRING);
 		NumberFormat nf = NumberFormat.getCurrencyInstance();
-		cell.setCellValue(writeString("SA: $" + nf.format(poliza.getSuma())));
+		cell.setCellValue(writeString("SA: " + nf.format(poliza.getSuma())));
 		if (poliza_auto) {
 			// ano
 			// patente

@@ -83,3 +83,18 @@ CREATE TABLE IF NOT EXISTS `usuarios_productores` (
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+
+insert into productores (id,nombre,apellido) values (1,'Alberto Andres','Melo');
+insert into productores (id,nombre,apellido) values (2,'Sebastian Rodrigo','Melo');
+
+insert into usuarios_productores (USER_ID,PRODUCTOR_ID) values (1,1);
+insert into usuarios_productores (USER_ID,PRODUCTOR_ID) values (1,2);
+insert into usuarios_productores (USER_ID,PRODUCTOR_ID) values (2,1);
+insert into usuarios_productores (USER_ID,PRODUCTOR_ID) values (2,2);
+insert into usuarios_productores (USER_ID,PRODUCTOR_ID) values (3,1);
+insert into usuarios_productores (USER_ID,PRODUCTOR_ID) values (3,2);
+insert into usuarios_productores (USER_ID,PRODUCTOR_ID) values (4,1);
+insert into usuarios_productores (USER_ID,PRODUCTOR_ID) values (4,2);
+insert into usuarios_productores (USER_ID,PRODUCTOR_ID) values (5,1);
+insert into usuarios_productores (USER_ID,PRODUCTOR_ID) values (5,2);

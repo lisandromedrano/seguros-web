@@ -4,6 +4,7 @@
  */
 package com.lix.polizas.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.lix.dto.DefaultResponse;
@@ -31,5 +32,6 @@ public interface PolizasService extends Service<Polizas, Integer> {
 
 	Page<PolizasDto> findPage(PolizasDto dto);
 
-	void crearPlanDePagos(Integer idPoliza);
+	void crearPlanDePagos(Integer idPoliza, Date fechaPrimerVencimiento)
+			throws Exception;
 }

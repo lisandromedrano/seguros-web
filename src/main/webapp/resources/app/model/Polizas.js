@@ -45,6 +45,7 @@ Ext.define('app.model.Polizas', {
 		maxFieldName : 'Vigencia Hasta'
 	} ,
           {type: 'presence', field: 'nroPoliza'},
+          {type: 'length',   field: 'bienACubrir',     max: 200},
           {type: 'presence', field: 'endoso'},
           {type: 'presence', field: 'fVigDesde'},
           {type: 'presence', field: 'fVigHasta'},

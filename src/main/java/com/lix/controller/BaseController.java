@@ -44,8 +44,8 @@ public abstract class BaseController {
 
 		DecimalFormat df = new DecimalFormat();
 		DecimalFormatSymbols symbols = new DecimalFormatSymbols();
-		symbols.setDecimalSeparator(',');
-		symbols.setGroupingSeparator('.');
+		symbols.setDecimalSeparator('.');
+		symbols.setGroupingSeparator(',');
 		df.setDecimalFormatSymbols(symbols);
 		CustomNumberEditor cne = new CustomNumberEditor(Double.class, df, true);
 		// Register it as custom editor for the Date type

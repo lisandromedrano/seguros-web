@@ -15,6 +15,23 @@ create database seguros_test;
 use seguros_test;
 
 /*==============================================================*/
+/* Table: CLIENTES                                              */
+/*==============================================================*/
+create table CLIENTES
+(
+   ID                   INTEGER unsigned not null auto_increment,
+   NOMBRE               VARCHAR(30),
+   APELLIDO             VARCHAR(30),
+   DIRECCION            VARCHAR(100),
+   TELEFONO             VARCHAR(30),
+   EMAIL                VARCHAR(30),
+   OBSERVACIONES        VARCHAR(100),
+   F_NACIMIENTO         DATETIME,
+   DNICUIT              VARCHAR(30),
+   primary key (ID)
+);
+
+/*==============================================================*/
 /* Table: COMPANIAS                                             */
 /*==============================================================*/
 create table COMPANIAS
@@ -42,30 +59,13 @@ create table PAGOS
 );
 
 /*==============================================================*/
-/* Table: clientes                                              */
+/* Table: POLIZAS                                               */
 /*==============================================================*/
-create table clientes
+create table POLIZAS
 (
-   id                   INTEGER unsigned not null auto_increment,
-   nombre               VARCHAR(30),
-   apellido             VARCHAR(30),
-   direccion            VARCHAR(100),
-   telefono             VARCHAR(30),
-   email                VARCHAR(30),
-   observaciones        VARCHAR(100),
-   f_nacimiento         DATETIME,
-   DNICUIT              VARCHAR(30),
-   primary key (id)
-);
-
-/*==============================================================*/
-/* Table: polizas                                               */
-/*==============================================================*/
-create table polizas
-(
-   ID                   INTEGER unsigned not null,
-   id_cliente           INTEGER unsigned,
-   id_compania          INTEGER unsigned,
+   ID                   INTEGER unsigned not null auto_increment,
+   ID_CLIENTE           INTEGER unsigned,
+   ID_COMPANIA          INTEGER unsigned,
    SECCION_ID           INT unsigned,
    NRO_POLIZA           VARCHAR(20),
    ENDOSO               VARCHAR(20),
@@ -77,7 +77,7 @@ create table polizas
    SUMA                 DOUBLE,
    PREMIO               DOUBLE,
    TIPO_POLIZA          VARCHAR(5),
-   BIEN_A_CUBRIR        VARCHAR(40),
+   BIEN_A_CUBRIR        VARCHAR(200),
    MONEDA               VARCHAR(3),
    RIESGO_A_CUBRIR      VARCHAR(50),
    CLASE_POLIZA         VARCHAR(1),
@@ -85,21 +85,21 @@ create table polizas
    NRO_CHASIS           VARCHAR(50),
    NRO_MOTOR            VARCHAR(50),
    TIPO_COBERTURA       VARCHAR(50),
-   f_registracion       DATETIME,
+   F_REGISTRACION       DATETIME,
    ORDEN                INTEGER,
    PATENTE              VARCHAR(7),
    primary key (ID)
 );
 
 /*==============================================================*/
-/* Table: secciones                                             */
+/* Table: SECCIONES                                             */
 /*==============================================================*/
-create table secciones
+create table SECCIONES
 (
    ID                   INTEGER unsigned not null auto_increment,
    ID_COMPANIA          INTEGER,
    NOMBRE               VARCHAR(50),
-   codigo               VARCHAR(5),
+   CODIGO               VARCHAR(5),
    primary key (ID)
 );
 
@@ -107,14 +107,14 @@ alter table PAGOS add constraint FK_PAGO_COMPANIA foreign key (ID_COMPANIA)
       references COMPANIAS (ID) on delete cascade;
 
 alter table PAGOS add constraint FK_PAGO_POLIZA foreign key (ID_POLIZA)
-      references polizas (ID) on delete cascade;
+      references POLIZAS (ID) on delete cascade;
 
-alter table polizas add constraint FK_POLIZA_CLIENTE foreign key (id_cliente)
-      references clientes (id) on delete cascade;
+alter table POLIZAS add constraint FK_POLIZA_CLIENTE foreign key (ID_CLIENTE)
+      references CLIENTES (ID) on delete cascade;
 
-alter table polizas add constraint FK_POLIZA_COMPANIA foreign key (id_compania)
+alter table POLIZAS add constraint FK_POLIZA_COMPANIA foreign key (ID_COMPANIA)
       references COMPANIAS (ID) on delete cascade;
 
-alter table polizas add constraint FK_POLIZA_SECCION foreign key (SECCION_ID)
-      references secciones (ID) on delete cascade;
+alter table POLIZAS add constraint FK_POLIZA_SECCION foreign key (SECCION_ID)
+      references SECCIONES (ID) on delete cascade;
 

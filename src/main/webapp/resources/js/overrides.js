@@ -212,3 +212,14 @@ Ext.require('Ext.data.Model', function() {
         }
     });
 });
+
+//Override for usMoney Format
+	Ext.util.Format.decimalSeparator= '.'
+//    Ext.apply(Ext.util.Format, {
+//        thousandSeparator: ',',
+//        decimalSeparator: '.',
+//        currencySign: '$', 
+//        dateFormat: 'd/m/Y'
+//    });
+    Ext.util.Format.thousandSeparator=','
+//    Ext.util.Format.arMoney = Ext.util.Format.currency;

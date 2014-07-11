@@ -1,6 +1,7 @@
 package com.lix.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -32,6 +33,22 @@ public class PolizasController extends BaseController {
 	@ResponseBody
 	public Page<PolizasDto> find(PolizasDto dto) {
 		return polizasService.findPage(dto);
+	}
+
+	@RequestMapping(value = "/crearPlandePagos", method = RequestMethod.GET)
+	@ResponseBody
+	public DefaultResponse crearPlandePagos(Integer idPoliza,
+			Date fechaPrimerVencimiento) {
+		DefaultResponse dr = new DefaultResponse();
+		try {
+			polizasService.crearPlanDePagos(idPoliza, fechaPrimerVencimiento);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			dr.setSuccess(false);
+			e.printStackTrace();
+			dr.setMessage(e.getMessage());
+		}
+		return dr;
 	}
 
 	// public List<PolizasDto> findAll(PaginationParams params, String name) {

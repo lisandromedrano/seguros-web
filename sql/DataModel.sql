@@ -77,7 +77,7 @@ create table POLIZAS
    SUMA                 DOUBLE,
    PREMIO               DOUBLE,
    TIPO_POLIZA          VARCHAR(5),
-   BIEN_A_CUBRIR        VARCHAR(40),
+   BIEN_A_CUBRIR        VARCHAR(200),
    MONEDA               VARCHAR(3),
    RIESGO_A_CUBRIR      VARCHAR(50),
    CLASE_POLIZA         VARCHAR(1),

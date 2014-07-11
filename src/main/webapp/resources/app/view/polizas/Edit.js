@@ -19,11 +19,11 @@ Ext.define("app.view.polizas.Edit", {
 				type : 'vbox'
 				// The total column count must be specified here
 				// ,columns : 4
-				,
-				align : 'stretch'
+				,align : 'stretch'
 			}
 		this.defaults = {
 				xtype : 'fieldset',
+				width : '100%',
 				style:'padding:5px'
 		}
 		this.items = [ {
@@ -54,6 +54,8 @@ Ext.define("app.view.polizas.Edit", {
 					type : 'table',
 					columns : 5
 				},
+				autoScroll:true,
+				style : 'padding:10px;padding-bottom:15px;margin:10px;vertical-align:top',
 				items:[
 						{
 						    xtype: 'displayfield',
@@ -66,20 +68,34 @@ Ext.define("app.view.polizas.Edit", {
 						    tpl:new Ext.XTemplate('<tpl>{apellido}, {nombre}</tpl>')
 //						    value: '10'
 						},
-				       {
-				    	   xtype : 'textfield',
-				    	   fieldLabel : 'Num. Poliza',
-				    	   name : 'nroPoliza'
-				       },
-				       {
-				    	   xtype : 'textfield',
-				    	   fieldLabel : 'Endoso',
-				    	   width:30,
-				    	   name : 'endoso'
-				       },
+						{
+							xtype: 'fieldcontainer',
+							layout: 'hbox',
+							fieldLabel : 'Num. Poliza / Endoso',
+							items:[
+							       {
+							    	   xtype : 'textfield',
+							    	   hideLabel:true,			
+							    	   margins: '0 0 0 0',
+//							    	   fieldLabel : 'Num. Poliza',
+							    	   name : 'nroPoliza'
+							       },
+							       {
+							    	   xtype : 'textfield',
+							    	   hideLabel:true,
+//							    	   fieldLabel : 'Endoso',
+							    	   width:40,
+							    	   name : 'endoso'
+							       }						
+							
+							]
+							
+						},
 				       {
 							xtype : 'textfield',
 							fieldLabel : 'Bien A Cubrir',
+							colspan:2,
+							maxLenght:200,
 							name : 'bienACubrir'
 						},
 						{
@@ -104,22 +120,22 @@ Ext.define("app.view.polizas.Edit", {
 						{
 							xtype : 'numberfield',
 							fieldLabel : 'Prima',
-//							decimalSeparator:'.',
+							decimalSeparator:'.',
 							name : 'prima'
 						},
 				
-						{
-							xtype : 'numberfield',
-//							decimalSeparator:'.',
-							fieldLabel : 'Suma',
-							name : 'suma'
-						},
 				
 						{
 							xtype : 'numberfield',
-//							decimalSeparator:'.',
+							decimalSeparator:'.',
 							fieldLabel : 'Premio',
 							name : 'premio'
+						},
+						{
+							xtype : 'numberfield',
+							decimalSeparator:'.',
+							fieldLabel : 'Suma',
+							name : 'suma'
 						},
 				
 						{
@@ -222,6 +238,62 @@ Ext.define("app.view.polizas.Edit", {
 		} // ,
 			
 		];
+		this.customButtons = [
+		                {
+		                	text:'Crear Copia',
+		                	itemId:'copy',
+		                	iconCls:'icon_polizas_copy',
+		    		        handler:function(button,event){
+		    		        	var form=this.up('form');
+		    		        	var fieldsToClear=[
+		    		        	         'id',
+		    		        	        'nroPoliza',
+		    		        	        'fRegistracion',
+		    		        	        'suma','prima','premio','fVigDesde','fVigHasta'
+		    		        	]
+		    		        	form.clearFields(fieldsToClear);
+		    		        	var pagosList=form.query('pagospolizasListByPoliza')[0];
+		    		        	pagosList.store.removeAll();
+		    		        	pagosList.query('button#add')[0].setDisabled(false);
+		    		        	pagosList.query('button#planPagos')[0].setDisabled(false);
+		    		        	pagosList.query('button#generarPlanPagos')[0].setDisabled(false);
+//		    		        	estado = NUEVO;
+//		    		    		HibernateSessionFactory.getSession().evict(poliza);
+//		    		    		this.poliza=new Poliza();
+//		    		    		poliza.setCliente(cliente);
+////		    		    		txtNroPoliza.setEditable(true);
+//		    		    		txtNroPoliza.setText("");
+//		    		    		txtPrima.setText("");
+//		    		    		txtPremio.setText("");
+//		    		    		txtSuma.setText("");
+//		    		    		txtf_venc_hasta.setText("");
+//		    		    		txtf_venc_desde.setText("");
+//		    		    		txtf_registracion.setText("");
+//		    		    		pagosTM.setNumRows(0);
+//		    		    		txtOrden.setText(""+Poliza.getLastOrden());
+//		    		    		habilitarEdicion();
+		    		    	}
+		                		
+		                },
+		                {
+		                	text:'Guardar',
+		                	itemId:'save',
+		                	iconCls:'icon-save',
+		                	handler:function(button,event){
+//		    		    		_this.fireEvent('save');
+//		    		        	this.buttonSaveClick()
+		                		var form=this.up('form')
+		                		form.buttonSaveClick(button,event);
+		                	}
+		                
+		                },
+		                {
+		                	text:'Cancelar',
+		                	scope:this,
+		                	iconCls:'icon-cancel',
+		                	handler:this.close
+		                }
+		                ];
 		this.callParent(arguments);
 	}
 	//Function to call after save
@@ -237,6 +309,7 @@ Ext.define("app.view.polizas.Edit", {
 		
 		// Enable add pago button			
 		controller.getAddPagoPolizaButton().setDisabled(false);
+		controller.getPlanPagosGenerarButton().setDisabled(false);
 		var buttonPlanPagos=controller.getPlanPagosButton();
 		if(buttonPlanPagos){
 			buttonPlanPagos.setDisabled(false);
