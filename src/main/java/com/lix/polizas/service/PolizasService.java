@@ -28,10 +28,12 @@ public interface PolizasService extends Service<Polizas, Integer> {
 
 	List<Polizas> polizasPorCliente(Integer id);
 
-	List<Polizas> getPolizasPorVencer(PolizasPorVencerDto dto);
+	Page<PolizasDto> getPolizasPorVencer(PolizasPorVencerDto dto);
 
 	Page<PolizasDto> findPage(PolizasDto dto);
 
 	void crearPlanDePagos(Integer idPoliza, Date fechaPrimerVencimiento)
 			throws Exception;
+
+	List<Polizas> getPolizasPorVencerList(PolizasPorVencerDto dto);
 }

@@ -23,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lix.dao.AbstractHibernateDao;
 import com.lix.polizas.dao.PolizasDao;
 import com.lix.polizas.dto.PolizasDto;
+import com.lix.polizas.dto.PolizasPorVencerDto;
 import com.lix.polizas.model.Polizas;
 import com.lix.util.BeanUtils;
 import com.lix.web.Page;
@@ -67,7 +68,30 @@ public class PolizasDaoImpl extends AbstractHibernateDao<Polizas, Integer>
 
 	@Override
 	@Transactional
-	public List<Polizas> getPolizasPorVencer(Date fechaDesde, Date fechaHasta) {
+	public Page<PolizasDto> getPolizasPorVencerPage(PolizasPorVencerDto dto) {
+		Page<PolizasDto> page = new Page<PolizasDto>();
+		Criteria criteria = getPolizasPorVencerCriteria(dto.getFechaDesde(),
+				dto.getFechaHasta());
+		page.setPage(dto.getPage());
+
+		ScrollableResults scrollable = criteria.scroll();
+		if (scrollable.last()) {
+			page.setTotalCount(scrollable.getRowNumber() + 1);
+		}
+		criteria = getPaginationCriteria(dto, criteria);
+		List<PolizasDto> data = new ArrayList<PolizasDto>();
+		for (Polizas e : (List<Polizas>) criteria.list()) {
+			PolizasDto ent = BeanUtils.copyProperties(e, PolizasDto.class);
+			data.add(ent);
+		}
+		page.setData(data);
+		page.setSuccess(true);
+
+		return page;
+	}
+
+	private Criteria getPolizasPorVencerCriteria(Date fechaDesde,
+			Date fechaHasta) {
 		Criteria crit = getCriteria();
 
 		Calendar desde = Calendar.getInstance();
@@ -82,11 +106,9 @@ public class PolizasDaoImpl extends AbstractHibernateDao<Polizas, Integer>
 		hasta.set(Calendar.MINUTE, 59);
 		hasta.set(Calendar.SECOND, 59);
 
-		// crit.add(Restrictions.between("fVigHasta", desde.getTime(),
-		// hasta.getTime()));
 		crit.add(Restrictions.between("fVigHasta", fechaDesde, fechaHasta));
 		crit.addOrder(Order.asc("fVigHasta"));
-		return crit.list();
+		return crit;
 	}
 
 	@Override
@@ -140,5 +162,11 @@ public class PolizasDaoImpl extends AbstractHibernateDao<Polizas, Integer>
 		page.setSuccess(true);
 		// // return (List<Modules>) criteria.list();
 		return page;
+	}
+
+	@Override
+	public List<Polizas> getPolizasPorVencerList(PolizasPorVencerDto dto) {
+		return getPolizasPorVencerCriteria(dto.getFechaDesde(),
+				dto.getFechaHasta()).list();
 	}
 }

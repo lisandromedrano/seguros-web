@@ -81,9 +81,8 @@ public class PolizasServiceImpl extends GenericService<Polizas, Integer>
 	}
 
 	@Override
-	public List<Polizas> getPolizasPorVencer(PolizasPorVencerDto dto) {
-		return polizasDao.getPolizasPorVencer(dto.getFechaDesde(),
-				dto.getFechaHasta());
+	public Page<PolizasDto> getPolizasPorVencer(PolizasPorVencerDto dto) {
+		return polizasDao.getPolizasPorVencerPage(dto);
 	}
 
 	@Override
@@ -144,5 +143,10 @@ public class PolizasServiceImpl extends GenericService<Polizas, Integer>
 			}
 		});
 		return pagosOrdenados;
+	}
+
+	@Override
+	public List<Polizas> getPolizasPorVencerList(PolizasPorVencerDto dto) {
+		return polizasDao.getPolizasPorVencerList(dto);
 	}
 }
