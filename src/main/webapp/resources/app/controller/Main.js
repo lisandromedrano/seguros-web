@@ -75,6 +75,17 @@ Ext.define('app.controller.Main', {
     			}
     		
     		}
+    		,'button#polizasPorVencer':{
+    			click:function(button){
+    				var idTab = 'polizasPorVencerList';
+	    			var xtype = 'polizasPorVencerList';
+	    			var title = 'Polizas X Venc.';
+	    			app.utils.openTab(xtype,title,idTab,{
+	    				editionMode:app.utils.EditionMode.TAB
+	    				}
+	    			);
+				}
+			}	
 //    	
     	})
     	

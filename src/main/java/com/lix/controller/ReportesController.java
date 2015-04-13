@@ -1,7 +1,5 @@
 package com.lix.controller;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -26,15 +24,7 @@ public class ReportesController {
 
 	@RequestMapping(value = "/polizasPorVencer/", method = RequestMethod.GET)
 	public ModelAndView getPolizasPorVencer(PolizasPorVencerDto dto) {
-		Calendar cal = Calendar.getInstance();
-		cal.set(2008, 0, 1);
-		Date hoy = cal.getTime();
-		cal.add(Calendar.YEAR, 1);
-		Date despues = cal.getTime();
-
-		dto.setFechaDesde(hoy);
-		dto.setFechaHasta(despues);
-		List<Polizas> polizas = polizasService.getPolizasPorVencer(dto);
+		List<Polizas> polizas = polizasService.getPolizasPorVencerList(dto);
 		return new ModelAndView("polizasPorVencer", "polizas", polizas);
 
 	}

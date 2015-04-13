@@ -61,7 +61,7 @@ public class PolizasDaoTest extends AbstractTestWithContext{
 		System.out.println("HOY:"+hoy);
 		System.out.println("DESPUES:"+despues);
 //		Assert.assertEquals(10,polizasDao.getPolizasPorVencer(hoy,despues).size());
-		int size=polizasDao.getPolizasPorVencer(hoy,despues).size();
+		int size=polizasDao.getPolizasPorVencerPage(hoy,despues).size();
 		System.out.println("size:"+size);
 		Assert.assertThat(size, Matchers.greaterThan(1));
 	}

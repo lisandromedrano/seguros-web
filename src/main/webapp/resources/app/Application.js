@@ -10,6 +10,7 @@ Ext.define('app.Application', {
        ,'clientes.List'
        ,'clientes.Edit'
        ,'polizas.List'
+       ,'polizas.PolizasPorVencerList'
        ,'polizas.Edit'
        ,'polizas.PolizasClienteList'
        ,'pagoscompanias.Edit'
@@ -34,6 +35,7 @@ Ext.define('app.Application', {
         ,'PagosPolizas'
         ,'PagosPolizasByPoliza'
         ,'PolizasByCliente'
+        ,'PolizasPorVencer'
     ],
     stores: [
        'Secciones'
