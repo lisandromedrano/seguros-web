@@ -46,7 +46,7 @@
 <!-- 	    <property name="maxUploadSize" value="100000"/> -->
 <!-- 	</bean> -->
     <!-- Database Configuration -->
-	<import resource="classpath:datasource.xml"/>
+<!-- 	<import resource="classpath:datasource.xml"/> -->
 	
 	<!-- Custom converters registered here to allow automatic binding in forms etc -->
 	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">

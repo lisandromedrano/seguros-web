@@ -6,11 +6,19 @@
     version="2.4">
  
     <display-name>SEGUROS V2</display-name>
-    
+    <context-param>
+      <param-name>contextClass</param-name>
+      <param-value>
+         org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+      </param-value>
+  	</context-param>
 	<context-param>
 	    <param-name>contextConfigLocation</param-name>
-	    <param-value>classpath:application-context.xml</param-value>
+ 		<param-value>
+            com.lix.config.ApplicationConfig
+        </param-value>
 	</context-param>
+	
 	
     <listener>
 	    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -20,10 +28,6 @@
 	<filter>
  		<filter-name>OpenSessioninViewFilter</filter-name>
 	 	<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
-<!-- 	 	<init-param> -->
-<!--          <param-name>sessionFactoryBeanName</param-name> -->
-<!--          <param-value>sessionFactory</param-value>          -->
-<!--       </init-param>  -->
 	</filter>
 	
 	<filter-mapping>
