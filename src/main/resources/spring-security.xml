@@ -26,8 +26,7 @@
 		/>  
         <session-management invalid-session-url="/login.jsp" />
     </http>
- 
-    
+
     <beans:bean id="authenticationFilter" class="com.lix.security.AuthProcessingFilter">
         <beans:property name="authenticationManager" ref="authenticationManager" />
     </beans:bean>

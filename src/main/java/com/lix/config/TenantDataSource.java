@@ -1,19 +1,24 @@
 package com.lix.config;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 
+import org.hibernate.cfg.AvailableSettings;
+import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
-import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.transaction.support.TransactionTemplate;
+
+import com.lix.multitenancy.LocalSessionFactoryBean;
+import com.lix.multitenancy.SimpleMultiTenantConnectionProvider;
 
 @Configuration
 @PropertySource({ "classpath:database.properties" })
@@ -22,7 +27,6 @@ public class TenantDataSource {
 	private static final String PROPERTY_NAME_DATABASE_DRIVER = "database.driver";
 	private static final String PROPERTY_NAME_DATABASE_PASSWORD = "database.password";
 	private static final String PROPERTY_NAME_DATABASE_URL = "database.url";
-	private static final String PROPERTY_NAME_DATABASE_MASTER_URL = "database.url.master";
 	private static final String PROPERTY_NAME_DATABASE_USERNAME = "database.username";
 
 	private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "database.dialect";
@@ -31,6 +35,11 @@ public class TenantDataSource {
 
 	@Resource
 	private Environment env;
+	@Autowired
+	CurrentTenantIdentifierResolver webSessionCurrentTenantIdentifierResolver;
+
+	@Autowired
+	SimpleMultiTenantConnectionProvider simpleMultiTenantConnectionProvider;
 
 	@Bean
 	public DataSource dataSource() {
@@ -48,25 +57,8 @@ public class TenantDataSource {
 	}
 
 	@Bean
-	public DataSource masterDataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-
-		dataSource.setDriverClassName(env
-				.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
-		dataSource.setUrl(env
-				.getRequiredProperty(PROPERTY_NAME_DATABASE_MASTER_URL));
-		dataSource.setUsername(env
-				.getRequiredProperty(PROPERTY_NAME_DATABASE_USERNAME));
-		dataSource.setPassword(env
-				.getRequiredProperty(PROPERTY_NAME_DATABASE_PASSWORD));
-
-		return dataSource;
-	}
-
-	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-		sessionFactory.setDataSource(dataSource());
 		sessionFactory
 				.setPackagesToScan(PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN);
 		sessionFactory.setHibernateProperties(hibProperties());
@@ -77,22 +69,24 @@ public class TenantDataSource {
 		Properties properties = new Properties();
 		properties.put(PROPERTY_NAME_HIBERNATE_DIALECT,
 				env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
-		// properties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL,
-		// env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_SHOW_SQL));
+		properties.put(AvailableSettings.MULTI_TENANT, "DATABASE");
+		properties.put(AvailableSettings.MULTI_TENANT_IDENTIFIER_RESOLVER,
+				webSessionCurrentTenantIdentifierResolver);
+		properties.put(AvailableSettings.MULTI_TENANT_CONNECTION_PROVIDER,
+				simpleMultiTenantConnectionProvider);
 		return properties;
 	}
 
 	@Bean
-	public HibernateTransactionManager transactionManager() {
-		HibernateTransactionManager transactionManager = new HibernateTransactionManager(
-				sessionFactory().getObject());
-		return transactionManager;
+	public Map<String, DataSource> dataSourcesMap() {
+		return new HashMap<String, DataSource>();
 	}
 
-	@Bean
-	public TransactionTemplate transactionTemplate() {
-		TransactionTemplate transactionTemplate = new TransactionTemplate();
-		transactionTemplate.setTransactionManager(transactionManager());
-		return transactionTemplate;
-	}
+	//
+	// @Bean
+	// public TransactionTemplate transactionTemplate() {
+	// TransactionTemplate transactionTemplate = new TransactionTemplate();
+	// transactionTemplate.setTransactionManager(transactionManager());
+	// return transactionTemplate;
+	// }
 }

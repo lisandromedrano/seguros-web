@@ -1,14 +1,6 @@
 Ext.onReady(function(){
     Ext.QuickTips.init();
     var fnLogin=function(){
-//    	var user=login.getForm().findField('loginUsername').getValue();
-//    	var pass=login.getForm().findField('loginPassword').getValue();
-//    	if(user=='accura'&&pass=='accura'){
-//    		 var redirect = 'index.jsp'; 
-//                window.location = redirect;
-//    	}else{
-//    		Ext.Msg.alert('','Login Failed!');                		
-//    	}
     	var form=login.getForm();
     	if (form.isValid()) {
     		form.submit({ 
@@ -16,16 +8,15 @@ Ext.onReady(function(){
     			waitTitle: 'Ingresando..', 
     			waitMsg:'Enviando Informacion...',
     			success: function(form, action) {
-//	            	//Ext.Msg.alert('Success', action.result.msg);
-	            	var redirect = 'index.jsp'; 
-	                window.location = redirect;
+	            	if(action.result.productores.length>1){
+						seleccionarProductor(action.result.productores);
+					}else{
+						var redirect = 'index.jsp'; 
+						window.location = redirect;
+					}
 	         	},
 	         	failure: function(form, action) {
-//	         		console.log(action.result);
-//	         		var msg = action.result.message;
-//	         		Ext.Msg.alert('Failed', msg);
 	         		Ext.Msg.alert('Datos Invalidos', 'Introduzca de nuevo sus datos')
-//	         		Ext.Msg.alert(AppMessages['app.messages.login.invaliddata'], msg);
 	         	}
     		}); 
 	    }else{
@@ -38,7 +29,6 @@ Ext.onReady(function(){
 	// Assign various config options as seen.	 
     var login = new Ext.FormPanel({ 
         labelWidth:80,
-//        url:CONTEXT_ROOT+'/login/processForm/',
         url:CONTEXT_ROOT+'/j_spring_security_check',
         defaultType:'textfield',
         monitorValid:true,
@@ -121,17 +111,46 @@ Ext.onReady(function(){
 //            }] 
     });
        
-//    var win = new Ext.Window({
-//
-//    	title:'Please Login', 
-//        layout:'fit',
-////        width:auto,
-//        autoHeight:true,
-//        closable: false,
-//        resizable: false,
-////        plain: true,
-////        border: false,
-//        items: [login]
-//	});
-//	win.show();
+    var seleccionarProductor=function(productores){
+    	//crear mensaje con combo para elegir
+    	var productoresStore=Ext.create('Ext.data.Store', {
+    	    fields: ['id', 'nombre'],
+    	    data : productores
+    	});
+    	var win=Ext.create('Ext.window.Window', {
+		    title: 'Seleccione Productor',
+		    bodyStyle:'padding:20px',
+		    labelAlign:'top',
+		    buttons: [
+		    {text:'Continuar',handler:function(){
+		    		var idProductor=win.query('combo')[0].getValue();
+		    		Ext.Ajax.request({
+		    			url:CONTEXT_ROOT+'/productores/select',
+		    			method:'POST',
+		    			params:{idProductor:idProductor},
+		    			success:function(response){
+			    			var redirect = 'index.jsp'; 
+			    			window.location = redirect;
+		    			}
+		    		});
+		    }},{
+		    	text:'cancelar'
+		    	,handler:function(){
+		    		win.destroy();					    		
+		    	}
+		    }],
+		    
+		    items:   
+		    	Ext.create('Ext.form.ComboBox', {
+		    	    fieldLabel: 'Seleccione Productor',
+		    	    store: productoresStore,
+		    	    displayField: 'nombre',
+		    	    valueField: 'id'
+		    	})
+		       
+		    
+		});
+		win.show();
+    	// segunda llamada ajax
+    };
 });

@@ -14,6 +14,7 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -26,7 +27,8 @@ import com.lix.web.PaginationParamsConverter;
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.lix" })
 @Configuration
-@ImportResource("classpath:spring-security.xml")
+@ImportResource({ "classpath:spring-security.xml" })
+@EnableTransactionManagement
 public class ApplicationConfig extends WebMvcConfigurerAdapter {
 
 	// equivalents for <mvc:resources/> tags

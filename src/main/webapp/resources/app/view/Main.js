@@ -31,7 +31,7 @@ Ext.define('app.view.Main', {
     		src:'css/images/meloyasoc.jpg'//,
     		
     	},'->'
-    	,'<b>Usuario:</b> '+usuario
+    	,'<b>Usuario:</b> '+usuario + '<br><b>Productor:</b>' + productor
     	,{
     		text:'Salir',
     		scale: 'large',
