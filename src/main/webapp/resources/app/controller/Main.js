@@ -5,9 +5,14 @@ Ext.define('app.controller.Main', {
     ],
     init: function() {
     	this.control({
+//    		'viewport > panel': {
+//                render: funtion(){
+//                	alert('render!!')
+//                }
+//            },
     		'button#clientes':{
     			click:function(){
-    				alert('hola');
+//    				alert('hola');
 //	    			click:function(){
 //		    			var idTab = 'seccionesList';
 //		    			var xtype = 'seccionesList';
@@ -18,6 +23,19 @@ Ext.define('app.controller.Main', {
 //	    			}
     			}
     	
+    		}
+    		, 'component#panelUsuario':{
+    			render:function(panelUsuario){
+    				Ext.Ajax.request({
+    					url: CONTEXT_ROOT+'/productores/getCurrentProductor',
+    					success: function(response){
+    						var responseObject= Ext.JSON.decode(response.responseText);
+    						panelUsuario.update('<p><b>Usuario:</b>'+usuario+'</p>'
+    								+ '<p><b>Productor:</b>'+responseObject.nombre+'</p>');
+    					}
+    				})
+    				console.log(panelUsuario.html)
+    			}
     		}
     		,'button#secciones':{
     			click:function(){
