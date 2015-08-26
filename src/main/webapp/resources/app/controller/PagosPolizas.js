@@ -94,11 +94,6 @@ Ext.define('app.controller.PagosPolizas', {
 	               }
 	        
 	    	}
-//			,'polizasEdit>toolbar>button#save':{
-//				click:me.buttonSaveClick,
-//				scope: me
-//			}
-		
 			});
 	}
 	

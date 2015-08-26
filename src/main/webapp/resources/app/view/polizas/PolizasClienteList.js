@@ -77,7 +77,7 @@ Ext.define('app.view.polizas.PolizasClienteList', {
 				   ]
 			   }
 		];
-				
+		
 		this.dockedItems = [{
             xtype: 'toolbar',
             items: [{

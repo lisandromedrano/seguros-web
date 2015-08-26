@@ -4,11 +4,11 @@
  */
 package com.lix.polizas.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import com.lix.dao.HibernateDao;
 import com.lix.polizas.dto.PolizasDto;
+import com.lix.polizas.dto.PolizasPorVencerDto;
 import com.lix.polizas.model.Polizas;
 import com.lix.web.Page;
 
@@ -25,8 +25,10 @@ public interface PolizasDao extends HibernateDao<Polizas, Integer> {
 
 	public List<Polizas> polizasPorCliente(Integer id);
 
-	public List<Polizas> getPolizasPorVencer(Date fechaDesde, Date fechaHasta);
-
 	public Page<PolizasDto> findPage(PolizasDto dto);
+
+	Page<PolizasDto> getPolizasPorVencerPage(PolizasPorVencerDto dto);
+
+	public List<Polizas> getPolizasPorVencerList(PolizasPorVencerDto dto);
 
 }

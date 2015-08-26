@@ -168,11 +168,6 @@ public class Libro extends Excel {
 	}
 
 	private void setLineasPagina() {
-		// Properties prop = AppProperties.getProperties();
-		// LINEAS_X_PAGINA = Integer.parseInt(prop.getProperty("lineasXhoja"));
 		LINEAS_X_PAGINA = 20;
 	}
-	// public InputStream getInputStream(){
-	// return InputStream.
-	// }
 }

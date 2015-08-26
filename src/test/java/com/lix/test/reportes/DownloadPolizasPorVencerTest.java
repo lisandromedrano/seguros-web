@@ -44,7 +44,7 @@ public class DownloadPolizasPorVencerTest extends AbstractTestWithContext {
 	  }
 	 @Test
 	  public void getFile() throws Exception {
-		 Mockito.when(polizasDao.getPolizasPorVencer(new Date(),new Date())).thenReturn(PolizasMock.createList(200));
+		 Mockito.when(polizasDao.getPolizasPorVencerPage(new Date(),new Date())).thenReturn(PolizasMock.createList(200));
 	    this.mockMvc.perform(get("/reportes/polizasPorVencer/").accept(MediaType.parseMediaType("application/vnd.ms-excel")))
 	        .andExpect(status().isOk());
 	  }

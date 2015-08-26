@@ -131,6 +131,21 @@ Ext.define('app.view.Main', {
 		   				iconCls:'icon_pagos_companias'
 		   			} 
 		    	   ]
+		       },{
+		    	   title:'Listados',
+		    	   defaults : {
+						textAlign : 'left',
+//						xtype:'button',
+						style : 'margin-top:5px'
+					},
+		    	   items:[
+				      {
+								xtype : 'button',
+								itemId : 'polizasPorVencer',
+								text : 'Polizas x Vencer',
+								iconCls : 'icon_pagos_companias'
+					}
+		    	          ]
 		       }
 		],
 		

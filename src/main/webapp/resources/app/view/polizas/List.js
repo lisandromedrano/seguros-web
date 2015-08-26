@@ -74,45 +74,59 @@ Ext.define('app.view.polizas.List', {
 //				,flex: 1
 //				,field: { xtype: 'textfield' }
 //				
-//			}//,
+//			}//
+			,{
+			header : 'Vencimiento',
+			dataIndex : 'fVigHasta',
+			width:200,
+			sortType : Ext.data.SortTypes.asDate,
+			renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+			field : {
+				xtype : 'datefield',
+				format : 'd-m-Y'
+			}
+
+		},
 		
 			];
 		
 		}
-		
-		this.dockedItems = [{
-            xtype: 'toolbar',
-            items: [{
-            	text: 'Actualizar',
-	    	    iconCls:'x-tbar-loading',
-	    	    scope: this,
-	    	    handler: function(){
-	    			this.store.load();	
-	    		}
-	        	
-	        },{
-	        	xtype:'textfield'
+		if(!this.dockedItems){
+			this.dockedItems = [{
+				xtype: 'toolbar',
+				items: [{
+					text: 'Actualizar',
+					iconCls:'x-tbar-loading',
+					scope: this,
+					handler: function(){
+						this.store.load();	
+					}
+				
+				},{
+					xtype:'textfield'
 //	            ,name     : 'buscarPoliza'
-	            ,itemId     : 'buscarPoliza'
-	            	,submitValue:false
-	            ,width: 300
-	            ,emptyText: 'Buscar por Numero, Asegurado, Bien, o Patente'
-	        },
-            '->',
+						,itemId     : 'buscarPoliza'
+							,submitValue:false
+							,width: 300
+							,emptyText: 'Buscar por Numero, Asegurado, Bien, o Patente'
+				},
+				'->',
 //            {
 //                text: 'Agregar',
 //                itemId:'add',
 //                iconCls: 'icon-add'
 //
 //            }, 
-             {
-                itemId: 'delete',
-                text: 'Borrar',
-                iconCls: 'icon-delete',
-                disabled: true
-            }
-			]
-        }]
+				{
+					itemId: 'delete',
+					text: 'Borrar',
+					iconCls: 'icon-delete',
+					disabled: true
+				}
+				]
+			}]
+			
+		}
 		
     	this.callParent(arguments);
 	}

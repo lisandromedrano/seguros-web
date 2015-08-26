@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lix.dto.DefaultResponse;
 import com.lix.polizas.dto.PolizasDto;
+import com.lix.polizas.dto.PolizasPorVencerDto;
 import com.lix.polizas.model.Polizas;
 import com.lix.polizas.service.PolizasService;
 import com.lix.util.BeanUtils;
@@ -49,6 +50,12 @@ public class PolizasController extends BaseController {
 			dr.setMessage(e.getMessage());
 		}
 		return dr;
+	}
+
+	@RequestMapping(value = "/porVencer", method = RequestMethod.GET)
+	@ResponseBody
+	public Page<PolizasDto> porVencer(PolizasPorVencerDto dto) {
+		return polizasService.getPolizasPorVencer(dto);
 	}
 
 	// public List<PolizasDto> findAll(PaginationParams params, String name) {
