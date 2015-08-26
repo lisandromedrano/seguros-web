@@ -14,28 +14,24 @@ Ext.define('app.view.Main', {
     items: [{	
     	region: 'north',
     	id: 'north-menu',
-//    	layout:'vbox',
-    	//cls:'accura-header',
-    	
-//    	items:[],
-//    	margins: '0 0 5 10',
     	bbar: {
-//    		cls:'app-header',
     		items:[{
     		height:80,
     		border: false,
     		xtype:'image',
-//    		autoEl: 'div',
-//    		style:'max-width:200px',
-//    		cls: 'seguros-main-logo',
     		src:'css/images/meloyasoc.jpg'//,
     		
     	},'->'
-    	,'<b>Usuario:</b> '+usuario
+//    	,'<b>Usuario:</b> '+usuario + '<br><b>Productor:</b>'
+    	, Ext.create('Ext.Component', {
+//    		html: 'HOLA',
+    		id:'panelUsuario',
+//    		xtype:'panel',
+    		 tpl: '<span>Hello {name}</span>'
+    	})
     	,{
     		text:'Salir',
     		scale: 'large',
-//    		cls:'button-logout',
     		handler:function(button){
     			button.setDisabled(true);
     			var redirect = 'j_spring_security_logout'; 

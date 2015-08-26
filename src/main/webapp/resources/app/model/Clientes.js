@@ -37,7 +37,7 @@ Ext.define('app.model.Clientes', {
 //	    }
 //	},
     validations: [
-	      {type: 'email', field: 'email'},
+	      //{type: 'email', field: 'email'},
 //	      {type: 'presence', field: 'nombre'},
 	      {type: 'presence', field: 'apellido'}
 	  ],
