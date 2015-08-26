@@ -30,13 +30,22 @@ Ext.define('app.controller.Main', {
     					url: CONTEXT_ROOT+'/productores/getCurrentProductor',
     					success: function(response){
     						var responseObject= Ext.JSON.decode(response.responseText);
-    						panelUsuario.update('<p><b>Usuario:</b>'+usuario+'</p>'
-    								+ '<p><b>Productor:</b>'+responseObject.nombre+'</p>');
+    						console.log(responseObject)
+    						panelUsuario.update('<p><b>Usuario: </b>'+usuario+'</p>'
+    								+ '<p><b>Productor: </b>'+responseObject.nombre+
+//    								' [<a href="" class="cambiarProductor">Cambiar</a>]'+
+    								'</p>');
+//    						Ext.select('a.cambiarProductor').on('click', function(e)
+//    								{
+//    								   var target = e.getTarget();
+//    								   alert(target.id);
+//    								}
+//    								);
     					}
     				})
-    				console.log(panelUsuario.html)
     			}
     		}
+    		
     		,'button#secciones':{
     			click:function(){
 	    			var idTab = 'seccionesList';
