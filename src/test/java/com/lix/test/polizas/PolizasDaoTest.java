@@ -45,24 +45,24 @@ public class PolizasDaoTest extends AbstractTestWithContext{
 	}
 	@Test
 	public void testPolizasXVencimiento(){
-		Calendar cal=Calendar.getInstance();
-		cal.set(2008, 0, 1);
-		Date hoy=cal.getTime();
-		cal.add(Calendar.YEAR, 1);
-		Date despues=cal.getTime();
+// 		Calendar cal=Calendar.getInstance();
+// 		cal.set(2008, 0, 1);
+// 		Date hoy=cal.getTime();
+// 		cal.add(Calendar.YEAR, 1);
+// 		Date despues=cal.getTime();
 		
-//		for(Polizas p:PolizasMock.createList(10)){
-//			System.out.println(p.getFVigHasta());
-//			clientesDao.save(p.getClientes());
-//			seccionesDao.saveOrUpdate(p.getTipoPoliza());
-//			companiasDao.saveOrUpdate(p.getCompanias());
-//			polizasDao.save(p);
-//		}
-		System.out.println("HOY:"+hoy);
-		System.out.println("DESPUES:"+despues);
-//		Assert.assertEquals(10,polizasDao.getPolizasPorVencer(hoy,despues).size());
-		int size=polizasDao.getPolizasPorVencerPage(hoy,despues).size();
-		System.out.println("size:"+size);
-		Assert.assertThat(size, Matchers.greaterThan(1));
+// //		for(Polizas p:PolizasMock.createList(10)){
+// //			System.out.println(p.getFVigHasta());
+// //			clientesDao.save(p.getClientes());
+// //			seccionesDao.saveOrUpdate(p.getTipoPoliza());
+// //			companiasDao.saveOrUpdate(p.getCompanias());
+// //			polizasDao.save(p);
+// //		}
+// 		System.out.println("HOY:"+hoy);
+// 		System.out.println("DESPUES:"+despues);
+// //		Assert.assertEquals(10,polizasDao.getPolizasPorVencer(hoy,despues).size());
+// 		int size=polizasDao.getPolizasPorVencerPage(hoy,despues).size();
+// 		System.out.println("size:"+size);
+// 		Assert.assertThat(size, Matchers.greaterThan(1));
 	}
 }
