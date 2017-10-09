@@ -13,7 +13,7 @@ import org.springframework.context.support.ConversionServiceFactoryBean;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -62,7 +62,7 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter {
 	public RequestMappingHandlerAdapter requestMappingHandler() {
 		RequestMappingHandlerAdapter adapter = new RequestMappingHandlerAdapter();
 		List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
-		messageConverters.add(new MappingJacksonHttpMessageConverter());
+		messageConverters.add(new MappingJackson2HttpMessageConverter());
 		adapter.setMessageConverters(messageConverters);
 		return adapter;
 	}

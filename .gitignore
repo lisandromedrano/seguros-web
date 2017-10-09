@@ -1,3 +1,7 @@
 /target/
 /.settings/
 /webapps/
+.idea/*
+*.iml
+*.ipr
+*.iws

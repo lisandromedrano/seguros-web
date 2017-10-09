@@ -102,7 +102,7 @@ public class ProductoresController extends BaseController {
 	public DefaultResponse select(Integer idProductor) {
 		LOGGER.info("select productor id:{}", idProductor);
 		DefaultResponse r = new DefaultResponse();
-		Productores productor = productoresRepository.findOne(idProductor);
+		Productores productor = productoresRepository.findById(idProductor).get();
 		request.getSession().setAttribute("currentProductor", productor);
 		return r;
 	}
