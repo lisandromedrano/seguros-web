@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.lix.domain.master.users.model.Users;
 
-@Repository("usersRepository")
+//@Repository("usersRepository")
 public interface UsersRepository extends JpaRepository<Users, Integer> {
 	public Users findByUsername(String username);
 }

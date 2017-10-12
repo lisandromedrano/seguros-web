@@ -8,8 +8,6 @@ package com.lix.domain.master.users.model;
 import java.io.Serializable;
 import java.util.List;
 
-//import javax.validation.constraints.* ;
-//import org.hibernate.validator.constraints.* ;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,9 +21,12 @@ import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.codehaus.jackson.annotate.JsonIgnore;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lix.domain.master.productores.model.Productores;
+
+//import javax.validation.constraints.* ;
+//import org.hibernate.validator.constraints.* ;
 
 /**
  * Persistent class for entity stored in table "users"

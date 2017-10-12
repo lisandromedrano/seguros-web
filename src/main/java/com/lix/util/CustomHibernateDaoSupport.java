@@ -3,7 +3,7 @@ package com.lix.util;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.springframework.core.GenericTypeResolver;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 
 public class CustomHibernateDaoSupport<T> {
 	// @Autowired

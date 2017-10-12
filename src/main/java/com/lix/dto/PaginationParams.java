@@ -1,12 +1,13 @@
 package com.lix.dto;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PaginationParams {
 	public static final String ORDER_ASC = "ASC";
@@ -22,8 +23,8 @@ public class PaginationParams {
 
 	// private List<Map<String, String>> sort;
 
-	// private List<Sort> sort = LazyList.decorate(new ArrayList<Sort>(),
-	// FactoryUtils.instantiateFactory(Sort.class));
+//	 private List<Sort> sort = LazyList.decorate(new ArrayList<Sort>(),
+//	 FactoryUtils.instantiateFactory(Sort.class));
 
 	public Integer getLimit() {
 		return limit;
@@ -49,13 +50,13 @@ public class PaginationParams {
 		this.start = start;
 	}
 
-	// public Sort getSort() {
-	// return sort;
-	// }
-	//
-	// public void setSort(Sort sort) {
-	// this.sort = sort;
-	// }
+//	 public Sort getSort() {
+//	 return sort;
+//	 }
+//
+//	 public void setSort(Sort sort) {
+//	 this.sort = sort;
+//	 }
 
 	public String getProperty() {
 		return property;
@@ -85,11 +86,10 @@ public class PaginationParams {
 		return sort;
 	}
 
-	public void setSort(String sort) throws JsonParseException,
-			JsonMappingException, IOException {
+	public void setSort(String sort) throws	IOException {
+		TypeReference<List<Sort>> mapType = new TypeReference<List<Sort>>() {};
 		ObjectMapper mapper = new ObjectMapper();
-		this.sorting = mapper.readValue(sort, new TypeReference<List<Sort>>() {
-		});
+		this.sorting = mapper.readValue(sort, mapType);
 		this.sort = sort;
 	}
 

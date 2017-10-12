@@ -4,16 +4,17 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
-import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -22,11 +23,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lix.domain.master.productores.model.Productores;
 import com.lix.domain.master.repositories.UsersRepository;
 import com.lix.domain.master.users.model.Users;
-
+//@Component
 public class AuthProcessingFilter extends UsernamePasswordAuthenticationFilter {
 	private static final Logger LOGGER = LoggerFactory
 			.getLogger(AuthProcessingFilter.class);
@@ -36,7 +40,16 @@ public class AuthProcessingFilter extends UsernamePasswordAuthenticationFilter {
 
 	@Autowired
 	UsersRepository usersRepository;
+	@PostConstruct
+	public void postConstruct(){
+		this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/login","POST"));
+	}
 
+	@Override
+	@Autowired
+	public void setAuthenticationManager(AuthenticationManager authenticationManager) {
+		super.setAuthenticationManager(authenticationManager);
+	}
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request,
 			HttpServletResponse response, FilterChain chain,

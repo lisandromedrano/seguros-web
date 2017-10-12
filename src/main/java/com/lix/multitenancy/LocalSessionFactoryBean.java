@@ -17,7 +17,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 //@Component
 public class LocalSessionFactoryBean extends
-		org.springframework.orm.hibernate4.LocalSessionFactoryBean {
+		org.springframework.orm.hibernate5.LocalSessionFactoryBean {
 
 	static Logger log = LoggerFactory.getLogger(LocalSessionFactoryBean.class);
 

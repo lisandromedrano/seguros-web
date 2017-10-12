@@ -2,8 +2,7 @@ package com.lix.dto;
 
 import java.util.Date;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.lix.util.JsonDateSerializer;
 
 public class PolizaDto {

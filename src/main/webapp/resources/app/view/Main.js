@@ -34,7 +34,7 @@ Ext.define('app.view.Main', {
     		scale: 'large',
     		handler:function(button){
     			button.setDisabled(true);
-    			var redirect = 'j_spring_security_logout'; 
+    			var redirect = 'login.jsp';
                 window.location = redirect;
                 
     		}

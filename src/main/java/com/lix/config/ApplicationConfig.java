@@ -8,6 +8,7 @@ import java.util.Set;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ConversionServiceFactoryBean;
 import org.springframework.core.convert.ConversionService;
@@ -22,12 +23,13 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 import com.lix.reportes.PlanPagosExcelBuilder;
 import com.lix.reportes.PolizasPorVencerExcelBuilder;
+import com.lix.security.SecurityConfig;
 import com.lix.web.PaginationParamsConverter;
 
 @EnableWebMvc
 @ComponentScan(basePackages = { "com.lix" })
 @Configuration
-@ImportResource({ "classpath:spring-security.xml" })
+//@ImportResource({ "classpath:spring-security.xml" })
 @EnableTransactionManagement
 public class ApplicationConfig extends WebMvcConfigurerAdapter {
 

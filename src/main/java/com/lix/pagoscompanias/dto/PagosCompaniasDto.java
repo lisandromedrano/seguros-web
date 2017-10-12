@@ -8,8 +8,7 @@ package com.lix.pagoscompanias.dto;
 
 import java.util.Date;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.lix.companias.dto.CompaniasDto;
 import com.lix.dto.PaginationParams;
 import com.lix.util.JsonDateSerializer;

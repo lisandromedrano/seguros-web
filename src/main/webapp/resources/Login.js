@@ -15,8 +15,13 @@ Ext.onReady(function(){
 						window.location = redirect;
 					}
 	         	},
+				//chapuza
 	         	failure: function(form, action) {
-	         		Ext.Msg.alert('Datos Invalidos', 'Introduzca de nuevo sus datos')
+                    if(action.result.length>1){
+                        seleccionarProductor(action.result);
+                    }else{
+	         			Ext.Msg.alert('Datos Invalidos', 'Introduzca de nuevo sus datos')
+                    }
 	         	}
     		}); 
 	    }else{
@@ -29,11 +34,10 @@ Ext.onReady(function(){
 	// Assign various config options as seen.	 
     var login = new Ext.FormPanel({ 
         labelWidth:80,
-        url:CONTEXT_ROOT+'/j_spring_security_check',
+        url:CONTEXT_ROOT+'/login',
         defaultType:'textfield',
         monitorValid:true,
         renderTo:'login',
-//        autoHeight:true,
         width:417,
         height:350,
         title:'Gestion de Asegurados - Ingreso',
@@ -63,7 +67,7 @@ Ext.onReady(function(){
                 fieldLabel:'Username',
                 hideLabel:true,
                 id:'username', 
-                name:'j_username', 
+                name:'username',
                 emptyText: 'USUARIO',
                 allowBlank:false 
             },{ 
@@ -71,18 +75,11 @@ Ext.onReady(function(){
                 hideLabel:true,
                 emptyText: 'CONTRASEÑA',
 //                name:'password', 
-                name:'j_password', 
+                name:'password',
                 inputType:'password', 
                 allowBlank:false 
             },{ 
             	xtype:'button',
-//            	layout : {
-//					type : 'vbox',
-//					align : 'center'
-////					tdAttrs : {
-////						style : 'padding: 5px 10px;cellspacing:5px;'
-////					}
-//				},
 				style:'margin-left: 70;margin-top:25px;',
                 text: 'Entrar',
                 formBind: true,	 
@@ -100,15 +97,6 @@ Ext.onReady(function(){
 	            });
 	        }
 		},
-// 
-//        buttons:[{ 
-//                text:'Login',
-//                formBind: true,	 
-//                // Function that fires when user clicks the button 
-//                handler:function(){
-//                	fnLogin();                    
-//                } 
-//            }] 
     });
        
     var seleccionarProductor=function(productores){
